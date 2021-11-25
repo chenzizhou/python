@@ -1,0 +1,32 @@
+.F
+======================================================================
+FAIL: test_youdao (test_youdao.MyTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\python_script\test_case\test_youdao.py", line 19, in test_youdao
+    self.assertEqual(title,"webdriver -有道搜索")
+AssertionError: '【webdriver】什么意思_英语webdriver的翻译_音标_读音_用法_例句_在线翻译_有道词典' != 'webdriver -有道搜索'
+- 【webdriver】什么意思_英语webdriver的翻译_音标_读音_用法_例句_在线翻译_有道词典
++ webdriver -有道搜索
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 15.988s
+
+FAILED (failures=1)
+.F
+======================================================================
+FAIL: test_youdao (test_youdao.MyTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\python_script\test_case\test_youdao.py", line 19, in test_youdao
+    self.assertEqual(title,"webdriver -有道搜索")
+AssertionError: '【webdriver】什么意思_英语webdriver的翻译_音标_读音_用法_例句_在线翻译_有道词典' != 'webdriver -有道搜索'
+- 【webdriver】什么意思_英语webdriver的翻译_音标_读音_用法_例句_在线翻译_有道词典
++ webdriver -有道搜索
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 17.247s
+
+FAILED (failures=1)

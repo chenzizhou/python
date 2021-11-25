@@ -1,0 +1,89 @@
+{
+  "id": "2c6e3afa-5107-4d9c-8118-f694a86fd784",
+  "version": "2.0",
+  "name": "1",
+  "url": "https://www.baidu.com",
+  "tests": [{
+    "id": "d26d2930-63e2-4fcc-9648-623a8f506ad4",
+    "name": "库里",
+    "commands": [{
+      "id": "fa9fc745-5ae8-4413-8f39-c1b8deba2298",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "90c1795a-d487-4dc6-8842-f68b625e5a47",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1550x848",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e96400dd-29b8-44a6-9ea1-5409bb2550d4",
+      "comment": "",
+      "command": "click",
+      "target": "id=kw",
+      "targets": [
+        ["id=kw", "id"],
+        ["name=wd", "name"],
+        ["css=#kw", "css:finder"],
+        ["xpath=//input[@id='kw']", "xpath:attributes"],
+        ["xpath=//form[@id='form']/span/input", "xpath:idRelative"],
+        ["xpath=//span/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0a18beb-f873-4e4a-a7b0-25031fd19214",
+      "comment": "",
+      "command": "type",
+      "target": "id=kw",
+      "targets": [
+        ["id=kw", "id"],
+        ["name=wd", "name"],
+        ["css=#kw", "css:finder"],
+        ["xpath=//input[@id='kw']", "xpath:attributes"],
+        ["xpath=//form[@id='form']/span/input", "xpath:idRelative"],
+        ["xpath=//span/input", "xpath:position"]
+      ],
+      "value": "库里"
+    }, {
+      "id": "82646d41-403b-4f68-babe-ba38d4afd536",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bdsug-s",
+      "targets": [
+        ["css=.bdsug-s", "css:finder"],
+        ["xpath=//form[@id='form']/div/ul/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'库里壁纸')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d71dc205-7857-46d6-a5df-ee24ecd8f527",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=库里壁纸 - 百度图片",
+      "targets": [
+        ["linkText=库里壁纸 - 百度图片", "linkText"],
+        ["css=.c-container > .c-title > a", "css:finder"],
+        ["xpath=//div[@id='1']/div/h3/a", "xpath:idRelative"],
+        ["xpath=//a[@href='http://www.baidu.com/link?url=-rWgPv87hjSrq3ItAhi987TXT8V9eoa5TxnFbRAZzqkEBaUM73-GNMA5kfwY00M-zhdptXNB8G2qsYJMedqhIW_c4DCCSse3x2g85CLe4c1slEoFwzN6zZkHwskoJ82ezhATMu-gNysbF6O-LCbWheRWP07s07LT1BxBTeo8LAfKPYZZju5RmQBCc_w7fVgIZifeC1UC3mwgSLmYG4leoa&wd=&eqid=dd1f693e0036a4c400000006610f7c97']", "xpath:href"],
+        ["xpath=//h3/a", "xpath:position"],
+        ["xpath=//a[contains(.,'库里壁纸 - 百度图片')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "375cb9c5-0988-4a97-907b-ad2a37c316f0",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["d26d2930-63e2-4fcc-9648-623a8f506ad4"]
+  }],
+  "urls": ["https://www.baidu.com/"],
+  "plugins": []
+}

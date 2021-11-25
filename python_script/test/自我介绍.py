@@ -1,0 +1,5 @@
+print('-----自我介绍-------')
+name=input('你的名字是:')
+age=input('你的年龄:')
+area=input('你的老家:')
+print('thanks everybody')
