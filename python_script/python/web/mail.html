@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mail</title>
+    <script>
+        while(true){
+            var mail=prompt('输入一个邮箱地址：')
+            if(mail.indexOf('.')==-1||mail.indexOf('@')==-1){
+                alert('邮箱输入错误，缺少.@符号');
+            }else if(mail.lastIndexOf('.')<mail.lastIndexOf('@')){
+                alert('最后一个.必须在@的后面！');
+            }
+            else{
+                alert('格式正确')
+                break;
+            }
+        }
+       
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

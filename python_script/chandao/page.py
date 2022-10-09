@@ -1,3 +1,4 @@
+#coding=utf-8
 from selenium import webdriver
 from FindElement import FindElement
 class page():
@@ -8,6 +9,10 @@ class page():
         fd=self.fd
         element=fd.get_element(key)
         return element
+    def get_elements(self,key):
+        fd=self.fd
+        element=fd.get_elements(key)
+        return element   
     def send_keys(self,key,value):
         self.get_element(key).send_keys(value)
     def location(self,element):

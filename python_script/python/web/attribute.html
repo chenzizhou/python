@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="common.js"></script>
+    <script>
+        var div=document.createElement('div')
+        div.id='d2'
+        div.innerHTML='动态创建div'
+        function changeA(){
+            console.log($('a1').href)
+            if($('a1').href=="http://www.baidu.com/"){
+                $('a1').href='http://www.tmooc.cn/';
+                $('a1').innerHTML='TMOOOC';
+            }else{
+                $('a1').href='http://www.baidu.com/';
+                $('a1').innerHTML='百度'; 
+            }
+                 
+            }
+    </script>
+    <a href="http://www.baidu.com" id="a1">百度</a>
+    <button onclick="changeA()">修改</button>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyNews</title>
+</head>
+<body>
+    <!-- 这是模板注释 -->
+    {% comment %}
+    <h1>这是模板注释</h1>
+    {% endcomment %}
+    <h1>hello,{{name}},{{l}}</h1>
+
+    {% for d in l %}
+            <p {% if forloop.first %}
+            style="color:red"
+            {% else%}
+            style="color:blue"
+            {% endif %}
+            >{{d|truncatechars:5}}</p> 
+    {% endfor %} 
+</body>
+</html>

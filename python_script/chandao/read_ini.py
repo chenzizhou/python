@@ -4,12 +4,12 @@ from typing import Text
 from selenium.webdriver.common import keys
 import sys
 import os
-filename=r'E:\python_script\chandao\config\localElement.ini'
+filename=r'E:\Python\python_script\chandao\config\localElement.ini'
 class ReadIni():
     def __init__(self,filename=None,node=None):
         self.cf=configparser.ConfigParser()
         if filename==None:
-            filename=r'E:\python_script\chandao\config\localElement.ini'
+            filename=r'E:\Python\python_script\chandao\config\localElement.ini'
             self.loadIni(filename)
         else:
              self.loadIni(filename)

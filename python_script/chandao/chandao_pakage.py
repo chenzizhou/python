@@ -1,3 +1,4 @@
+#coding=utf-8
 from selenium import webdriver
 import random   
 # 时间
@@ -19,7 +20,7 @@ class chandao(object):
         self.driver=driver
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
-    def login(self,url,username='admin',password='123456',node=None):
+    def login(self,url,username='admin',password='123456',node='login'):
         driver=self.driver
         # url='http://114.215.149.146:81/zentaopms/www/user-login.html'
         driver.get(url)
@@ -131,6 +132,69 @@ class chandao(object):
         pg.location(element)
         element.click()
         sleep(2)
+    def delete_task(self,project_name='内部规划-外勤2.X',node='delete_task'):
+        driver=self.driver
+        pg=page(driver,node)
+        fd=FindElement(driver,'delete_task')
+        sleep(1)
+        pg.get_element('project').click()
+        sleep(1)
+        fd.get_element('task').click()
+        ##currentItem
+        sleep(1)
+        pg.get_element('currentItem').click()
+        # project_name='内部规划-外勤2.X'
+        driver.find_element_by_class_name('form-control.search-input.empty').send_keys(project_name) 
+        sleep(1)
+        driver.find_element_by_class_name('search-list-item.active').send_keys(Keys.ENTER)
+        pg.get_element('指派给我').click()
+        sleep(2)
+        pg.get_element('搜索').click()
+        pg.get_element('筛选项').click()
+        sleep(2)
+        pg.get_element('筛选项').send_keys('由谁创建')
+        driver.find_element_by_class_name('active-result').click()
+        sleep(2)
+        driver.find_element_by_class_name('chosen-single.chosen-default').click()
+        driver.find_element_by_class_name('chosen-single.chosen-default').send_keys('陈自州')
+        driver.find_element_by_class_name('active-result.highlighted').click()
+        sleep(2)
+        driver.find_element_by_xpath('//*[@id="task-search"]/tbody/tr[2]/td/button[3]/i').click()
+        sleep(2)
+        driver.find_element_by_xpath('//*[@id="field2_chosen"]/a').click()
+        driver.find_element_by_xpath('//*[@id="field2_chosen"]/a').send_keys('任务状态')
+        driver.find_element_by_xpath('//*[@id="field2_chosen"]/div/ul/li').click()
+        sleep(2)
+        driver.find_element_by_xpath('//*[@id="value2_chosen"]/a').click()
+        sleep(2)
+        driver.find_element_by_xpath('//*[@id="value2_chosen"]/a').send_keys('已关闭')
+        sleep(2)
+        driver.find_element_by_xpath('//*[@id="value2_chosen"]/div/ul/li').click()
+        driver.find_element_by_id('submit').click()
+        sleep(2)
+        elements=pg.get_elements('任务名')
+        print(len(elements))
+        if len(elements)==0:
+            pass
+        else:
+            # 不能直接用int进行迭代，而必须加个range
+            for i in range(0,len(elements)):
+                sleep(2)
+                pg.get_element('任务名').click()
+                sleep(2)
+                pg.get_element('删除').click()
+                sleep(2)
+                # 浏览器弹框处理alert、confirm、Promt
+                confirm=driver.switch_to.alert
+                text=confirm.text
+                print(text)
+                confirm.accept()
+                sleep(2)
+        sleep(2)
+
+
+
+
 
 
 

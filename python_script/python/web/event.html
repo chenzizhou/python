@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="common.js"></script>
+
+    <script>
+        function show(event){
+            console.log(event)
+        }
+        function mouse(){
+            console.log(event)
+            // 元素坐标
+            console.log(event.offsetX)
+            // 网页坐标
+            console.log(event.clientX)
+            // 屏幕坐标
+            console.log(event.screenX)
+        }
+    </script>
+    <button onclick="show(event)" onmouseover="mouse()">查看event</button>
+  
+    
+    <br><input type="text" name="" id="i1">
+    <script>
+        window.onload=function(){
+            $('i1').onkeypress=function(){
+                if(event.which>=48&&event.which<=57){
+                    return true;
+                }
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

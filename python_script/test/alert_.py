@@ -16,3 +16,7 @@ sleep(2)
 ##接受警告框
 driver.switch_to_alert().accept()
 driver.quit()
+
+
+
+
