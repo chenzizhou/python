@@ -12,7 +12,7 @@ class test_wq(unittest.TestCase):
 
     def test_login(self):
         u = User()
-        u.login(self.driver, 'admin', 'YSD@city')
+        u.login(self.driver, 'admin', '123456')
         sleep(2)
 
         # u.make_scheme(driver, '081701', '巡检测试范围')
