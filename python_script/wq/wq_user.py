@@ -12,19 +12,20 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class User:
-    global driver
-    driver=webdriver.Chrome()
     def __init__(self):
+        global driver
+        driver = webdriver.Chrome()
         driver.implicitly_wait(20)
         driver.get("http://192.168.10.195:7799/")
         # 刷新当前界面，清除历史数据
         driver.refresh()
         sleep(2)
-        # 2 | setWindowSize | 1550x848 |
+        # 设置窗口大小
         driver.set_window_size(1550, 848)
         sleep(1)
         driver.maximize_window()
         driver.implicitly_wait(20)
+
     def setup_method(self):
         pass
 
@@ -33,21 +34,15 @@ class User:
 
     def login(self, username, password):
         sleep(2)
-        driver.find_element_by_name("username").click()
-        sleep(2)
-        # 4 | type | name=username | admin
         driver.find_element_by_name("username").send_keys(username)
-        sleep(1)
-        # 5 | click | name=password |
-        driver.find_element_by_name('password').click()
         sleep(2)
-        # 6 | type | name=password | 123456
-        driver.find_element_by_name("password").send_keys(password)
-        # 7 | click | css=.suffix-icon |
-        driver.find_element_by_css_selector(".suffix-icon").click()
+        driver.find_element_by_name('password').send_keys(password)
         sleep(2)
-        # 8 | click | css=button |
-        driver.find_element_by_css_selector("button").click()
+        print('查看密码')
+        driver.find_element(By.XPATH,'//div[@class="ey-x-input-suffix"]').click()
+        sleep(2)
+        print('点击登录')
+        driver.find_element(By.XPATH,"//button[text()='登录']").click()
         sleep(2)
 
     ##  制定方案
@@ -56,7 +51,7 @@ class User:
         ##鼠标事件 虚浮在元素上方
         ActionChains(driver).move_to_element(xjgl).perform()
         xjfazd = driver.find_element(By.XPATH,
-            '//span[text()="巡检方案制定"]')
+                                     '//span[text()="巡检方案制定"]')
         ActionChains(driver).click(xjfazd).perform()
         sleep(2)
         driver.implicitly_wait(20)
@@ -70,7 +65,9 @@ class User:
         ActionChains(driver).click(sx).perform()
         sleep(2)
         print('查询范围输入')
-        driver.find_element(By.XPATH,"//span[text()='查询范围：']/../span[@class='ant-select ant-select-enabled ant-select-allow-clear']").send_keys('04-开关阀组')
+        driver.find_element(By.XPATH,
+                            "//span[text()='查询范围：']/../span[@class='ant-select ant-select-enabled ant-select-allow-clear']").send_keys(
+            '04-开关阀组')
         sleep(2)
         print('点击搜索')
         fw = driver.find_element_by_xpath(
@@ -101,7 +98,7 @@ class User:
         driver.find_element_by_css_selector(
             'body > div.v-dialog.v-s-normal.v-t-confirm > div.v-dialog-footer.v-s-center > div.v-dialog-footer-btn.v-dialog-footer-btn-cancel').click()
 
-    def make_plan(self,fa_name, ry_name):
+    def make_plan(self, fa_name, ry_name):
         jh_name = fa_name
         xjgl = driver.find_element_by_xpath('//*[@id="main"]/div[5]/div[2]/div[1]/div/div/div/div[3]/div/span[2]')
         ##鼠标事件 虚浮在元素上方
@@ -150,15 +147,15 @@ class User:
     def make_ywpz(self):
         xtpz = driver.find_elements_by_xpath('//span[@title="系统设置"]')[0]
         # 将业务配置元素滑动到可见位置
-        driver.execute_script('arguments[0].scrollIntoView()',xtpz)
+        driver.execute_script('arguments[0].scrollIntoView()', xtpz)
         sleep(3)
         ActionChains(driver).move_to_element(xtpz).perform()
         driver.implicitly_wait(20)
         sleep(5)
-        elements=driver.find_elements_by_tag_name('span')
+        elements = driver.find_elements_by_tag_name('span')
         sleep(1)
         for element in elements:
-            if element.text=='业务配置':
+            if element.text == '业务配置':
                 print("点击业务配置")
                 ActionChains(driver).click(element).perform()
                 break
@@ -173,7 +170,7 @@ class User:
         sleep(1)
         driver.find_element_by_id('code').send_keys('测试')
         sleep(1)
-        gwz={'供水管网':['管段','节点','阀门']}
+        gwz = {'供水管网': ['管段', '节点', '阀门']}
         for key in gwz.keys():
             for value in gwz[key]:
                 # 添加作业对象
@@ -183,31 +180,29 @@ class User:
                 driver.find_element_by_xpath('//span[@class="ant-select-selection__rendered"]').click()
                 sleep(3)
                 # 选择设备
-                driver.find_element(By.CSS_SELECTOR,"span[title='"+key+"']+ul span[title='"+value+"']").click()
+                driver.find_element(By.CSS_SELECTOR, "span[title='" + key + "']+ul span[title='" + value + "']").click()
                 sleep(1)
                 # 作业历史选择
-                driver.find_element(By.XPATH,"//div[@id='historyRecords']/div/div[@class='ant-select-selection__rendered']").click()
+                driver.find_element(By.XPATH,
+                                    "//div[@id='historyRecords']/div/div[@class='ant-select-selection__rendered']").click()
                 sleep(2)
-                driver.find_element(By.XPATH,"//ul[ @role='listbox']/li[text()='设备作业历史']").click()
+                driver.find_element(By.XPATH, "//ul[ @role='listbox']/li[text()='设备作业历史']").click()
                 sleep(2)
                 # 到位
-                driver.find_element(By.XPATH,"//span[text()='到位']").click()
+                driver.find_element(By.XPATH, "//span[text()='到位']").click()
                 sleep(1)
                 # 到位半径
-                driver.find_element(By.XPATH,"//input[@role='spinbutton']").click()
+                driver.find_element(By.XPATH, "//input[@role='spinbutton']").click()
                 sleep(1)
-                #是否反馈
-                driver.find_element(By.XPATH,"//span[text()='反馈']").click()
+                # 是否反馈
+                driver.find_element(By.XPATH, "//span[text()='反馈']").click()
                 # 设备反馈
-                driver.find_element(By.XPATH,"//div[@id='equipFeedbackBpm']/div/div[@class='ant-select-selection__rendered']").click()
+                driver.find_element(By.XPATH,
+                                    "//div[@id='equipFeedbackBpm']/div/div[@class='ant-select-selection__rendered']").click()
                 sleep(2)
                 # 设备流程
-                driver.find_element(By.XPATH,"//ul[@role='listbox']/li[text()='设备反馈']").click()
+                driver.find_element(By.XPATH, "//ul[@role='listbox']/li[text()='设备反馈']").click()
                 sleep(1)
                 # 保存
-                driver.find_element(By.XPATH,"//span/div/button[@type='submit']").click()
+                driver.find_element(By.XPATH, "//span/div/button[@type='submit']").click()
                 sleep(1)
-
-
-
-
