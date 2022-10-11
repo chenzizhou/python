@@ -13,6 +13,7 @@ class TestCase(unittest.TestCase):
     def test_01_login(self):
         l = LoginPage()
         l.login()
+        l.close()
 
     def test_02_login(self):
         print(111222)

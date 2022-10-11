@@ -32,3 +32,6 @@ class BasePage:
 
     def click(self, loc):
         return driver.find_element(*loc).click()
+
+    def close(self):
+        return driver.close()
