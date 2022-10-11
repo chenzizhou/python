@@ -27,8 +27,8 @@ class BasePage:
     def loc_element(self, loc):
         return driver.find_element(*loc)
 
-    def send_keys(self, *loc, value):
+    def send_keys(self, loc, value):
         return driver.find_element(*loc).send_keys(value)
 
-    def click(self, *loc):
+    def click(self, loc):
         return driver.find_element(*loc).click()
