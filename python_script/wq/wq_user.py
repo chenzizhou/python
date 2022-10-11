@@ -13,20 +13,13 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class User:
     def __init__(self):
-        self.driver = None
+        pass
 
     def setup_method(self):
-        self.driver = webdriver.Chrome()
-        ##    # 清除缓存提示框
-        ##    self.driver.get('chrome://settings/clearBrowserData')
-        ##    # 2S 等待时间
-        ##    time.sleep(2)
-        ##    clearButton = self.driver.execute_script("return document.querySelector('settings-ui').shadowRoot.querySelector('settings-main').shadowRoot.querySelector('settings-basic-page').shadowRoot.querySelector('settings-section > settings-privacy-page').shadowRoot.querySelector('settings-clear-browsing-data-dialog').shadowRoot.querySelector('#clearBrowsingDataDialog').querySelector('#clearBrowsingDataConfirm')")
-        ##    clearButton.click()
-        self.vars = {}
+        pass
 
     def teardown_method(self):
-        self.driver.quit()
+        pass
 
     def login(self, driver, username, password):
         # Test name: 登录
@@ -64,35 +57,26 @@ class User:
         xjgl = driver.find_element_by_xpath('//div/span[@title="巡检管理"]')
         ##鼠标事件 虚浮在元素上方
         ActionChains(driver).move_to_element(xjgl).perform()
-        xjfazd = driver.find_element_by_css_selector(
-            'body > div.v-popup.v-menu-popup > div > div:nth-child(1) > div > span.v-menu-item-text')
+        xjfazd = driver.find_element(By.XPATH,
+            '//span[text()="巡检方案制定"]')
         ActionChains(driver).click(xjfazd).perform()
         sleep(2)
         driver.implicitly_wait(20)
         ##创建方案
         jh_name = fa_name
-        # driver.find_element_by_css_selector('#scheme_name').send_keys(fa_name)
+        print('请输入方案名称')
         driver.find_element_by_xpath('//input[@placeholder="请输入方案名称"]').send_keys(fa_name)
-        ##筛选 #screenPageA > img
         sleep(2)
-        # sx = driver.find_element_by_css_selector('#screenPageA > img')
+        print('点击筛选')
         sx = driver.find_element_by_xpath('//div/a/img[@src="/images/filter.svg"]')
         ActionChains(driver).click(sx).perform()
         sleep(2)
-        ##选择作业区域#workscope > xm-select > i
-        zyqy = driver.find_element_by_css_selector('#workscope > xm-select > i')
-        ActionChains(driver).click(zyqy).perform()
+        print('查询范围输入')
+        driver.find_element(By.XPATH,"//span[text()='查询范围：']/../span[@class='ant-select ant-select-enabled ant-select-allow-clear']").send_keys('04-开关阀组')
         sleep(2)
-        driver.find_element_by_css_selector(
-            '#workscope > xm-select > div.xm-body.absolute > div > div.xm-search > input').send_keys(fw_name)
-        ##伪元素解决用css定位 patrol2
-        ##    fw=driver.find_element_by_css_selector('#workscope > xm-select > div.xm-body.absolute > div > div.scroll-body > div:nth-child(1) > div > i.xm-option-icon.xm-iconfont.xm-icon-duox')
-        ##    //patrol1
-        ##    fw=driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[2]/xm-select/div[3]/div/div[2]/div[1]/div/div')
-        ##    ActionChains(driver).click(fw).perform()
-        sleep(2)
-        fw = driver.find_element_by_css_selector(
-            '#workscope > xm-select > div.xm-body.absolute > div > div.scroll-body > div > div > div > span')
+        print('点击搜索')
+        fw = driver.find_element_by_xpath(
+            '//*[@id="baseInfo"]/div[4]/div[1]/div[1]/div[2]/i[1]/svg/path')
         ActionChains(driver).click(fw).perform()
         sleep(2)
         ##  随机点击页面 body > div.container-fluid > div.row
@@ -167,6 +151,7 @@ class User:
 
     def make_ywpz(self, driver):
         xtpz = driver.find_elements_by_xpath('//span[@title="系统设置"]')[0]
+        # 将业务配置元素滑动到可见位置
         driver.execute_script('arguments[0].scrollIntoView()',xtpz)
         sleep(3)
         ActionChains(driver).move_to_element(xtpz).perform()
