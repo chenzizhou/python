@@ -12,28 +12,26 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class User:
+    global driver
+    driver=webdriver.Chrome()
     def __init__(self):
-        pass
-
+        driver.implicitly_wait(20)
+        driver.get("http://192.168.10.195:7799/")
+        # 刷新当前界面，清除历史数据
+        driver.refresh()
+        sleep(2)
+        # 2 | setWindowSize | 1550x848 |
+        driver.set_window_size(1550, 848)
+        sleep(1)
+        driver.maximize_window()
+        driver.implicitly_wait(20)
     def setup_method(self):
         pass
 
     def teardown_method(self):
         pass
 
-    def login(self, driver, username, password):
-        # Test name: 登录
-        # Step # | name | target | value
-        # 1 | open | login |
-        driver.get("http://192.168.10.195:7799/")
-        # 刷新当前界面，清除历史数据
-        driver.refresh()
-        sleep(4)
-        # 2 | setWindowSize | 1550x848 |
-        driver.set_window_size(1550, 848)
-        sleep(1)
-        driver.maximize_window()
-        driver.implicitly_wait(20)
+    def login(self, username, password):
         sleep(2)
         driver.find_element_by_name("username").click()
         sleep(2)
@@ -53,7 +51,7 @@ class User:
         sleep(2)
 
     ##  制定方案
-    def make_scheme(self, driver, fa_name, fw_name):
+    def make_scheme(self, fa_name, fw_name):
         xjgl = driver.find_element_by_xpath('//div/span[@title="巡检管理"]')
         ##鼠标事件 虚浮在元素上方
         ActionChains(driver).move_to_element(xjgl).perform()
@@ -103,7 +101,7 @@ class User:
         driver.find_element_by_css_selector(
             'body > div.v-dialog.v-s-normal.v-t-confirm > div.v-dialog-footer.v-s-center > div.v-dialog-footer-btn.v-dialog-footer-btn-cancel').click()
 
-    def make_plan(self, driver, fa_name, ry_name):
+    def make_plan(self,fa_name, ry_name):
         jh_name = fa_name
         xjgl = driver.find_element_by_xpath('//*[@id="main"]/div[5]/div[2]/div[1]/div/div/div/div[3]/div/span[2]')
         ##鼠标事件 虚浮在元素上方
@@ -149,7 +147,7 @@ class User:
         driver.switch_to.frame(jhfp)
         driver.find_element_by_xpath('/html/body/div[1]/div[2]/input[1]').click()
 
-    def make_ywpz(self, driver):
+    def make_ywpz(self):
         xtpz = driver.find_elements_by_xpath('//span[@title="系统设置"]')[0]
         # 将业务配置元素滑动到可见位置
         driver.execute_script('arguments[0].scrollIntoView()',xtpz)

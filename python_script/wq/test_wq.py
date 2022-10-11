@@ -7,22 +7,21 @@ import unittest
 
 class test_wq(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome()
-        self.driver.implicitly_wait(20)
+        pass
 
     def test_login(self):
         u = User()
-        u.login(self.driver, 'admin', '123456')
+        u.login('admin', '123456')
         sleep(2)
 
-        u.make_scheme(self.driver, '081701', '巡检测试范围')
+        u.make_scheme( '081701', '巡检测试范围')
         # sleep(2)
         # u.make_plan(driver, '081701', '陈自然')
-        u.make_ywpz(self.driver)
+        u.make_ywpz()
         sleep(2)
 
     def tearDown(self):
-        self.driver.quit()
+        pass
 
 
 if __name__ == '__main__':
