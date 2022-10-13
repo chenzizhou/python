@@ -15,6 +15,7 @@ class LoginPage(BasePage):
     password_loc = (By.NAME, 'password')
     eye_loc = (By.XPATH, '//div[@class="ey-x-input-suffix"]')
     submit_loc = (By.XPATH, "//button[text()='登录']")
+    info_loc=(By.XPATH,"//span[@class='arrow-icon']")
 
     def login(self, username='admin', password='123456'):
         self.send_keys(LoginPage.username_loc, username)
@@ -24,4 +25,8 @@ class LoginPage(BasePage):
         self.click(LoginPage.eye_loc)
         sleep(1)
         self.click(LoginPage.submit_loc)
+        sleep(2)
+
+    def get_expect_element(self):
+        return self.loc_element(LoginPage.info_loc)
         sleep(2)
