@@ -10,6 +10,9 @@ from web自动化.外勤.pageobject.login_page import LoginPage
 
 @ddt
 class TestCase(unittest.TestCase):
+    def setUp(self) -> None:
+        print('准备')
+
     @data(('admin', '123456'), ('nature', '123456'))
     @unpack
     def test_01_login(self,username,password):
@@ -21,7 +24,14 @@ class TestCase(unittest.TestCase):
     def test_02_login(self):
         print(111222)
 
+    def tearDown(self):
+        print('结束')
 
 if __name__ == '__main__':  # 并没有执行
     print('运行')
-    unittest.main()
+    suite=unittest.TestSuite()
+    suite.addTest(TestCase('test_02_login'))
+    runner=unittest.TextTestRunner()
+    runner.run(suite)
+
+    # unittest.main()
