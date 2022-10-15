@@ -8,6 +8,7 @@ from selenium import webdriver
 from time import sleep
 from web自动化.外勤.pageobject.login_page import LoginPage
 
+
 @ddt
 class TestCase(unittest.TestCase):
     def setUp(self) -> None:
@@ -15,9 +16,9 @@ class TestCase(unittest.TestCase):
 
     @data(('admin', '123456'), ('nature', '123456'))
     @unpack
-    def test_01_login(self,username,password):
+    def test_01_login(self, username, password):
         l = LoginPage()
-        l.login(username,password)
+        l.login(username, password)
         self.assertTrue(l.get_expect_element())
         l.close()
 
@@ -27,11 +28,12 @@ class TestCase(unittest.TestCase):
     def tearDown(self):
         print('结束')
 
+
 if __name__ == '__main__':  # 并没有执行
     print('运行')
-    suite=unittest.TestSuite()
+    suite = unittest.TestSuite()
     suite.addTest(TestCase('test_02_login'))
-    runner=unittest.TextTestRunner()
+    runner = unittest.TextTestRunner()
     runner.run(suite)
 
     # unittest.main()
