@@ -3,13 +3,10 @@
 # 开发时间：2022/10/11 22:30
 # 功能：
 import unittest
-
 from ddt import ddt, data
 from selenium import webdriver
 from time import sleep
-
 from web自动化.外勤.pageobject.login_page import LoginPage
-
 
 @ddt
 class TestCase(unittest.TestCase):
