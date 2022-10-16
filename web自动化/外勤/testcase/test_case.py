@@ -11,15 +11,15 @@ from web自动化.外勤.pageobject.login_page import LoginPage
 
 
 @ddt
-class TestCase(unittest.TestCase):
-    def setUp(self) -> None:
+class TestLogin(unittest.TestCase):
+    def setUp(self):
         print('准备')
 
     @data(('admin', '123456'), ('nature', '123456'))
     @unpack
     def test_01_login(self, username, password):
         l = LoginPage()
-        l.login(username, password)
+        l.login(username,password)
         self.assertTrue(l.get_expect_element())
         l.close()
 
@@ -33,11 +33,13 @@ class TestCase(unittest.TestCase):
 
 if __name__ == '__main__':  # 并没有执行
     print('运行')
-    suite = unittest.TestSuite()
-    suite.addTest(TestCase('test_02_login'))
+    # suite = unittest.TestSuite()
+    discover=unittest.defaultTestLoader.discover('../testcase','test*.py')
+    discover.addTest()
+    # suite.addTest(TestLogin("test_01_login_1"))
     # runner = unittest.TextTestRunner()
     f=open('../report/result.html','wb')
-    runner=HTMLTestRunner.HTMLTestRunner(stream=f,title='外勤登录',description='..')
-    runner.run(suite)
-
+    runner=HTMLTestRunner.HTMLTestRunner(stream=f,title='外勤登录',description='用例执行情况：')
+    runner.run(discover)
+    f.close()
     # unittest.main()
