@@ -2,6 +2,7 @@
 # 作者：NATURE
 # 开发时间：2022/10/11 22:30
 # 功能：
+import HTMLTestRunner
 import unittest
 from ddt import ddt, data, unpack
 from selenium import webdriver
@@ -22,6 +23,7 @@ class TestCase(unittest.TestCase):
         self.assertTrue(l.get_expect_element())
         l.close()
 
+    @unittest.skip
     def test_02_login(self):
         print(111222)
 
@@ -33,7 +35,9 @@ if __name__ == '__main__':  # 并没有执行
     print('运行')
     suite = unittest.TestSuite()
     suite.addTest(TestCase('test_02_login'))
-    runner = unittest.TextTestRunner()
+    # runner = unittest.TextTestRunner()
+    f=open('../report/result.html','wb')
+    runner=HTMLTestRunner.HTMLTestRunner(stream=f,title='外勤登录',description='..')
     runner.run(suite)
 
     # unittest.main()
