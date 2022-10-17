@@ -18,6 +18,7 @@ class TestLogin(unittest.TestCase):
     @data(('admin', '123456'), ('nature', '123456'))
     @unpack
     def test_01_login(self, username, password):
+        '''测试登录'''
         l = LoginPage()
         l.login(username,password)
         self.assertTrue(l.get_expect_element())
