@@ -23,7 +23,7 @@ class TestLogin(unittest.TestCase):
         self.assertTrue(l.get_expect_element())
         l.close()
 
-    @unittest.skip
+    # @unittest.skip #添加改装饰后，测试机也加不进去
     def test_02_login(self):
         print(111222)
 
@@ -35,7 +35,7 @@ if __name__ == '__main__':  # 并没有执行
     print('运行')
     # suite = unittest.TestSuite()
     discover=unittest.defaultTestLoader.discover('../testcase','test*.py')
-    discover.addTest()
+    discover.addTest(TestLogin('test_02_login'))
     # suite.addTest(TestLogin("test_01_login_1"))
     # runner = unittest.TextTestRunner()
     f=open('../report/result.html','wb')

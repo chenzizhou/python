@@ -18,6 +18,7 @@ class LoginPage(BasePage):
     info_loc=(By.XPATH,"//span[@class='arrow-icon']")
 
     def login(self, username='admin', password='123456'):
+        '''测试登录'''
         self.send_keys(LoginPage.username_loc, username)
         sleep(1)
         self.send_keys(LoginPage.password_loc, password)
