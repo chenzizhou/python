@@ -3,11 +3,14 @@
 # 开发时间：2022/10/11 22:30
 # 功能：
 import HTMLTestRunner
+import time
 import unittest
 from ddt import ddt, data, unpack
 from selenium import webdriver
 from time import sleep
 from web自动化.外勤.pageobject.login_page import LoginPage
+from web自动化.外勤.until.find_new_file import get_new_file
+from web自动化.外勤.until.send_mail import send_mail
 
 
 @ddt
@@ -39,8 +42,11 @@ if __name__ == '__main__':  # 并没有执行
     discover.addTest(TestLogin('test_02_login'))
     # suite.addTest(TestLogin("test_01_login_1"))
     # runner = unittest.TextTestRunner()
-    f=open('../report/result.html','wb')
+    file_url='../report/'+time.strftime("%Y-%m-%d %H_%M_%S")+' result.html'
+    print(file_url)
+    f=open(file_url,'wb')
     runner=HTMLTestRunner.HTMLTestRunner(stream=f,title='外勤登录',description='用例执行情况：')
     runner.run(discover)
     f.close()
+    send_mail(get_new_file())
     # unittest.main()
