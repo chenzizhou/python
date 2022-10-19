@@ -30,3 +30,65 @@ JavaScript warning: https://hectorstatic.baidu.com/96c9c06653ba892e.js, line 3: 
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.baidu.com."
 1666077769879	Marionette	INFO	Stopped listening on port 60239
 [Parent 7056, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1666166626167	geckodriver	INFO	Listening on 127.0.0.1:58935
+1666166629523	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\rust_mozprofileRPT2aw"
+1666166707785	Marionette	INFO	Marionette enabled
+1666166707908	Marionette	INFO	Listening on port 59040
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 768))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 420))
+1666166785316	geckodriver	INFO	Listening on 127.0.0.1:59093
+1666166788157	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\rust_mozprofileFx0ofM"
+1666166801748	Marionette	INFO	Marionette enabled
+1666166801752	Marionette	INFO	Listening on port 59147
+Read port: 59147
+Read port: 59147
+Read port: 59147
+Read port: 59147
+Read port: 59147
+Read port: 59147
+Read port: 59147
+Read port: 59147
+Read port: 59147
+Read port: 59147
+Read port: 59147
+1666166814020	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 768))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 420))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\rust_mozprofileFx0ofM\\search.json.mozlz4", (void 0)))
+1666167460542	Marionette	INFO	Stopped listening on port 59147
+[Parent 7912, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+emote" "-profile" "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\rust_mozprofilep0yOlI"
+1666166939671	Marionette	INFO	Marionette enabled
+1666166939675	Marionette	INFO	Listening on port 55664
+Read port: 55664
+Read port: 55664
+Read port: 55664
+Read port: 55664
+1666166946169	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 768))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 420))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\rust_mozprofilep0yOlI\\search.json.mozlz4", (void 0)))
+1666166975234	Marionette	INFO	Stopped listening on port 55664
+[Parent 30992, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+[Parent 30992, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+[Parent 30992, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+[Parent 30992, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1666167345068	geckodriver	INFO	Listening on 127.0.0.1:52605
+1666167347805	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\rust_mozprofilebtGoB3"
+1666167384678	Marionette	INFO	Marionette enabled
+1666167384683	Marionette	INFO	Listening on port 54291
+Read port: 54291
+Read port: 54291
+Read port: 54291
+Read port: 54291
+Read port: 54291
+Read port: 54291
+Read port: 54291
+1666167395705	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 768))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 420))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\rust_mozprofilebtGoB3\\search.json.mozlz4", (void 0)))
+JavaScript warning: https://hectorstatic.baidu.com/96c9c06653ba892e.js, line 3: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.baidu.com."
+1666167541126	Marionette	INFO	Stopped listening on port 54291
+[Parent 15144, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
