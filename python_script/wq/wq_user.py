@@ -16,7 +16,7 @@ class User:
         global driver
         driver = webdriver.Chrome()
         driver.implicitly_wait(20)
-        driver.get("http://192.168.10.195:7799/")
+        driver.get("http://10.41.16.20:32091/")
         # 刷新当前界面，清除历史数据
         driver.refresh()
         sleep(2)
@@ -65,13 +65,10 @@ class User:
         ActionChains(driver).click(sx).perform()
         sleep(2)
         print('查询范围输入')
-        driver.find_element(By.XPATH,
-                            "//span[text()='查询范围：']/../span[@class='ant-select ant-select-enabled ant-select-allow-clear']").send_keys(
-            '04-开关阀组')
+        driver.find_element(By.XPATH,"//*[@id='baseInfo']/div[3]/div[1]/span[2]/span/ul").send_keys('04-开关阀组')
         sleep(2)
         print('点击搜索')
-        fw = driver.find_element_by_xpath(
-            '//*[@id="baseInfo"]/div[4]/div[1]/div[1]/div[2]/i[1]/svg/path')
+        fw = driver.find_element_by_xpath('//*[@id="baseInfo"]/div[4]/div[1]/div[1]/div[2]/i[1]/svg/path')
         ActionChains(driver).click(fw).perform()
         sleep(2)
         ##  随机点击页面 body > div.container-fluid > div.row
@@ -109,15 +106,13 @@ class User:
         driver.find_element_by_css_selector('#horizontal_SearchBar_field-schemeName').send_keys(fa_name)
         sleep(2)
         ##点击查询 #query
-        driver.find_element_by_css_selector('#MAKE_PLAN_CZ > div > form > div > span.index__search_btn___1rRz_').click()
+        driver.find_element(By.XPATH,"//span[contains(@style,'search')]").click()
         ##点击分派
         sleep(2)
-        driver.find_element_by_css_selector(
-            '#MAKE_PLAN_CZ > div > div:nth-child(3) > div > div > div.ant-table-wrapper > div > div > div > div > div > div.ant-table-body > table > tbody > tr:nth-child(1) > td:nth-child(9) > a:nth-child(2)').click()
+        driver.find_element(By.XPATH,"//td[text()='"+fa_name+"测试12']/../td/*/a[text()='分派']").click()
         sleep(2)
         ##切换到制定计划iframe
-        jhfp = driver.find_element_by_css_selector(
-            'body > div.v-dialog.v-s-normal > div.v-dialog-body > div > div > iframe')
+        jhfp = driver.find_element_by_css_selector(By.XPATH,"//iframe[contains(@src,'assignmentTask')]")
         driver.switch_to.frame(jhfp)
         sleep(2)
         driver.find_element_by_css_selector('#taskName').send_keys(jh_name)
@@ -130,19 +125,16 @@ class User:
         ryxz = driver.find_element_by_css_selector('#layui-laydialog-iframe1')
         driver.switch_to.frame(ryxz)
         driver.find_element_by_css_selector('#fullname').send_keys(ry_name)
-        driver.find_element_by_css_selector(
-            '#tab-1 > div > div > div > table > tbody > tr > td:nth-child(2) > div.toolbar-panel > div > div.toolbar-head.clearfix > div:nth-child(1) > a > span').click()
-        ##    选择人  //*[@id="854670074076725248"]/td[3]  #\38 54670074076725248 > td:nth-child(3)
-        driver.find_element_by_xpath(
-            '/html/body/div[1]/div[2]/div/div[1]/div/div/div/table/tbody/tr/td[2]/div[2]/div/div[3]/div[3]/div/table/tbody/tr[2]/td[@title="陈自然"]').click()
-        ##    patrol2
-        ##    driver.find_element_by_xpath('//*[@id="854670074076725248"]/td[3]').click()
+        print('点击搜索')
+        driver.find_element(By.XPATH,"//span[text()='搜索']").click()
+        print('选择人')
+        driver.find_element_by_xpath("//td[@title='"+ry_name+"' and contains(@aria-describedby,'name')]").click()
         sleep(2)
         driver.switch_to.default_content()
         driver.find_element_by_link_text('选择').click()
         sleep(2)
         driver.switch_to.frame(jhfp)
-        driver.find_element_by_xpath('/html/body/div[1]/div[2]/input[1]').click()
+        driver.find_element_by_xpath("//input[@value='任务下发']").click()
 
     def make_ywpz(self):
         xtpz = driver.find_elements_by_xpath('//span[@title="系统设置"]')[0]
@@ -150,7 +142,6 @@ class User:
         driver.execute_script('arguments[0].scrollIntoView()', xtpz)
         sleep(3)
         ActionChains(driver).move_to_element(xtpz).perform()
-        driver.implicitly_wait(20)
         sleep(5)
         elements = driver.find_elements_by_tag_name('span')
         sleep(1)
@@ -161,48 +152,71 @@ class User:
                 break
         sleep(2)
         print('进入业务配置')
-        # 业务配置-查看
-        driver.find_element_by_xpath('//td[text()="巡检"]/../td[3]/div/button[1]').click()
-        print("进入业务配置列表")
-        driver.find_element_by_xpath('//div[text()="+ 添加类型"]').click()
-        sleep(4)
-        driver.find_element_by_id('name').send_keys('测试')
-        sleep(1)
-        driver.find_element_by_id('code').send_keys('测试')
-        sleep(1)
-        gwz = {'供水管网': ['管段', '节点', '阀门']}
-        for key in gwz.keys():
-            for value in gwz[key]:
-                # 添加作业对象
-                driver.find_element_by_xpath("//label[text()='作业对象']/../button[1]").click()
-                sleep(1)
-                # 点击设备类型
-                driver.find_element_by_xpath('//span[@class="ant-select-selection__rendered"]').click()
-                sleep(3)
-                # 选择设备
-                driver.find_element(By.CSS_SELECTOR, "span[title='" + key + "']+ul span[title='" + value + "']").click()
-                sleep(1)
-                # 作业历史选择
-                driver.find_element(By.XPATH,
-                                    "//div[@id='historyRecords']/div/div[@class='ant-select-selection__rendered']").click()
-                sleep(2)
-                driver.find_element(By.XPATH, "//ul[ @role='listbox']/li[text()='设备作业历史']").click()
-                sleep(2)
-                # 到位
-                driver.find_element(By.XPATH, "//span[text()='到位']").click()
-                sleep(1)
-                # 到位半径
-                driver.find_element(By.XPATH, "//input[@role='spinbutton']").click()
-                sleep(1)
-                # 是否反馈
-                driver.find_element(By.XPATH, "//span[text()='反馈']").click()
-                # 设备反馈
-                driver.find_element(By.XPATH,
-                                    "//div[@id='equipFeedbackBpm']/div/div[@class='ant-select-selection__rendered']").click()
-                sleep(2)
-                # 设备流程
-                driver.find_element(By.XPATH, "//ul[@role='listbox']/li[text()='设备反馈']").click()
-                sleep(1)
-                # 保存
-                driver.find_element(By.XPATH, "//span/div/button[@type='submit']").click()
-                sleep(1)
+        ywlxs=['巡检','养护','检漏','排污稽查']
+        for ywlx in ywlxs:
+            # 业务配置-查看
+            driver.find_element_by_xpath("//td[text()='"+ywlx+"']/../td[3]/div/button[1]").click()
+            print("进入业务配置列表")
+            driver.find_element_by_xpath('//div[text()="+ 添加类型"]').click()
+            sleep(2)
+            driver.find_element_by_id('name').send_keys('北海-'+ywlx)
+            sleep(1)
+            driver.find_element_by_id('code').send_keys('北海-'+ywlx)
+            sleep(1)
+            gws = {'北海供水': ['管段', '阀门', '控制阀门', '消防栓', '水表'],'北海原水': ['管段', '渠道', '阀门', '控制阀门', '消防栓'],}
+            for gw in gws.keys():
+                for sb in gws[gw]:
+                    # 添加作业对象
+                    driver.find_element_by_xpath("//label[text()='作业对象']/../button[1]").click()
+                    sleep(1)
+                    # 点击设备类型
+                    driver.find_element_by_xpath('//span[@class="ant-select-selection__rendered"]').click()
+                    sleep(1)
+                    try:
+                        # 选择设备
+                        driver.find_element(By.CSS_SELECTOR, "span[title='" + gw + "']+ul span[title='" + sb + "']").click()
+                    except Exception as e:
+                        print('界面无'+gw+' '+sb)
+                        sleep(1)
+                        driver.find_element(By.XPATH,"//span/div/button[@type='submit']/../button[@type='button']").click()
+                        sleep(1)
+                        continue
+                    sleep(1)
+                    # 作业历史选择
+                    driver.find_element(By.XPATH,
+                                        "//div[@id='historyRecords']/div/div[@class='ant-select-selection__rendered']").click()
+                    sleep(1)
+                    driver.find_element(By.XPATH, "//ul[ @role='listbox']/li[text()='设备作业历史']").click()
+                    sleep(1)
+                    # 到位
+                    driver.find_element(By.XPATH, "//span[text()='到位']").click()
+                    sleep(1)
+                    # 到位半径
+                    dwbj=driver.find_element(By.XPATH, "//input[@role='spinbutton']")
+                    dwbj.send_keys(Keys.CONTROL,'a')
+                    sleep(1)
+                    dwbj.send_keys(100)
+                    sleep(1)
+                    # 是否反馈
+                    # driver.find_element(By.XPATH, "//span[text()='反馈']").click()
+                    # 设备反馈
+                    # driver.find_element(By.XPATH,"//div[@id='equipFeedbackBpm']/div/div[@class='ant-select-selection__rendered']").click()
+                    # sleep(2)
+                    # 设备流程
+                    # driver.find_element(By.XPATH, "//ul[@role='listbox']/li[text()='设备反馈']").click()
+                    # sleep(1)
+                    # 保存
+                    driver.find_element(By.XPATH, "//span/div/button[@type='submit']").click()
+                    try:
+                        n = 1
+                        while driver.find_element(By.XPATH,"//span[text()='作业对象重复,请重新输入']"):
+                            driver.find_element(By.XPATH,"//*[@id='objectName']").send_keys(n)
+                            n+=1
+                            driver.find_element(By.XPATH, "//span/div/button[@type='submit']").click()
+                    except Exception as e:
+                        pass
+                    finally:
+                        print(f'{gw}-{sb}已添加！')
+                        continue
+                print(gw+' 所有设备已添加完毕！')
+            driver.find_element_by_xpath('//span/button[1]').click()
