@@ -12,17 +12,17 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class User:
-    def __init__(self):
+    def __init__(self,url):
         global driver
         driver = webdriver.Chrome()
         driver.implicitly_wait(20)
-        driver.get("http://10.41.16.20:32091/")
+        driver.get(url)
         # 刷新当前界面，清除历史数据
         driver.refresh()
         sleep(2)
         # 设置窗口大小
-        driver.set_window_size(1550, 848)
-        sleep(1)
+        # driver.set_window_size(1550, 848)
+        # sleep(1)
         driver.maximize_window()
         driver.implicitly_wait(20)
 
@@ -136,7 +136,7 @@ class User:
         driver.switch_to.frame(jhfp)
         driver.find_element_by_xpath("//input[@value='任务下发']").click()
 
-    def make_ywpz(self):
+    def make_ywpz(self,ywlxs,gws,gs=''):
         xtpz = driver.find_elements_by_xpath('//span[@title="系统设置"]')[0]
         # 将业务配置元素滑动到可见位置
         driver.execute_script('arguments[0].scrollIntoView()', xtpz)
@@ -152,18 +152,22 @@ class User:
                 break
         sleep(2)
         print('进入业务配置')
-        ywlxs=['巡检','养护','检漏','排污稽查']
+        # ywlxs=['巡检','养护','检漏','排污稽查']
         for ywlx in ywlxs:
             # 业务配置-查看
-            driver.find_element_by_xpath("//td[text()='"+ywlx+"']/../td[3]/div/button[1]").click()
+            driver.find_element(By.XPATH,r"//td[text()='"+ywlx+"']/../td[3]/div/button[1]").click()
             print("进入业务配置列表")
             driver.find_element_by_xpath('//div[text()="+ 添加类型"]').click()
             sleep(2)
-            driver.find_element_by_id('name').send_keys('北海-'+ywlx)
-            sleep(1)
-            driver.find_element_by_id('code').send_keys('北海-'+ywlx)
-            sleep(1)
-            gws = {'北海供水': ['管段', '阀门', '控制阀门', '消防栓', '水表'],'北海原水': ['管段', '渠道', '阀门', '控制阀门', '消防栓'],}
+            if gs:
+                driver.find_element_by_id('name').send_keys(gs+'-'+ywlx)
+                sleep(1)
+                driver.find_element_by_id('code').send_keys(gs+'-'+ywlx)
+            else:
+                driver.find_element_by_id('name').send_keys('测试-'+ ywlx)
+                sleep(1)
+                driver.find_element_by_id('code').send_keys('测试-'+ ywlx)
+            # gws = {'北海供水': ['管段', '阀门', '控制阀门', '消防栓', '水表'],'北海原水': ['管段', '渠道', '阀门', '控制阀门', '消防栓'],}
             for gw in gws.keys():
                 for sb in gws[gw]:
                     # 添加作业对象
@@ -176,7 +180,7 @@ class User:
                         # 选择设备
                         driver.find_element(By.CSS_SELECTOR, "span[title='" + gw + "']+ul span[title='" + sb + "']").click()
                     except Exception as e:
-                        print('界面无'+gw+' '+sb)
+                        print('------------------无'+gw+'-'+sb+'-----------------------')
                         sleep(1)
                         driver.find_element(By.XPATH,"//span/div/button[@type='submit']/../button[@type='button']").click()
                         sleep(1)
