@@ -21,7 +21,8 @@ class test_wq(unittest.TestCase):
         # u.make_plan(driver, '081701', '陈自然')
         ywlxs = ['巡检', '养护', '检漏', '排污稽查']
         gws = {'供水管网': ['管段', '阀门', '控制阀门', '消防栓', '水表'], '高铁供水': ['管段', '渠道', '阀门', '控制阀门', '消防栓'], }
-        u.make_ywpz(ywlxs,gws)
+        gs=[]
+        u.make_ywpz(ywlxs,gws,gs)
         sleep(2)
     def tearDown(self):
         pass
