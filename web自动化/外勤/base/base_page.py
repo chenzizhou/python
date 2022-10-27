@@ -5,8 +5,8 @@
 # 功能
 # 基础层：封装selenium原生方法
 from time import sleep
-
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 
 
 class BasePage:
@@ -14,7 +14,9 @@ class BasePage:
         global driver
         driver = webdriver.Chrome()
         driver.implicitly_wait(20)
-        driver.get("http://192.168.10.195:7799/")
+        print('进入登录界面')
+        driver.get("http://192.168.10.18:31903/login")
+        sleep(2)
         # 刷新当前界面，清除历史数据
         driver.refresh()
         sleep(2)
@@ -22,16 +24,25 @@ class BasePage:
         driver.set_window_size(1550, 848)
         sleep(1)
         driver.maximize_window()
-        driver.implicitly_wait(20)
-
     def loc_element(self, loc):
         return driver.find_element(*loc)
+
+    def move_to_element(self, loc):
+        return ActionChains(driver).move_to_element(self.loc_element(loc)).perform()
 
     def send_keys(self, loc, value):
         return driver.find_element(*loc).send_keys(value)
 
     def click(self, loc):
         return driver.find_element(*loc).click()
+
+    def in_frame(self,loc):
+        return driver.switch_to.frame(self.loc_element(loc))
+    def out_frame(self):
+        return driver.switch_to.default_content()
+
+    def execute_script(self,scripts,loc):
+        return driver.execute_script(scripts,self.loc_element(loc))
 
     def close(self):
         return driver.close()
