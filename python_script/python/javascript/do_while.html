@@ -2,33 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>100内猜数字</title>
 
 </head>
 <body>
  <script>
     function add(){
-        document.write('123');
         do{
             var a=0;
             var b=0;
-            var a=parseInt(prompt('请输入：'));
-            document.write(a);
-            console.log(a);
-            console.log(typeof(a));
+            var a=prompt('请输入：','');
             var b=Math.random()*100;
-            console.log(b);
-            if(a==NaN){
-                console.log('！');
-            }else if(a>b){
-               console.log('大啦！');
-            }else if(a<b){
-               console.log('小啦！');
-            }else{
+            if(a=='exit'){
+                break;
+            }else if(a==''||Number(a)%1!=0){
+                alert('请输入正整数！')
+            }else if(parseInt(a)>b){
+                alert('大啦！')
+                console.log('大啦！');
+            }else if(parseInt(a)<b){
+                alert('小啦！')
+                console.log('小啦！');
+            }else if(parseInt(a)==b){
+                alert('相等！')
                 console.log('相等！');}
+             else{
+                break;
+             }
         }while(a!=b);
     }
  </script>
 </body>
-    <input text="button" onclick="add()" value='开始'>
+    <input text="button" onclick="add()" value='开始游戏' style="width:65px;background:red;text-align:center;">
 </html>
