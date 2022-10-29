@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域</title>
+    <script>
+        //全局变量
+        a=12
+        function f(){
+            //局部变量
+            var a=12
+            a+=1;
+            alert(a)
+        }
+        f()
+        alert(a)
+    </script>
+</head>
+<body>
+
+</body>
+</html>
