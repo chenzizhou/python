@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script>
-    do{
-        var a=window.prompt('请输入：',1);
-        console.log(a);
-        var b=Math.random()*100;
-        console.log(b);
-        if(a>b){
-           console.log('大啦！');
-        }else if(a<b){
-           console.log('小啦！');
-        }else{
-            console.log('相等！');
-        }}while(a!=b);
-    </script>
+
 </head>
 <body>
-
+ <script>
+    function add(){
+        document.write('123');
+        do{
+            var a=0;
+            var b=0;
+            var a=parseInt(prompt('请输入：'));
+            document.write(a);
+            console.log(a);
+            console.log(typeof(a));
+            var b=Math.random()*100;
+            console.log(b);
+            if(a==NaN){
+                console.log('！');
+            }else if(a>b){
+               console.log('大啦！');
+            }else if(a<b){
+               console.log('小啦！');
+            }else{
+                console.log('相等！');}
+        }while(a!=b);
+    }
+ </script>
 </body>
+    <input text="button" onclick="add()" value='开始'>
 </html>
