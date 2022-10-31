@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Date对象</title>
+    <script>
+        var d=new Date();
+        console.log(d.getYear());//从1990开始计算
+        console.log(d.getTime());//返回自1970-1-1 00:00:00 到date 对象所经过的毫秒数
+<!--        console.log(d.setTime(6000000000000));//设置后本机时间也会变化-->
+
+        console.log(d.getFullYear());//年
+        console.log(d.getMonth());//月
+        console.log(d.getDate());//日
+        console.log(d.getDay());//星期
+        console.log(d.getHours());//时
+        console.log(d.getMinutes());//分
+        console.log(d.getSeconds());//秒
+        console.log(d.getMilliseconds());//毫秒
+        console.log(d.toLocaleString( ));//年月日时分秒
+        console.log(d.toLocaleTimeString());//时分秒
+        console.log(d.toLocaleDateString());//年月日
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
