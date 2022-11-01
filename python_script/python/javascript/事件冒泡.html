@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件冒泡</title>
+    <script>
+        function o1(event){console.log(event.target)}
+        function o2(event){
+            console.log(event.target);
+            event.stopPropagation();
+        }
+    </script>
+</head>
+<body>
+    <div onclick="o1(event)">
+        <input onclick="o2(event)">
+    </div>
+</body>
+</html>

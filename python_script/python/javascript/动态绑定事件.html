@@ -5,14 +5,15 @@
     <title>动态绑定事件</title>
 
 </head>
-<body>
-    <input id="i1" type="text"><br>
+<body onload="console.log('常用:为body绑定load事件，目的是为了在所有内容都加载完成之后再执行的操作要放在此处');">
+    <input id="i1" type="text" ><br>
     <script>
         var i=document.getElementById('i1');
         i.onclick=function(){
             //document.getElementById('i1').value='鼠标单击事件';
             this.value='鼠标单击事件';
         }
+<!--        window.onload=function(){document.getElementById('i1').value='所有内容加载完后显示';}-->
     </script>
 </body>
 </html>

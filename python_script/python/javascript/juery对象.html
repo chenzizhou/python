@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <input id="i1" class='c1' value="345">
+    <div id="d1" >d1内容</div>
+    <script src="jquery-3.6.0.js"></script>
+    <script>
+        console.log($('#d1').html('123').text());
+        console.log($('#i1').val());
+        $('#i1').addClass('c2');
+        $('#i1').removeClass('c1');
+        $('#i1').toggleClass('c1');
+
+
+    </script>
+</body>
+</html>

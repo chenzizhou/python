@@ -4,20 +4,30 @@
     <meta charset="UTF-8">
     <title>键盘事件</title>
     <script>
-        function down(){
+        function down(event){
             document.getElementById('i1').value='键位按下时事件';
+            console.log(event.target);
+            console.log(event.which);
+            console.log(event.key);
+
         }
-        function press(){
+        function press(event){
             document.getElementById('i2').value='键位按下时事件';
+            console.log(event.target);
+            console.log(event.which);
+            console.log(event.key);
         }
-        function up(){
+        function up(event){
             document.getElementById('i3').value='键位抬起时事件';
+            console.log(event.target);
+            console.log(event.which);
+            console.log(event.key);
         }
     </script>
 </head>
 <body>
-    <input id="i1" type="text" onkeydown="down()"><br>
-    <input id="i2" type="text" onkeypress="press()"><br>
-    <input id="i3" type="text" onkeyup="up()"><br>
+    <input id="i1" type="text" onkeydown="down(event)"><br>
+    <input id="i2" type="text" onkeypress="press(event)"><br>
+    <input id="i3" type="text" onkeyup="up(event)"><br>
 </body>
 </html>
