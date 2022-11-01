@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标事件</title>
+    <script>
+        function on(){
+            document.getElementById('i1').value='鼠标单击事件';
+        }
+        function over(){
+            document.getElementById('i2').value='鼠标移入进元素激发的事件';
+        }
+        function out(){
+            document.getElementById('i3').value='鼠标移出元素激发的事件';
+        }
+        function move(){
+            document.getElementById('i4').value='鼠标在元素内移动时的事件';
+        }
+    </script>
+</head>
+<body>
+    <input id="i1" type="text" onclick="on()"><br>
+    <input id="i2" type="text" onmouseover="over()"><br>
+    <input id="i3" type="text" onmouseout="out()"><br>
+    <input id="i4" type="text" onmousemove="move()"><br>
+</body>
+</html>

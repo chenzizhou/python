@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件</title>
+    <script>
+        function down(){
+            document.getElementById('i1').value='键位按下时事件';
+        }
+        function press(){
+            document.getElementById('i2').value='键位按下时事件';
+        }
+        function up(){
+            document.getElementById('i3').value='键位抬起时事件';
+        }
+    </script>
+</head>
+<body>
+    <input id="i1" type="text" onkeydown="down()"><br>
+    <input id="i2" type="text" onkeypress="press()"><br>
+    <input id="i3" type="text" onkeyup="up()"><br>
+</body>
+</html>
