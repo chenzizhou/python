@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>jquery对象</title>
 </head>
 
 <body>
@@ -10,11 +10,40 @@
     <div id="d1" >d1内容</div>
     <script src="jquery-3.6.0.js"></script>
     <script>
+        //添加文本
         console.log($('#d1').html('123').text());
+        //获取文本框value值
         console.log($('#i1').val());
+        //添加class属性值
         $('#i1').addClass('c2');
+        //如果有属性值，覆盖第一个属性值
+        $('#i1').attr('class','c3');
+
+        //移出class属性值
         $('#i1').removeClass('c1');
+        //如果存在class值，删除；如果不存在，创建；
         $('#i1').toggleClass('c1');
+        //css属性
+        $('#i1').css({'color':'green','background-color':'pink'});
+
+        //创建元素
+        $div2=$("<div id='d2'>动态创建div2</div>");
+        $div3=$("<div id='d3'>动态创建div3</div>");
+        $div4=$("<div id='d4'>动态创建div4</div>");
+
+        //插入元素,同一个元素插入最后一次插入生效
+        //追加到该元素下最后一个子元素后面
+        //追加到该元素下第一个子元素前面
+        //追加到该元素的后面
+        //追加到该元素的前面
+        $('body').prepend($div2);
+        $('body').append($div2);
+        $('#d2').after($div3);
+        $('#d3').before($div4);
+
+
+
+
 
 
     </script>

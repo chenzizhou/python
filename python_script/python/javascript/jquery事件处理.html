@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery事件处理</title>
+
+</head>
+<body>
+    <input id="i1" class='c1' value="345">
+    <script src="jquery-3.6.0.js"></script>
+    <script>
+        $(function(){
+            //$('#i1').attr('value','动态加入value值');
+            $('#i1').val('123');
+            $('#i1').hide(5000);
+            $('#i1').show(5000);
+            $('#i1').slideUp(5000);
+            $('#i1').slideDown(5000);
+            $('#i1').fadeOut(5000);
+            $('#i1').fadeIn(5000);
+
+
+        })
+    </script>
+</body>
+</html>
