@@ -53,7 +53,7 @@ class WxgdPage(LoginPage):
         self.out_frame()
         self.in_frame(self.wxsb_iframe_loc)
         sleep(1)
-        self.execute_script('arguments[0].innerHTML="江苏省苏州市姑苏区谈家南巷32"',self.dzms_loc)
+        self.execute_script('arguments[0].value="江苏省苏州市姑苏区谈家南巷32"',self.dzms_loc)
         sleep(5)
     def close_wxsb(self):
         pass
