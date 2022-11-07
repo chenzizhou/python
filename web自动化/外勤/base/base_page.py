@@ -24,6 +24,7 @@ class BasePage:
         driver.set_window_size(1550, 848)
         sleep(1)
         driver.maximize_window()
+
     def loc_element(self, loc):
         return driver.find_element(*loc)
 
@@ -36,13 +37,14 @@ class BasePage:
     def click(self, loc):
         return driver.find_element(*loc).click()
 
-    def in_frame(self,loc):
+    def in_frame(self, loc):
         return driver.switch_to.frame(self.loc_element(loc))
+
     def out_frame(self):
         return driver.switch_to.default_content()
 
-    def execute_script(self,scripts,loc):
-        return driver.execute_script(scripts,self.loc_element(loc))
+    def execute_script(self, scripts, loc):
+        return driver.execute_script(scripts, self.loc_element(loc))
 
     def close(self):
         return driver.close()
