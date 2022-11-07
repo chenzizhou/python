@@ -4,6 +4,7 @@
 # 2022/10/26 10:40
 # 功能
 #
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from time import sleep
 
@@ -53,7 +54,8 @@ class WxgdPage(LoginPage):
         self.out_frame()
         self.in_frame(self.wxsb_iframe_loc)
         sleep(1)
-        self.execute_script('arguments[0].value="江苏省苏州市姑苏区谈家南巷32"',self.dzms_loc)
+        self.click(self.dzms_loc)
+        ActionChains(self.driver).move_by_offset(500, 200).click()
         sleep(5)
     def close_wxsb(self):
         pass
