@@ -21,6 +21,9 @@ class WxgdPage(LoginPage):
 
     wxsb_iframe_loc=(By.XPATH,r"//div[@class='layui-laydialog-content']/iframe")
     dzms_loc=(By.XPATH,"//label[contains(text(),'地址描述')]/../div//input")
+    dt_loc=(By.CSS_SELECTOR,"#map_gc")
+    qr_loc=(By.XPATH,"//input[@value='确认']")
+
     lxr_loc=(By.XPATH,"//label[contains(text(),'联系人')]/../div//input")
     lxdh_loc=(By.XPATH,"//label[contains(text(),'联系电话')]/../div//input")
     fylb_loc=(By.XPATH,"//label[contains(text(),'反映类别')]/../div//input")
@@ -55,7 +58,19 @@ class WxgdPage(LoginPage):
         self.in_frame(self.wxsb_iframe_loc)
         sleep(1)
         self.click(self.dzms_loc)
-        ActionChains(self.driver).move_by_offset(500, 200).click()
+        self.out_frame()
+        print(1)
+        f=self.loc_elements(self.wxsb_iframe_loc)
+        print(2)
+        self.in_frame1(f[1])
+        print(3)
+        dt=self.loc_element(self.dt_loc)
+        self.move_by_offset(500, 200)
+        sleep(2)
+        dt.click()
+        sleep(2)
+        self.click(self.qr_loc)
+        sleep(2)
         sleep(5)
     def close_wxsb(self):
         pass
