@@ -26,6 +26,7 @@ class LoginPage(BasePage):
         self.click(LoginPage.eye_loc)
         sleep(1)
         self.click(LoginPage.submit_loc)
+        sleep(4)
 
     def get_expect_element(self):
         return self.loc_element(LoginPage.info_loc)

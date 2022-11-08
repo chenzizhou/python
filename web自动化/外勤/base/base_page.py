@@ -13,13 +13,13 @@ class BasePage:
     def __init__(self):
         global driver
         driver = webdriver.Chrome()
-        driver.implicitly_wait(20)
+        driver.implicitly_wait(30)
         print('进入登录界面')
         driver.get("http://10.41.16.20:32091/login")
         sleep(2)
         # 刷新当前界面，清除历史数据
         driver.refresh()
-        sleep(2)
+        sleep(4)
         # 设置窗口大小
         driver.set_window_size(1550, 848)
         sleep(1)
