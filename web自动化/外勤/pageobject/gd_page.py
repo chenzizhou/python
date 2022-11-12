@@ -7,9 +7,9 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from time import sleep
-
+from selenium.webdriver.support.wait import WebDriverWait
 from web自动化.外勤.pageobject.login_page import LoginPage
-
+from selenium.webdriver.support import expected_conditions as EC
 
 class WxgdPage(LoginPage):
     # 元素定位
@@ -48,15 +48,19 @@ class WxgdPage(LoginPage):
 
     def save_wxsb(self,username='admin',password='123456'):
         # 登录
+        driver=self.get_driver()
         print('登录')
         self.login(username,password)
         # 进入维修工单
         self.move_to_element(self.gdgl_loc)
         sleep(2)
+        print(1)
+        element=WebDriverWait(driver,1,20).until(EC.visibility_of_element_located(self.wxgd_loc))
+        print(1)
         self.move_to_element(self.wxgd_loc)
         sleep(1)
         print('点击维修工单')
-        self.click(self.wxgd_loc)
+        element.click()
         # 点击新建工单
         sleep(1)
         self.in_frame(self.wxgd_iframe_loc)

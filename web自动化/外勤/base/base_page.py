@@ -9,6 +9,7 @@ from selenium import webdriver
 from selenium.webdriver import ActionChains
 
 
+
 class BasePage:
     def __init__(self):
         global driver
@@ -39,6 +40,9 @@ class BasePage:
     def click(self, loc):
         return driver.find_element(*loc).click()
 
+    def get_driver(self):
+        return driver
+
     def in_frame(self, loc):
         return driver.switch_to.frame(self.loc_element(loc))
 
@@ -53,6 +57,8 @@ class BasePage:
 
     def move_by_offset(self,x,y):
         return ActionChains(driver).move_by_offset(x,y).perform()
+
+
 
     def close(self):
         return driver.close()
