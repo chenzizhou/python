@@ -1,9 +1,15 @@
 class Student(object):
     """学生类"""
-    __slots__ = ['name', 'age']
+    __slots__ = ['name', 'age','__p']
+
+    def __init__(self):
+        self.__p = 1
+
+    def __p_m(self):
+        return self.__p
 
     def o_m(self):
-        return '实例方法被调用'
+        return '实例方法被调用' + '私有变量，私有方法' + str(self.__p_m())
 
     @classmethod
     def c_m(cls):
