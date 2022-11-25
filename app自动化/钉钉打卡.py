@@ -37,14 +37,14 @@ def dddk(dk_type):
 
 while True:
     h, m = time.ctime().split(' ')[3][:5].split(':')
-    if h == '09' and m == '00':
+    if h == '08' and m == '45':
         dddk('上班打卡')
         sleep(60 * 60 * 3 - 5)
-    elif h == '12' and m == '00':
+    elif h == '12' and m == '01':
         dddk('下班打卡')
-        sleep(60 * 60 * 6 - 5)
-    elif h == '00' and m == '09':
-        dddk('外勤打卡')
-        sleep(60 * 60 * 15 - 5)
+        sleep(60 * 60 * 6-60 )
+    elif h == '18' and m == '01':
+        dddk('下班打卡')
+        sleep(60 * 60 * 15-60*15-60)
     else:
         continue
