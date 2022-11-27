@@ -9,4 +9,4 @@ if __name__ == '__main__':
     # -v: 显示更详细的信息
     # pytest.main(['指点参数', '指点模块/指点目录/（指点目录/模块）/（指点目录/指点模块::类名::方法名）','多线程[-n=2]'])
     # pytest.main(['-vs', '../../web自动化/外勤/testcase/test_pytest002.py::test_func'])
-    pytest.main(['-n = 2', '../testcase/test_pytest.py'])
+    pytest.main(['-vs', '../testcase/test_pytest001.py', '--reruns=2'])
