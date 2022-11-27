@@ -1,11 +1,12 @@
 class Student(object):
     """学生类"""
     #
-    __slots__ = ['name', 'age','__p']
+    __slots__ = ['name', 'age', '__p']
 
     def __init__(self):
         self.__p = 1
-    #__私有，只有在类方法中调用才生效
+
+    # __私有，只有在类方法中调用才生效
     def __p_m(self):
         return self.__p
 
