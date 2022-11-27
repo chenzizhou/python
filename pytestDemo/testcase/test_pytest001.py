@@ -30,4 +30,4 @@ class TestPytest:
 
 
 if __name__ == '__main__':
-    pytest.main(['-sv', '../testcase/test_pytest001.py', '--reruns=2'])
+    pytest.main(['-vs', '../testcase/test_pytest001.py', '--reruns=3'])
