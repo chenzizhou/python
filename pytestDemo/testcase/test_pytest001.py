@@ -10,7 +10,7 @@ import pytest
 class TestPytest:
     def test_pytest(self):
         sleep(3)
-        print('测试pytest001')
+        print('测试pytest')
 
     def test_pytest01(self):
         sleep(3)
@@ -18,16 +18,16 @@ class TestPytest:
 
     def test_pytest02(self):
         sleep(3)
-        print('测试pytest001')
+        print('测试pytest002')
 
     def test_pytest03(self):
         sleep(3)
-        print('测试pytest001')
+        print('测试pytest003')
 
     def test_pytest04(self):
         sleep(3)
-        print('测试pytest001')
+        print('测试pytest004')
 
 
 if __name__ == '__main__':
-    pytest.main(['-sv', '../testcase/test_pytest001.py', '-n=2'])
+    pytest.main(['-sv', '../testcase/test_pytest001.py', '--reruns=2'])
