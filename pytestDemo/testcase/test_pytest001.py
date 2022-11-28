@@ -9,8 +9,8 @@ import pytest
 
 class TestPytest:
     def test_pytest(self):
-        assert 1==2
         print('测试pytest')
+        assert 1==2
 
     def test_pytest01(self):
         print('测试pytest001')
