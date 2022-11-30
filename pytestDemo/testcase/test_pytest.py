@@ -12,6 +12,11 @@ class TestPytest:
         sleep(3)
         print('测试pytest')
 
+    @pytest.mark.smoke
+    def test_pytest_ini(self):
+        sleep(3)
+        print('测试pytest_ini')
+
 
 if __name__ == '__main__':
     pytest.main(['-sv'])
