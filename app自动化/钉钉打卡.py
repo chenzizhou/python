@@ -25,7 +25,7 @@ desired_caps = {
     'skipDeviceInitialization': True
     # 'app' : r'd:\apk\bili.apk'
 }
-
+    
 
 def dddk(dk_type):
     driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
