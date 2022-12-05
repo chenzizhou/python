@@ -12,9 +12,11 @@ from web自动化.外勤.pageobject.login_page import LoginPage
 from selenium.webdriver.support import expected_conditions as EC
 
 class WxgdPage(LoginPage):
+    bd_loc=(By.XPATH,r"// div[ @ title = '百度']")
     # 元素定位
     gdgl_loc=(By.XPATH,r"//span[text()='工单管理']")
     wxgd_loc=(By.XPATH,r"//span[text()='维修工单']")
+    wxgdjm_loc=(By.XPATH,r"// div[contains(text(), '工单编号') and @class ='ui-th-div ui-jqgrid-sortable']")
 
     wxgd_iframe_loc=(By.XPATH,r"//iframe[@src='/hbp/d/gdzsjmb.htm']")
     xjgd_loc=(By.XPATH,r"//a[text()='新建工单']")
@@ -51,24 +53,30 @@ class WxgdPage(LoginPage):
         driver=self.get_driver()
         print('登录')
         self.login(username,password)
+
+        # 显示等待
+        WebDriverWait(driver, 5, 20).until(EC.visibility_of_element_located(self.bd_loc))
         # 进入维修工单
         self.move_to_element(self.gdgl_loc)
         sleep(2)
-        print(1)
-        element=WebDriverWait(driver,1,20).until(EC.visibility_of_element_located(self.wxgd_loc))
-        print(1)
+        element=WebDriverWait(driver,5,20).until(EC.visibility_of_element_located(self.wxgd_loc))
+        print(self.wxgd_loc)
         self.move_to_element(self.wxgd_loc)
-        sleep(1)
+        # sleep(1)
         print('点击维修工单')
         element.click()
         # 点击新建工单
         sleep(1)
         self.in_frame(self.wxgd_iframe_loc)
+        WebDriverWait(driver, 1, 20).until(EC.visibility_of_element_located(self.wxgdjm_loc))
         print('点击新建工单')
         self.click(self.xjgd_loc)
+        sleep(1)
         self.out_frame()
         self.in_frame(self.wxsb_iframe_loc)
+        sleep(1)
         self.click(self.gs_loc)
+        sleep(1)
         self.click(self.gs_xx_loc)
         sleep(1)
         self.click(self.dzms_loc)

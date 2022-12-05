@@ -14,7 +14,7 @@ desired_caps = {
     'platformVersion': '11',  # 手机安卓版本
     'deviceName': 'mix fold',  # 设备名，安卓手机可以随意填写
     'appPackage': 'com.alibaba.android.rimet',  # 启动APP Package名称
-    'appActivity': '.biz.LaunchHomeActivity',  # 启动Activity名称#
+    'appActivity': '.biz.LaunchHomeActivity',  # 启动Activity名称
     'unicodeKeyboard ': True,  # 使用自带输入法，输入中文时填True
     'resetKeyboard': True,  # 执行完程序恢复原来输入法
     'noReset': True,  # 不要重置App
@@ -25,7 +25,7 @@ desired_caps = {
     'skipDeviceInitialization': True
     # 'app' : r'd:\apk\bili.apk'
 }
-    
+
 
 def dddk(dk_type):
     driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
