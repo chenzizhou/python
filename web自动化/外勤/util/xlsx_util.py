@@ -67,7 +67,7 @@ def read_xlsx(file,sheet_index=0,sheet_name='sheet1'):
         elif dwfs=='text':
             return '1'
         else:
-            print('qita')
+            print('qit')
 
 
 if __name__ == '__main__':
