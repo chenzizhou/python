@@ -11,6 +11,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from web自动化.外勤.pageobject.login_page import LoginPage
 from selenium.webdriver.support import expected_conditions as EC
 
+
+
 class WxgdPage(LoginPage):
     bd_loc=(By.XPATH,r"// div[ @ title = '百度']")
     # 元素定位
@@ -48,6 +50,7 @@ class WxgdPage(LoginPage):
     save_loc=(By.XPATH,"//span[text()='保存']")
     qd_loc=(By.XPATH,"//span[text()='启动']")
 
+
     def save_wxsb(self,username='admin',password='123456'):
         # 登录
         driver=self.get_driver()
@@ -60,7 +63,6 @@ class WxgdPage(LoginPage):
         self.move_to_element(self.gdgl_loc)
         sleep(2)
         element=WebDriverWait(driver,5,20).until(EC.visibility_of_element_located(self.wxgd_loc))
-        print(self.wxgd_loc)
         self.move_to_element(self.wxgd_loc)
         # sleep(1)
         print('点击维修工单')
@@ -70,6 +72,7 @@ class WxgdPage(LoginPage):
         self.in_frame(self.wxgd_iframe_loc)
         WebDriverWait(driver, 1, 20).until(EC.visibility_of_element_located(self.wxgdjm_loc))
         print('点击新建工单')
+        # self.find_element('xjgd_loc').click()
         self.click(self.xjgd_loc)
         sleep(1)
         self.out_frame()

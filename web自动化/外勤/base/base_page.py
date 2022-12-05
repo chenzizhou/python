@@ -7,7 +7,9 @@
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
 
+from web自动化.外勤.util.xlsx_util import read_xlsx
 
 
 class BasePage:
@@ -28,6 +30,7 @@ class BasePage:
 
     def loc_element(self, loc):
         return driver.find_element(*loc)
+
     def loc_elements(self, loc):
         return driver.find_elements(*loc)
 
@@ -55,10 +58,24 @@ class BasePage:
     def execute_script(self, scripts, loc):
         return driver.execute_script(scripts, self.loc_element(loc))
 
-    def move_by_offset(self,x,y):
-        return ActionChains(driver).move_by_offset(x,y).perform()
-
-
+    def move_by_offset(self, x, y):
+        return ActionChains(driver).move_by_offset(x, y).perform()
 
     def close(self):
         return driver.close()
+
+    def find_element(self,key):
+        file = r'../data/wxgd.xlsx'
+        by = read_xlsx(file)[key][0]
+        print(by)
+        k=read_xlsx(file)[key][1]
+        if by=='XPATH':
+            element=driver.find_element(By.XPATH,k)
+        elif by=='ID':
+           element=driver.find_element_by_name(By.ID,key)
+        elif by=='CLASS_NAME':
+            element=driver.find_element(By.CLASS_NAME,key)
+        elif by=='TEXT':
+            element=driver.find_element_by_xpath(By.PARTIAL_LINK_TEXT,key)
+        return element
+
