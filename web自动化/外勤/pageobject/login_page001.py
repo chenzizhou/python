@@ -7,7 +7,7 @@ from time import sleep
 from selenium.webdriver.common.by import By
 
 from web自动化.外勤.base.base_page import BasePage
-
+from web自动化.外勤.util.xlsx_util import read_xlsx
 
 
 class LoginPage(BasePage):
@@ -17,17 +17,23 @@ class LoginPage(BasePage):
     eye_loc = (By.XPATH, '//div[@class="ey-x-input-suffix"]')
     submit_loc = (By.XPATH, "//button[text()='登录']")
     info_loc=(By.XPATH,"//span[@class='arrow-icon']")
-
     def login(self, username='admin', password='123456'):
         '''测试登录'''
-        self.send_keys(LoginPage.username_loc, username)
-        sleep(1)
-        self.send_keys(LoginPage.password_loc, password)
-        sleep(1)
-        self.click(LoginPage.eye_loc)
-        sleep(1)
-        self.click(LoginPage.submit_loc)
-        sleep(4)
+        # self.send_keys(LoginPage.username_loc, username)
+        # sleep(1)
+        # self.send_keys(LoginPage.password_loc, password)
+        # sleep(1)
+        # self.click(LoginPage.eye_loc)
+        # sleep(1)
+        # self.click(LoginPage.submit_loc)
+        # sleep(4)
+        driver=self.get_driver()
+        file='../data/登录界面.xlsx'
+        dldw_data=read_xlsx(file)
+        print(dldw_data['username_loc'])
+        if dldw_data['username_loc'][0]=='NAME':
+            print(dldw_data['username_loc'][1])
+            driver.find_element(By.NAME,dldw_data['username_loc'][1]).send_keys(username)
 
     def get_expect_element(self):
         return self.loc_element(LoginPage.info_loc)
