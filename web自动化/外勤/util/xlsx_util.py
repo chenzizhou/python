@@ -7,6 +7,7 @@
 import xlrd2
 import xlwt
 
+
 def read_excel(file):
     # 打开文件
     workBook = xlrd2.open_workbook(file);
@@ -22,16 +23,16 @@ def read_excel(file):
 
     # 2. 获取sheet内容
     ## 2.1 法1：按索引号获取sheet内容
-    sheet1_content1 = workBook.sheet_by_index(0); # sheet索引从0开始
+    sheet1_content1 = workBook.sheet_by_index(0);  # sheet索引从0开始
     ## 2.2 法2：按sheet名字获取sheet内容
     sheet1_content2 = workBook.sheet_by_name(allSheetNames[0]);
 
     # 3. sheet的名称，行数，列数
-    print(sheet1_content1.name,sheet1_content1.nrows,sheet1_content1.ncols);
+    print(sheet1_content1.name, sheet1_content1.nrows, sheet1_content1.ncols);
 
     # 4. 获取整行和整列的值（数组）
-    rows = sheet1_content1.row_values(0); # 获取第一行内容
-    cols = sheet1_content1.col_values(0); # 获取第一列内容
+    rows = sheet1_content1.row_values(0);  # 获取第一行内容
+    cols = sheet1_content1.col_values(0);  # 获取第一列内容
     print(rows);
     print(cols);
 
@@ -44,35 +45,21 @@ def read_excel(file):
     # Tips: python读取excel中单元格的内容返回的有5种类型 [0 empty,1 string, 2 number, 3 date, 4 boolean, 5 error]
     print(sheet1_content1.cell(1, 0).ctype);
 
-def read_xlsx(file,sheet_index=0,sheet_name='sheet1'):
+
+def read_xlsx(file, sheet_index=0, sheet_name='sheet1'):
     workBook = xlrd2.open_workbook(file);
-    sheet_content=workBook.sheet_by_index(sheet_index)
-    rows=sheet_content.nrows
-    print(rows)
-    d={}
-    for i in range(1,rows):
-        row_content=sheet_content.row_values(i)
-        print(row_content)
-        key,value=row_content[0],row_content[1:3]
-        d[key]=value
-        dwfs=d['bd_loc'][0]
-        if dwfs=='ID':
-            return '1'
-        elif dwfs=='NAME':
-           return '1'
-        elif dwfs=='CLASS':
-            return '1'
-        elif dwfs=='xpath':
-            return '1'
-        elif dwfs=='text':
-            return '1'
-        else:
-            print('qit')
+    sheet_content = workBook.sheet_by_index(sheet_index)
+    rows = sheet_content.nrows
+    d = {}
+    for i in range(1, rows):
+        row_content = sheet_content.row_values(i)
+        key, value = row_content[0], row_content[1:3]
+        d[key] = value
+    return d
 
 
 if __name__ == '__main__':
-    file=r'../data/wxgd.xlsx'
+    file = r'../data/wxgd.xlsx'
     read_xlsx(file)
 
     # read_excel(file)
-

@@ -64,18 +64,17 @@ class BasePage:
     def close(self):
         return driver.close()
 
-    def find_element(self,key):
-        file = r'../data/wxgd.xlsx'
-        by = read_xlsx(file)[key][0]
-        print(by)
-        k=read_xlsx(file)[key][1]
-        if by=='XPATH':
-            element=driver.find_element(By.XPATH,k)
-        elif by=='ID':
-           element=driver.find_element_by_name(By.ID,key)
-        elif by=='CLASS_NAME':
-            element=driver.find_element(By.CLASS_NAME,key)
-        elif by=='TEXT':
-            element=driver.find_element_by_xpath(By.PARTIAL_LINK_TEXT,key)
+    def find_element_by_xlsx(self, xlsx_data, dwmc):
+        dwfs = xlsx_data[dwmc][0]
+        dwz = xlsx_data[dwmc][1]
+        if dwfs == 'XPATH':
+            element = driver.find_element(By.XPATH, dwz)
+        elif dwfs == 'ID':
+            element = driver.find_element(By.ID, dwz)
+        elif dwfs == 'NAME':
+            element = driver.find_element(By.NAME, dwz)
+        elif dwfs == 'CLASS_NAME':
+            element = driver.find_element(By.CLASS_NAME, dwz)
+        elif dwfs == 'TEXT':
+            element = driver.find_element(By.PARTIAL_LINK_TEXT, dwz)
         return element
-

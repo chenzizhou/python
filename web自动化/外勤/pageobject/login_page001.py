@@ -16,7 +16,8 @@ class LoginPage(BasePage):
     password_loc = (By.NAME, 'password')
     eye_loc = (By.XPATH, '//div[@class="ey-x-input-suffix"]')
     submit_loc = (By.XPATH, "//button[text()='登录']")
-    info_loc=(By.XPATH,"//span[@class='arrow-icon']")
+    info_loc = (By.XPATH, "//span[@class='arrow-icon']")
+
     def login(self, username='admin', password='123456'):
         '''测试登录'''
         # self.send_keys(LoginPage.username_loc, username)
@@ -27,14 +28,17 @@ class LoginPage(BasePage):
         # sleep(1)
         # self.click(LoginPage.submit_loc)
         # sleep(4)
-        driver=self.get_driver()
-        file='../data/登录界面.xlsx'
-        dldw_data=read_xlsx(file)
-        print(dldw_data['username_loc'])
-        if dldw_data['username_loc'][0]=='NAME':
-            print(dldw_data['username_loc'][1])
-            driver.find_element(By.NAME,dldw_data['username_loc'][1]).send_keys(username)
-
+        file = '../data/登录界面.xlsx'
+        xlsx_data=read_xlsx(file)
+        print(xlsx_data)
+        self.find_element_by_xlsx(xlsx_data,'username_loc').send_keys(username)
+        sleep(1)
+        self.find_element_by_xlsx(xlsx_data,'password_loc').send_keys(password)
+        sleep(1)
+        self.find_element_by_xlsx(xlsx_data,'eye_loc').click()
+        sleep(1)
+        self.find_element_by_xlsx(xlsx_data,'submit_loc').click()
+        sleep(3)
     def get_expect_element(self):
         return self.loc_element(LoginPage.info_loc)
         sleep(2)
