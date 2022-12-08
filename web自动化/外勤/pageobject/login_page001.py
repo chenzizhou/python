@@ -29,16 +29,17 @@ class LoginPage(BasePage):
         # self.click(LoginPage.submit_loc)
         # sleep(4)
         file = '../data/登录界面.xlsx'
-        xlsx_data=read_xlsx(file)
+        xlsx_data = read_xlsx(file)
         print(xlsx_data)
-        self.find_element_by_xlsx(xlsx_data,'username_loc').send_keys(username)
+        self.find_element_by_xlsx(xlsx_data, 'username_loc').send_keys(username)
         sleep(1)
-        self.find_element_by_xlsx(xlsx_data,'password_loc').send_keys(password)
+        self.find_element_by_xlsx(xlsx_data, 'password_loc').send_keys(password)
         sleep(1)
-        self.find_element_by_xlsx(xlsx_data,'eye_loc').click()
+        self.find_element_by_xlsx(xlsx_data, 'eye_loc').click()
         sleep(1)
-        self.find_element_by_xlsx(xlsx_data,'submit_loc').click()
+        self.find_element_by_xlsx(xlsx_data, 'submit_loc').click()
         sleep(3)
+
     def get_expect_element(self):
         return self.loc_element(LoginPage.info_loc)
         sleep(2)
