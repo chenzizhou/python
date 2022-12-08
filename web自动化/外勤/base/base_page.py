@@ -9,7 +9,7 @@ from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
-from web自动化.外勤.util.xlsx_util import read_xlsx
+from web自动化.外勤.util.xlsx_util import XlsxUtil
 
 
 class BasePage:
