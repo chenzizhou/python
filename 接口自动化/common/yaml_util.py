@@ -2,7 +2,6 @@
 # 作者：NATURE
 # 开发时间：2022/12/4 22:01
 # 功能：
-import pyaml
 import yaml
 
 file = '../testcase/title_name.yaml'
