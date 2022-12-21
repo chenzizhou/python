@@ -5,7 +5,6 @@
 # 功能
 #
 import xlrd2
-import xlwt
 
 class XlsxUtil:
     def read_excel(self,file):

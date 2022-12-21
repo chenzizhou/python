@@ -16,7 +16,7 @@ class TestLogin(unittest.TestCase):
     def setUp(self):
         print('准备')
 
-    @data(('bhcs', '123456'),)
+    @data(('bhcs', '123456'))
     @unpack
     def test_01_login(self, username, password):
         '''测试登录'''

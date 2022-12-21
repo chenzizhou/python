@@ -7,7 +7,7 @@ from time import sleep
 from selenium.webdriver.common.by import By
 
 from web自动化.外勤.base.base_page import BasePage
-from web自动化.外勤.util.xlsx_util import read_xlsx
+from web自动化.外勤.util.xlsx_util import XlsxUtil
 
 
 class LoginPage(BasePage):
@@ -29,7 +29,8 @@ class LoginPage(BasePage):
         # self.click(LoginPage.submit_loc)
         # sleep(4)
         file = '../data/登录界面.xlsx'
-        xlsx_data = read_xlsx(file)
+        x=XlsxUtil()
+        xlsx_data = x.read_xlsx(file)
         print(xlsx_data)
         self.find_element_by_xlsx(xlsx_data, 'username_loc').send_keys(username)
         sleep(1)
