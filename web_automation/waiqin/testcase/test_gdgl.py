@@ -2,7 +2,7 @@ import unittest
 
 from ddt import ddt, data, unpack
 
-from web自动化.外勤.pageobject.gd_page001 import WxgdPage
+from web_automation.外勤.pageobject.gd_page001 import WxgdPage
 
 
 # @ddt,@data,@unpack

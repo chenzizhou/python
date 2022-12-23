@@ -8,8 +8,15 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from time import sleep
 from selenium.webdriver.support.wait import WebDriverWait
-from web自动化.外勤.pageobject.login_page import LoginPage
+
 from selenium.webdriver.support import expected_conditions as EC
+
+from web_automation.waiqin.pageobject.login_page import LoginPage
+import sys
+import os
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+sys.path.append(rootPath)
 
 class WxgdPage(LoginPage):
     bd_loc=(By.XPATH,r"// div[ @ title = '百度']")

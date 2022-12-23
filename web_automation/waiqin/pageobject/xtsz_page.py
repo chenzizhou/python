@@ -9,7 +9,7 @@ from time import sleep
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 
-from web自动化.外勤.pageobject.login_page import LoginPage
+from web_automation.外勤.pageobject.login_page import LoginPage
 
 
 class XtpzPage(LoginPage):

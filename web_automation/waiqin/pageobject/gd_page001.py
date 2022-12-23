@@ -8,7 +8,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from time import sleep
 from selenium.webdriver.support.wait import WebDriverWait
-from web自动化.外勤.pageobject.login_page import LoginPage
+from web_automation.外勤.pageobject.login_page import LoginPage
 from selenium.webdriver.support import expected_conditions as EC
 
 

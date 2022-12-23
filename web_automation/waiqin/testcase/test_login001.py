@@ -6,9 +6,9 @@ import HTMLTestRunner
 import time
 import unittest
 from ddt import ddt, data, unpack
-from web自动化.外勤.pageobject.login_page001 import LoginPage
-from web自动化.外勤.util.find_new_file import get_new_file
-from web自动化.外勤.util.send_mail import send_mail
+from web_automation.外勤.pageobject.login_page001 import LoginPage
+from web_automation.外勤.util.find_new_file import get_new_file
+from web_automation.外勤.util.send_mail import send_mail
 
 
 @ddt
