@@ -137,6 +137,7 @@ class User:
         driver.find_element_by_xpath("//input[@value='任务下发']").click()
 
     def make_ywpz(self,ywlxs,gws,gs=''):
+        '''批量配置业务类型及设备类型'''
         xtpz = driver.find_elements_by_xpath('//span[@title="系统设置"]')[0]
         # 将业务配置元素滑动到可见位置
         driver.execute_script('arguments[0].scrollIntoView()', xtpz)

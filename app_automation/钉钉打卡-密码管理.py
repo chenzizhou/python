@@ -12,7 +12,7 @@ from selenium.webdriver.common.by import By
 
 desired_caps = {
     'platformName': 'Android',  # 被测手机是安卓
-    'platformVersion': '11',  # 手机安卓版本
+    'platformVersion': '10',  # 手机安卓版本
     'deviceName': 'mix fold',  # 设备名，安卓手机可以随意填写
     'appPackage': 'com.alibaba.android.rimet',  # 启动APP Package名称
     'appActivity': '.biz.LaunchHomeActivity',  # 启动Activity名称
@@ -70,20 +70,24 @@ def dddk(dk_type):
 
     driver.find_element(By.XPATH, '//android.widget.Button[@text="确认"]').click()
 
-
-
-
+# print(time.ctime())
+# print(time.ctime().split(' ')[3][:5])
+# print(time.ctime().split(' ')[4][:5])
+# h, m = time.ctime().split(' ')[4][:5].split(':')
 
 while True:
-    h, m = time.ctime().split(' ')[4][:5].split(':')
+    h, m = time.ctime().split(' ')[3][:5].split(':')
     if h == '08' and m == '45':
         dddk('上班打卡')
         sleep(60 * 60 * 3 - 5)
     elif h == '12' and m == '01':
         dddk('下班打卡')
         sleep(60 * 60 * 6 - 60)
-    elif h == '00':
+    elif h == '18' and m == '32':
         dddk('下班打卡')
-        sleep(60 * 60 * 15 - 60 * 15 - 60)
+        sleep(60 * 60 * 2.4)
+    elif h == '20' and m == '55':
+        dddk('下班打卡')
+        sleep(60 * 60 * 2.4)
     else:
         continue
