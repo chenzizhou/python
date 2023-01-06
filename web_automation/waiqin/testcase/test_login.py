@@ -5,10 +5,10 @@
 import sys
 import unittest
 from ddt import ddt, data, unpack
-
+import sys
+sys.path.append('E:\\python')
 from web_automation.waiqin.pageobject.login_page import LoginPage
 
-import sys
 
 
 @ddt
