@@ -4,6 +4,8 @@
 # 功能：
 import time
 from time import sleep
+
+import xlrd2
 from selenium.webdriver import Keys
 from selenium.webdriver.common import keys
 from appium import webdriver
@@ -51,15 +53,14 @@ class Dd():
         sleep(1)
         # 点击确定
         driver.find_element(By.XPATH, '//android.widget.Button[@text="确认"]').click()
-        print('回到登录界面')
     def dd_dk(self, dk_type):
         # 工作台
         driver.find_element(By.XPATH, '//android.widget.TextView[@text="工作台"]').click()
-        sleep(4)
+        sleep(3)
         print(dk_type)
         # 进入考勤打卡按钮
         driver.find_elements(By.XPATH, "//android.view.View[@text='考勤打卡']")[0].click()
-        sleep(4)
+        sleep(3)
         # 打卡
         driver.find_element(By.XPATH, "//android.view.View[@text='" + dk_type + "']").click()
         print('打卡成功')
@@ -78,62 +79,101 @@ class Dd():
         self.dd_dk(dk_type)
         self.dd_logout()
 
+    def get_dd_user(self):
+        x=xlrd2.open_workbook('./data/dd_user_info.xlxs')
+        s=x.sheet_by_index(0)
+        for i in range(1,s.rows):
+            name,password=s.row_values(i)
+            print(name,password)
+    @classmethod
+    def get_dd_user(cls):
+        x = xlrd2.open_workbook('data/dd_user_info.xlsx')
+        s = x.sheet_by_index(0)
+        peoples = []
+        for i in range(1, s.nrows):
+            p = {}
+            p['username'], p['password'] = name, password = s.row_values(i)
+            peoples.append(p)
+        # print(peoples)
+        return peoples
+
+    @classmethod
+    def get_dd_control_phone_config(cls):
+        x = xlrd2.open_workbook('data/dd_control_phone_config.xlsx')
+        s = x.sheet_by_index(0)
+        desired_caps = {}
+        for i in range(1, s.nrows):
+            name,password,comment = s.row_values(i)
+            if password=='1':
+                desired_caps[name]=True
+            elif password=='0':
+                desired_caps[name] = False
+            else:
+                desired_caps[name] = password
+        # print(desired_caps)
+        return desired_caps
+
 
 # 配置所控制手机
-desired_caps = {
-    'platformName': 'Android',  # 被测手机是安卓
-    'platformVersion': '10',  # 手机安卓版本
-    'deviceName': 'xiaomi',  # 设备名，安卓手机可以随意填写
-    'appPackage': 'com.alibaba.android.rimet',  # 启动APP Package名称
-    'appActivity': '.biz.LaunchHomeActivity',  # 启动Activity名称
-    'unicodeKeyboard ': True,  # 使用自带输入法，输入中文时填True
-    'resetKeyboard': True,  # 执行完程序恢复原来输入法
-    'noReset': True,  # 不要重置App
-    'newCommandTimeout': 6000,
-    'automationName': 'UiAutomator2',
-    'ignoreHiddenApiPolicyError': True,
-    'skipServerInstallation': True,
-    'skipDeviceInitialization': True
-    # 'app' : r'd:\apk\bili.apk'
-}
+# desired_caps = {
+#     'platformName': 'Android',  # 被测手机是安卓
+#     'platformVersion': '10',  # 手机安卓版本
+#     'deviceName': 'xiaomi',  # 设备名，安卓手机可以随意填写
+#     'appPackage': 'com.alibaba.android.rimet',  # 启动APP Package名称
+#     'appActivity': '.biz.LaunchHomeActivity',  # 启动Activity名称
+#     'unicodeKeyboard ': True,  # 使用自带输入法，输入中文时填True
+#     'resetKeyboard': True,  # 执行完程序恢复原来输入法
+#     'noReset': True,  # 不要重置App
+#     'newCommandTimeout': 6000,
+#     'automationName': 'UiAutomator2',
+#     'ignoreHiddenApiPolicyError': True,
+#     'skipServerInstallation': True,
+#     'skipDeviceInitialization': True
+#     # 'app' : r'd:\apk\bili.apk'
+# }
+if __name__=='__main__':
+    desired_caps = Dd.get_dd_control_phone_config()
+    print(desired_caps)
+    dk_types = ['上班打卡', '下班打卡', '外勤打卡']
+    print(dk_types)
+    peoples=Dd.get_dd_user()
+    print(peoples)
+    print(str(time.ctime().split(' ')[3][:6])+'启动程序')
+    while True:
+        # username='13277987082'
+        # password='rz321324'
+        # peoples = [{"username": "18571708907", "password": "zy153580"},
+        #            {"username": "15587621808", "password": "czr19970604"}]
+        # username = '18571708907'
+        # password = 'zy153580'
+        h, m ,y= time.ctime().split(' ')[3][:6].split(':')
+        if h == '08' and m == '10':
+            dd = Dd()
+            for p in peoples:
+                dd.dddk(dk_types[0], p['username'], p['password'])
+            sleep(60 * 60 * 3 )
+        elif h == '12' and m == '00':
+            dd = Dd()
+            for p in peoples:
+                dd.dddk(dk_types[1], p['username'], p['password'])
+            sleep(60 * 60 * 5.5)
+        elif h == '18' and m == '00':
+            dd = Dd()
+            for p in peoples:
+                dd.dddk(dk_types[1], p['username'], p['password'])
+            sleep(60 * 60 * 2)
 
-dk_types = ['上班打卡', '下班打卡', '外勤打卡']
-print(str(time.ctime().split(' ')[4][:5])+'启动程序')
-while True:
-    # username='13277987082'
-    # password='rz321324'
-    peoples = [{"username": "18571708907", "password": "zy153580"},
-               {"username": "15587621808", "password": "czr19970604"}]
-    # username = '18571708907'
-    # password = 'zy153580'
-    h, m = time.ctime().split(' ')[4][:5].split(':')
-    if h == '08' and m == '10':
-        dd = Dd()
-        for p in peoples:
-            dd.dddk(dk_types[0], p['username'], p['password'])
-        sleep(60 * 60 * 3 )
-    elif h == '12' and m == '00':
-        dd = Dd()
-        for p in peoples:
-            dd.dddk(dk_types[1], p['username'], p['password'])
-        sleep(60 * 60 * 5.5)
-    elif h == '18' and m == '00':
-        dd = Dd()
-        for p in peoples:
-            dd.dddk(dk_types[1], p['username'], p['password'])
-        sleep(60 * 60 * 2)
+        # 调试代码段
+        # elif h == '17':
+        #     dd = Dd()
+        #     for p in peoples:
+        #         dd.dddk(dk_types[1], p['username'], p['password'])
+        #     sleep(60*3)
 
-    # 调试代码段
-    # elif h == '10':
-    #     dd = Dd()
-    #     for p in peoples:
-    #         dd.dddk(dk_types[1], p['username'], p['password'])
-    #     sleep(60*3)
-
-    elif h == '20' and m == '31':
-        dd = Dd()
-        for p in peoples:
-            dd.dddk(dk_types[1], p['username'], p['password'])
-        sleep(60 * 60 * 11)
-    else:
-        continue
+        elif h == '20' and m == '31':
+            dd = Dd()
+            for p in peoples:
+                dd.dddk(dk_types[1], p['username'], p['password'])
+            sleep(60 * 60 * 11)
+        else:
+            continue

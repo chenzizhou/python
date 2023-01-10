@@ -11,4 +11,5 @@ sys.path.append('E:\\python')
 # print(sys.path)
 from web_automation.waiqin.pageobject.test_import import print_123
 print(sys.path)
+print(sys.modules)
 print_123()

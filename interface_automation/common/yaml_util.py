@@ -21,4 +21,4 @@ def read_yaml(file):
 
 data = read_yaml('../testcase/title_name.yaml')
 print(data)
-# write_yaml(file, data)
+# write_yaml(file,data)
