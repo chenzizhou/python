@@ -20,13 +20,16 @@ def get_dd_user():
     print(peoples)
     return peoples
 get_dd_user()
-print(time.ctime())
+
 import datetime
 from chinese_calendar import is_workday
-date = datetime.datetime.now().date()
+date = datetime.datetime.now()
+print(date.time().strftime('%H:%M:%S').split(':')[:2])
+# date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+# print(datetime.datetime.now())
 print(date)
-date = datetime.datetime(2022, 9, 4)
-print(date)
+# date = datetime.datetime(2022, 9, 4)
+# print(date)
 if is_workday(date):
   print("是工作日")
 else:

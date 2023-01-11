@@ -10,6 +10,8 @@ from selenium.webdriver import Keys
 from selenium.webdriver.common import keys
 from appium import webdriver
 from selenium.webdriver.common.by import By
+import datetime
+from chinese_calendar import is_workday
 
 
 class Dd():
@@ -65,6 +67,11 @@ class Dd():
         driver.find_element(By.XPATH, "//android.view.View[@text='" + dk_type + "']").click()
         print('打卡成功')
         sleep(4)
+        if driver.find_element(By.XPATH, "//android.widget.TextView[@text='工作通知']").is_displayed():
+            print('进入打卡通知界面')
+            driver.find_element(By.ID, "back_icon").click()
+            sleep(2)
+        print('未开启打卡通知！')
         # 关闭，回到主界面
         driver.find_element(By.XPATH, '//android.widget.RelativeLayout[@content-desc="关闭"]').click()
         sleep(2)
@@ -132,48 +139,49 @@ class Dd():
 #     # 'app' : r'd:\apk\bili.apk'
 # }
 if __name__=='__main__':
+    print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '启动程序')
     desired_caps = Dd.get_dd_control_phone_config()
     print(desired_caps)
     dk_types = ['上班打卡', '下班打卡', '外勤打卡']
     print(dk_types)
     peoples=Dd.get_dd_user()
     print(peoples)
-    print(str(time.ctime().split(' ')[3][:6])+'启动程序')
     while True:
-        # username='13277987082'
-        # password='rz321324'
-        # peoples = [{"username": "18571708907", "password": "zy153580"},
-        #            {"username": "15587621808", "password": "czr19970604"}]
-        # username = '18571708907'
-        # password = 'zy153580'
-        h, m ,y= time.ctime().split(' ')[3][:6].split(':')
-        if h == '08' and m == '10':
-            dd = Dd()
-            for p in peoples:
-                dd.dddk(dk_types[0], p['username'], p['password'])
-            sleep(60 * 60 * 3 )
-        elif h == '12' and m == '00':
-            dd = Dd()
-            for p in peoples:
-                dd.dddk(dk_types[1], p['username'], p['password'])
-            sleep(60 * 60 * 5.5)
-        elif h == '18' and m == '00':
-            dd = Dd()
-            for p in peoples:
-                dd.dddk(dk_types[1], p['username'], p['password'])
-            sleep(60 * 60 * 2)
+        date = datetime.datetime.now()
+        h,m = date.time().strftime('%H:%M:%S').split(':')[:2]
+        if is_workday(date):
+            if h == '08' and m == '10':
+                dd = Dd()
+                for p in peoples:
+                    dd.dddk(dk_types[0], p['username'], p['password'])
+                sleep(60 * 60 * 3)
+            elif h == '12' and m == '00':
+                dd = Dd()
+                for p in peoples:
+                    dd.dddk(dk_types[1], p['username'], p['password'])
+                sleep(60 * 60 * 5.5)
+            elif h == '18' and m == '00':
+                dd = Dd()
+                for p in peoples:
+                    dd.dddk(dk_types[1], p['username'], p['password'])
+                sleep(60 * 60 * 2)
 
-        # 调试代码段
-        # elif h == '17':
-        #     dd = Dd()
-        #     for p in peoples:
-        #         dd.dddk(dk_types[1], p['username'], p['password'])
-        #     sleep(60*3)
+            # 调试代码段
+            # elif h == '17':
+            #     dd = Dd()
+            #     for p in peoples:
+            #         dd.dddk(dk_types[1], p['username'], p['password'])
+            #     sleep(60*3)
 
-        elif h == '20' and m == '31':
-            dd = Dd()
-            for p in peoples:
-                dd.dddk(dk_types[1], p['username'], p['password'])
-            sleep(60 * 60 * 11)
+            elif h == '20' and m == '31':
+                dd = Dd()
+                for p in peoples:
+                    dd.dddk(dk_types[1], p['username'], p['password'])
+                sleep(60 * 60 * 11)
+            else:
+                continue
         else:
             continue
+
+
+
