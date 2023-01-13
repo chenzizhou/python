@@ -66,15 +66,18 @@ class Dd():
         # 打卡
         driver.find_element(By.XPATH, "//android.view.View[@text='" + dk_type + "']").click()
         print('打卡成功')
-        sleep(4)
-        if driver.find_element(By.XPATH, "//android.widget.TextView[@text='工作通知']").is_displayed():
-            print('进入打卡通知界面')
-            driver.find_element(By.ID, "back_icon").click()
+        sleep(3)
+        try:
+            if driver.find_element(By.XPATH, "//android.widget.TextView[@text='工作通知']"):
+                print('进入打卡通知界面')
+                driver.find_element(By.ID, "back_icon").click()
+                sleep(2)
+        except Exception:
+            print('未开启打卡通知！')
+        finally:
+            # 关闭，回到主界面
+            driver.find_element(By.XPATH, '//android.widget.RelativeLayout[@content-desc="关闭"]').click()
             sleep(2)
-        print('未开启打卡通知！')
-        # 关闭，回到主界面
-        driver.find_element(By.XPATH, '//android.widget.RelativeLayout[@content-desc="关闭"]').click()
-        sleep(2)
 
     def dddk(self, dk_type, username, password):
         try:
@@ -141,11 +144,11 @@ class Dd():
 if __name__=='__main__':
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '启动程序')
     desired_caps = Dd.get_dd_control_phone_config()
-    print(desired_caps)
+    # print(desired_caps)
     dk_types = ['上班打卡', '下班打卡', '外勤打卡']
-    print(dk_types)
+    # print(dk_types)
     peoples=Dd.get_dd_user()
-    print(peoples)
+    # print(peoples)
     while True:
         date = datetime.datetime.now()
         h,m = date.time().strftime('%H:%M:%S').split(':')[:2]
@@ -167,13 +170,13 @@ if __name__=='__main__':
                 sleep(60 * 60 * 2)
 
             # 调试代码段
-            # elif h == '17':
+            # elif h == '18':
             #     dd = Dd()
             #     for p in peoples:
             #         dd.dddk(dk_types[1], p['username'], p['password'])
             #     sleep(60*3)
 
-            elif h == '20' and m == '31':
+            elif h == '20' and m == '30 ':
                 dd = Dd()
                 for p in peoples:
                     dd.dddk(dk_types[1], p['username'], p['password'])
