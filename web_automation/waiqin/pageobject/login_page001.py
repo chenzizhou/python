@@ -6,8 +6,8 @@ from time import sleep
 
 from selenium.webdriver.common.by import By
 
-from web_automation.外勤.base.base_page import BasePage
-from web_automation.外勤.util.xlsx_util import XlsxUtil
+from web_automation.waiqin.base.base_page import BasePage
+from web_automation.waiqin.util.xlsx_util import XlsxUtil
 
 
 class LoginPage(BasePage):

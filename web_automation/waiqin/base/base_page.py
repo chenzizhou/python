@@ -15,7 +15,7 @@ class BasePage:
         driver = webdriver.Chrome()
         driver.implicitly_wait(30)
         print('进入登录界面')
-        driver.get("http://10.41.16.20:32091/login")
+        driver.get("http://192.168.10.195:7799/")
         sleep(2)
         # 刷新当前界面，清除历史数据
         driver.refresh()
