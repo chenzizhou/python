@@ -304,7 +304,6 @@ class XtpzPage(LoginPage):
 if __name__=='__main__':
     ywlxs=XtpzPage.get_ywpz_info_by_xlsx()
     print(ywlxs)
-    print(type(ywlxs))
     x = XtpzPage()
     x.add_ywxf(ywlxs)
 
