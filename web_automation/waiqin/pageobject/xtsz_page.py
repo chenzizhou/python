@@ -8,6 +8,8 @@ from time import sleep
 
 import xlrd2
 import yaml
+import xlwt
+from openpyxl import load_workbook
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from web_automation.waiqin.pageobject.login_page import LoginPage
@@ -43,20 +45,25 @@ class XtpzPage(LoginPage):
             driver.find_element(By.XPATH,r"//td[text()='"+ywlx+"']/../td[3]/div/button[1]").click()
             sleep(1)
             print("进入业务配置列表")
-            driver.find_element(By.XPATH,'//div[text()="+ 添加类型"]').click()
-            sleep(2)
             for ywxf,gws in ywxfs.items():
+                driver.find_element(By.XPATH, '//div[text()="+ 添加类型"]').click()
+                sleep(2)
                 if gs:
                     driver.find_element(By.ID,'name').send_keys(gs+'-'+ywxf)
                     sleep(1)
                     driver.find_element(By.ID,'code').send_keys(gs+'-'+ywxf)
+                    sleep(1)
                 else:
                     driver.find_element(By.ID,'name').send_keys(ywxf)
                     sleep(1)
                     driver.find_element(By.ID,'code').send_keys(ywxf)
                 for gw in gws.keys():
+                    if gw=='无':
+                        continue
                     for sbxx in gws[gw]:
                         sb,zyls,sfdw,dwfs,dwbj,sffk,sfdwfk,fklc=sbxx
+                        if sb=='无':
+                            continue
                         # 添加作业对象
                         driver.find_element(By.XPATH,"//label[text()='作业对象']/../button[1]").click()
                         sleep(1)
@@ -67,7 +74,7 @@ class XtpzPage(LoginPage):
                             # 选择设备
                             driver.find_element(By.CSS_SELECTOR, "span[title='" + gw + "']+ul span[title='" + sb + "']").click()
                         except Exception as e:
-                            print('------------------无'+gw+'-'+sb+'-----------------------')
+                            print(f'------------------{ywxf}-{gw}下无{sb}设备-----------------------')
                             sleep(1)
                             driver.find_element(By.XPATH,"//span/div/button[@type='submit']/../button[@type='button']").click()
                             sleep(1)
@@ -115,14 +122,15 @@ class XtpzPage(LoginPage):
                         except Exception as e:
                             pass
                         finally:
-                            print(f'{ywlx}-{gw}-{sb}已添加！')
+                            print(f'{ywlx}-{ywxf}-{gw}-{sb}已添加！')
                             # continue
-                    print(ywlx+'-'+gw+' 所有设备已添加完毕！')
+                    print(f'{ywlx}-{ywxf}-{gw}所有设备已添加完毕！')
                 # self.add_zydx(ywlx,ywxf,gws)
+                # 点击-业务配置详情-保存
                 driver.find_element(By.XPATH,'//span/button[1]').click()
                 sleep(1)
-                driver.find_element(By.XPATH,'//div[text()="业务配置"]').click()
-                sleep(1)
+            driver.find_element(By.XPATH,'//div[text()="业务配置"]').click()
+            sleep(1)
 
     def add_zydx(self,ywlx,ywxf,gws):
         driver = self.get_driver()
@@ -193,14 +201,65 @@ class XtpzPage(LoginPage):
             print(f'{ywlx} -{ywxf}-{gw} 所有设备已添加完毕！')
 
     @staticmethod
+    def get_null_cell():
+        s = xlrd2.open_workbook('../data/ywpz_info.xlsx').sheet_by_index(0)
+        k = []
+        for row in range(1, s.nrows):
+            for col in range(0, s.ncols):
+                if not s.cell_value(row, col):
+                    k.append((row, col))
+        return k
+
+    @staticmethod
+    def write_null_cell():
+        k = XtpzPage.get_null_cell()
+
+        # 加载excel，注意路径要与脚本一致
+        wb = load_workbook('../data/ywpz_info.xlsx')
+        # 激活excel表
+        sheet = wb.active
+        for lc in k:
+            row, col = lc
+            try:
+                sheet.cell(row + 1, col + 1, '无')
+            except Exception:
+                pass
+        wb.save('../data/ywpz_info.xlsx')
+        wb.close()
+
+    @staticmethod
     def get_ywpz_info_by_xlsx():
-        x = xlrd2.open_workbook('../data/ywpz_info.xlsx')
-        ywlxs={}
-        s=x.sheet_by_index(0)
+        # XtpzPage.write_null_cell()
+
+        # 获取空单元格
+        s = xlrd2.open_workbook('../data/ywpz_info.xlsx').sheet_by_index(0)
+        k = []
+        for row in range(1, s.nrows):
+            for col in range(0, s.ncols):
+                if not s.cell_value(row, col):
+                    k.append((row, col))
+
+        # 给空单元格赋值
+        # 加载excel，注意路径要与脚本一致
+        wb = load_workbook('../data/ywpz_info.xlsx')
+        # 激活excel表
+        sheet = wb.active
+        for lc in k:
+            row, col = lc
+            try:
+                sheet.cell(row + 1, col + 1, '无')
+            except Exception:
+                pass
+        wb.save('../data/ywpz_info.xlsx')
+        wb.close()
+
+        # 获取业务类型数据
+        s = xlrd2.open_workbook('../data/ywpz_info.xlsx').sheet_by_index(0)
+        ywlxs = {}
         for row in range(1,s.nrows):
             ywlx,ywxf,gw,sb,zyls,sfdw,dwfs,dwbj,sffk,sfdwfk,fklc=s.row_values(row)
             n=row
-            while n>0:
+            while n>1:
                 if ywlx:
                     break
                 else:
@@ -208,7 +267,7 @@ class XtpzPage(LoginPage):
                     # print(ywlx)
                     n=n-1
             n = row
-            while n>0:
+            while n>1:
                 if ywxf:
                     break
                 else:
@@ -216,13 +275,15 @@ class XtpzPage(LoginPage):
                     # print(ywlx)
                     n=n-1
             n = row
-            while n>0:
+            while n>1:
                 if gw:
                     break
                 else:
                     gw=s.cell_value(n-1,2)
                     # print(ywlx)
                     n=n-1
+            if not sb:
+                sb='无'
             print(ywlx, ywxf, gw, sb, zyls, sfdw, dwfs, dwbj, sffk, sfdwfk, fklc)
             if ywlx in ywlxs.keys():
                 if ywxf in ywlxs[ywlx].keys():
