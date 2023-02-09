@@ -8,23 +8,26 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class BasePage:
+    jm_loc=(By.XPATH,"//div[text()='用户登录']")
     def __init__(self):
         global driver
         driver = webdriver.Chrome()
         driver.implicitly_wait(30)
-        print('进入登录界面')
-        driver.get("http://192.168.10.195:7799/")
-        sleep(2)
-        # 刷新当前界面，清除历史数据
-        driver.refresh()
-        sleep(4)
         # 设置窗口大小
         driver.set_window_size(1550, 848)
         sleep(1)
         driver.maximize_window()
-
+    def get(self,url):
+        driver.get(url)
+        # 显示等待
+        WebDriverWait(driver, 3, 20).until(EC.visibility_of_element_located(self.jm_loc))
+        # 刷新当前界面，清除历史数据
+        driver.refresh()
+        WebDriverWait(driver, 3, 20).until(EC.visibility_of_element_located(self.jm_loc))
     def loc_element(self, loc):
         return driver.find_element(*loc)
 

@@ -13,7 +13,23 @@ from selenium.webdriver.common.by import By
 import datetime
 from chinese_calendar import is_workday
 
-
+# 配置所控制手机
+# desired_caps = {
+#     'platformName': 'Android',  # 被测手机是安卓
+#     'platformVersion': '10',  # 手机安卓版本
+#     'deviceName': 'xiaomi',  # 设备名，安卓手机可以随意填写
+#     'appPackage': 'com.alibaba.android.rimet',  # 启动APP Package名称
+#     'appActivity': '.biz.LaunchHomeActivity',  # 启动Activity名称
+#     'unicodeKeyboard ': True,  # 使用自带输入法，输入中文时填True
+#     'resetKeyboard': True,  # 执行完程序恢复原来输入法
+#     'noReset': True,  # 不要重置App
+#     'newCommandTimeout': 6000,
+#     'automationName': 'UiAutomator2',
+#     'ignoreHiddenApiPolicyError': True,
+#     'skipServerInstallation': True,
+#     'skipDeviceInitialization': True
+#     # 'app' : r'd:\apk\bili.apk'
+# }
 class Dd():
     def __init__(self):
         global driver
@@ -26,7 +42,6 @@ class Dd():
         return driver
 
     def dd_login(self, username, password):
-        print("进入登录界面")
         # 用户名
         driver.find_element(By.ID, 'et_phone_input').send_keys(username)
         sleep(2)
@@ -64,7 +79,7 @@ class Dd():
         driver.find_elements(By.XPATH, "//android.view.View[@text='考勤打卡']")[0].click()
         sleep(3)
         # 打卡
-        driver.find_element(By.XPATH, "//android.view.View[@text='" + dk_type + "']").click()
+        # driver.find_element(By.XPATH, "//android.view.View[@text='" + dk_type + "']").click()
         print('打卡成功')
         sleep(3)
         try:
@@ -97,7 +112,7 @@ class Dd():
             print(name,password)
     @classmethod
     def get_dd_user(cls):
-        x = xlrd2.open_workbook('data/dd_user_info.xlsx')
+        x = xlrd2.open_workbook('../data/dd_user_info.xlsx')
         s = x.sheet_by_index(0)
         peoples = []
         for i in range(1, s.nrows):
@@ -109,7 +124,7 @@ class Dd():
 
     @classmethod
     def get_dd_control_phone_config(cls):
-        x = xlrd2.open_workbook('data/dd_control_phone_config.xlsx')
+        x = xlrd2.open_workbook('../data/dd_control_phone_config.xlsx')
         s = x.sheet_by_index(0)
         desired_caps = {}
         for i in range(1, s.nrows):
@@ -124,23 +139,7 @@ class Dd():
         return desired_caps
 
 
-# 配置所控制手机
-# desired_caps = {
-#     'platformName': 'Android',  # 被测手机是安卓
-#     'platformVersion': '10',  # 手机安卓版本
-#     'deviceName': 'xiaomi',  # 设备名，安卓手机可以随意填写
-#     'appPackage': 'com.alibaba.android.rimet',  # 启动APP Package名称
-#     'appActivity': '.biz.LaunchHomeActivity',  # 启动Activity名称
-#     'unicodeKeyboard ': True,  # 使用自带输入法，输入中文时填True
-#     'resetKeyboard': True,  # 执行完程序恢复原来输入法
-#     'noReset': True,  # 不要重置App
-#     'newCommandTimeout': 6000,
-#     'automationName': 'UiAutomator2',
-#     'ignoreHiddenApiPolicyError': True,
-#     'skipServerInstallation': True,
-#     'skipDeviceInitialization': True
-#     # 'app' : r'd:\apk\bili.apk'
-# }
+
 if __name__=='__main__':
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '启动程序')
     desired_caps = Dd.get_dd_control_phone_config()
@@ -170,13 +169,13 @@ if __name__=='__main__':
                 sleep(60 * 60 * 2)
 
             # 调试代码段
-            # elif h == '18':
-            #     dd = Dd()
-            #     for p in peoples:
-            #         dd.dddk(dk_types[1], p['username'], p['password'])
-            #     sleep(60*3)
+            elif h == '09':
+                dd = Dd()
+                for p in peoples:
+                    dd.dddk(dk_types[1], p['username'], p['password'])
+                sleep(60*3)
 
-            elif h == '20' and m == '30 ':
+            elif h == '20' and m == '30':
                 dd = Dd()
                 for p in peoples:
                     dd.dddk(dk_types[1], p['username'], p['password'])

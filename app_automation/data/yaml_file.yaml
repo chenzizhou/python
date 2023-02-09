@@ -1,0 +1,8 @@
+- name: $csv{name}
+  request:
+    method: get
+    url: /cgi-bin/token
+    params:
+      appid: $csv{appid}
+      secret: $csv{secret}
+      grant_type: $csv{grant_type}

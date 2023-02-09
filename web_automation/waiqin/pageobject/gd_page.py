@@ -19,7 +19,6 @@ rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
 class WxgdPage(LoginPage):
-    bd_loc=(By.XPATH,r"// div[ @ title = '百度']")
     # 元素定位
     gdgl_loc=(By.XPATH,r"//span[text()='工单管理']")
     wxgd_loc=(By.XPATH,r"//span[text()='维修工单']")
@@ -60,9 +59,6 @@ class WxgdPage(LoginPage):
         driver=self.get_driver()
         print('登录')
         self.login(username,password)
-
-        # 显示等待
-        WebDriverWait(driver, 5, 20).until(EC.visibility_of_element_located(self.bd_loc))
         # 进入维修工单
         self.move_to_element(self.gdgl_loc)
         sleep(2)

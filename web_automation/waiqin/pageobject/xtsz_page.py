@@ -15,7 +15,7 @@ from web_automation.waiqin.pageobject.login_page import LoginPage
 
 
 class XtpzPage(LoginPage):
-    def add_ywxf(self, ywlxs, gs='', username='admin', password='123456'):
+    def add_ywxf(self, ywlxs, gs='FCG', username='admin', password='123456'):
         '''
         :param ywlxs:业务类型
         :param gws: 管网类型
@@ -24,8 +24,14 @@ class XtpzPage(LoginPage):
         :param password: 登录密码
         :return:
         '''
-        self.login(username, password)
-        driver = self.get_driver()
+        self.login(url,username, password)
+        try:
+            driver = self.get_driver()
+            ActionChains(driver).move_to_element(driver.find_element(By.XPATH,"//span[@title='切换公司']")).perform()
+            sleep(1)
+            driver.find_element(By.XPATH,f"//div[@data-value='{gs}']").click()
+        except Exception:
+            pass
         xtpz = driver.find_elements(By.XPATH, '//span[@title="系统设置" and text()="系统设置"]')[0]
         # 将业务配置元素滑动到可见位置
         driver.execute_script('arguments[0].scrollIntoView()', xtpz)
@@ -205,8 +211,9 @@ class XtpzPage(LoginPage):
             print(f'{ywlx} -{ywxf}-{gw} 所有设备已添加完毕！')
 
     @staticmethod
-    def get_null_cell():
-        s = xlrd2.open_workbook('../data/ywpz_info.xlsx').sheet_by_index(0)
+    def get_null_cell(file):
+        '''读取sheet页中空白单元格'''
+        s = xlrd2.open_workbook(file).sheet_by_index(0)
         k = []
         for row in range(1, s.nrows):
             for col in range(0, s.ncols):
@@ -215,11 +222,11 @@ class XtpzPage(LoginPage):
         return k
 
     @staticmethod
-    def write_null_cell():
+    def write_null_cell(file):
+        '''填充sheet页中空白单元格'''
         k = XtpzPage.get_null_cell()
-
         # 加载excel，注意路径要与脚本一致
-        wb = load_workbook('../data/ywpz_info.xlsx')
+        wb = load_workbook(file)
         # 激活excel表
         sheet = wb.active
         for lc in k:
@@ -228,38 +235,39 @@ class XtpzPage(LoginPage):
                 sheet.cell(row + 1, col + 1, '无')
             except Exception:
                 pass
-        wb.save('../data/ywpz_info.xlsx')
+        wb.save(file)
         wb.close()
 
     @staticmethod
-    def get_ywpz_info_by_xlsx():
+    def get_ywpz_info_by_xlsx(file):
+        '''从Excel中获取业务配置信息'''
         # XtpzPage.write_null_cell()
-
         # 获取空单元格
-        s = xlrd2.open_workbook('../data/ywpz_info.xlsx').sheet_by_index(0)
+        s = xlrd2.open_workbook(file).sheet_by_index(0)
         k = []
         for row in range(1, s.nrows):
             for col in range(0, s.ncols):
-                if not s.cell_value(row, col):
+                if not s.cell_value(row, col):#获取值从0开始
                     k.append((row, col))
 
         # 给空单元格赋值
         # 加载excel，注意路径要与脚本一致
-        wb = load_workbook('../data/ywpz_info.xlsx')
+        wb = load_workbook(file)
         # 激活excel表
         sheet = wb.active
         for lc in k:
             row, col = lc
             try:
-                sheet.cell(row + 1, col + 1, '无')
+                sheet.cell(row + 1, col + 1, '无')#赋值从1开始
             except Exception:
                 pass
-        wb.save('../data/ywpz_info.xlsx')
+        wb.save(file)
         wb.close()
 
         # 获取业务类型数据
-        s = xlrd2.open_workbook('../data/ywpz_info.xlsx').sheet_by_index(0)
+        s = xlrd2.open_workbook(file).sheet_by_index(0)
         ywlxs = {}
+        #业务类型、业务细分、管网合并单元格值为空处理
         for row in range(1, s.nrows):
             ywlx, ywxf, gw, sb, zyls, sfdw, dwfs, dwbj, sffk, sfdwfk, fklc = s.row_values(row)
             n = row
@@ -309,7 +317,11 @@ class XtpzPage(LoginPage):
 
 
 if __name__ == '__main__':
-    ywlxs = XtpzPage.get_ywpz_info_by_xlsx()
+    url='http://10.41.16.20:32091/?ecode=FCG&init=FCG'
+    username='admin'
+    password='Gis@123456'
+    file='../data/ywpz_info.xlsx'
+    ywlxs = XtpzPage.get_ywpz_info_by_xlsx(file)
     print(ywlxs)
     x = XtpzPage()
-    x.add_ywxf(ywlxs)
+    x.add_ywxf(ywlxs,username=username,password=password)
