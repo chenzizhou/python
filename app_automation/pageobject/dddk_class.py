@@ -150,7 +150,7 @@ if __name__=='__main__':
         date = datetime.datetime.now()
         h,m = date.time().strftime('%H:%M:%S').split(':')[:2]
         if is_workday(date):
-            if h == '08' and m == '10':
+            if h == '08' and m == '40':
                 dd = Dd()
                 for p in peoples:
                     dd.dddk(dk_types[0], p['username'], p['password'])
