@@ -12,7 +12,8 @@ from selenium.webdriver import Remote
 def djc_grid_baidu(host,browser):
     driver = Remote(command_executor=host,
                     desired_capabilities={'platform': 'ANY',
-                                          'browserName': browser, 'version': '',
+                                          'browserName': browser,
+                                           'version': '',
                                           'javascriptEnabled': True})
     sleep(2)
     driver.get('http://www.baidu.com')

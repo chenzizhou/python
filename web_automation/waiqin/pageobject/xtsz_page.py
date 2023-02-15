@@ -15,7 +15,7 @@ from web_automation.waiqin.pageobject.login_page import LoginPage
 
 
 class XtpzPage(LoginPage):
-    def add_ywxf(self, ywlxs, gs='FCG', username='admin', password='123456'):
+    def add_ywxf(self, ywlxs, gs='', username='admin', password='123456',url='http://192.168.10.195:7799/login'):
         '''
         :param ywlxs:业务类型
         :param gws: 管网类型
@@ -255,6 +255,9 @@ class XtpzPage(LoginPage):
         wb = load_workbook(file)
         # 激活excel表
         sheet = wb.active
+        # sheet = wb.get_sheet_by_name('Sheet1')
+        # sheet = wb['Sheet1']
+
         for lc in k:
             row, col = lc
             try:
@@ -316,12 +319,12 @@ class XtpzPage(LoginPage):
         return ywlxs
 
 
-if __name__ == '__main__':
-    url='http://10.41.16.20:32091/?ecode=FCG&init=FCG'
-    username='admin'
-    password='Gis@123456'
-    file='../data/ywpz_info.xlsx'
-    ywlxs = XtpzPage.get_ywpz_info_by_xlsx(file)
-    print(ywlxs)
-    x = XtpzPage()
-    x.add_ywxf(ywlxs,username=username,password=password)
+# if __name__ == '__main__':
+#     url='http://10.41.16.20:32091/?ecode=FCG&init=FCG'
+#     username='admin'
+#     password='123456'
+#     file='../data/ywpz_info.xlsx'
+#     ywlxs = XtpzPage.get_ywpz_info_by_xlsx(file)
+#     print(ywlxs)
+#     x = XtpzPage()
+#     x.add_ywxf(ywlxs,username=username,password=password)

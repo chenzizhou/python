@@ -12,7 +12,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class BasePage:
-    jm_loc=(By.XPATH,"//div[text()='用户登录']")
+    jm_loc=(By.XPATH,"//button[text()='登录']")
     def __init__(self):
         global driver
         driver = webdriver.Chrome()
@@ -64,9 +64,12 @@ class BasePage:
     def close(self):
         return driver.close()
 
-    def find_element_by_xlsx(self, xlsx_data, dwmc):
-        dwfs = xlsx_data[dwmc][0]
-        dwz = xlsx_data[dwmc][1]
+    def quit(self):
+        return driver.quit()
+
+    def find_element_by_xlsx(self, xlsx_data_dwmc):
+        dwfs = xlsx_data_dwmc[0]
+        dwz = xlsx_data_dwmc[1]
         if dwfs == 'XPATH':
             element = driver.find_element(By.XPATH, dwz)
         elif dwfs == 'ID':

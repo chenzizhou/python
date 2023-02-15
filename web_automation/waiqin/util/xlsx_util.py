@@ -45,22 +45,22 @@ class XlsxUtil:
         print(sheet1_content1.cell(1, 0).ctype);
 
     # 返回xlsx 第一个字段：列表[第二个字段..]格式数据
-    def read_xlsx(self,file,by='sheet_index',sheet_index=0, sheet_name='sheet1'):
+    def read_loc_infos_by_xlsx(self,file,by='sheet_index',sheet_index=0, sheet_name='sheet1'):
         workBook = xlrd2.open_workbook(file);
         if by=='sheet_index':
             sheet_content = workBook.sheet_by_index(sheet_index)
         else:
             sheet_content = workBook.sheet_by_name(sheet_name)
         rows = sheet_content.nrows
-        d = {}
+        sheeet_data = {}
         for i in range(1, rows):
             row_content = sheet_content.row_values(i)
-            key, value = row_content[0], row_content[1:3]
-            d[key] = value
-        return d
+            key, value = row_content[0], row_content[1:4]
+            sheeet_data[key] = value
+        return sheeet_data
 
 if __name__ == '__main__':
-    file = r'../data/wxgd.xlsx'
+    file = r'../data/wq_login_loc_info.xlsx'
     r=XlsxUtil()
     data=r.read_xlsx(file)
     print(data)

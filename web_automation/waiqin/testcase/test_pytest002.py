@@ -10,7 +10,7 @@ import pytest
 
 class TestPytest:
     def test_pytest(self, my_fixture):
-        print('测试pytest002')
+        print('测试pytest003')
 
     @pytest.mark.smoke
     def test_pytest_ini(self):
