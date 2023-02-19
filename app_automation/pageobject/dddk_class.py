@@ -36,7 +36,7 @@ class Dd():
     def get_driver(self):
         # 连接appium服务端并告知要控制手机的版本及应用等配置并返回一个操作手机的驱动
         desired_caps =Dd.get_dd_control_phone_config()
-        driver = webdriver.Remote('http://localhost:4723/wd/hub',desired_caps )
+        driver = webdriver.Remote('http://localhost:4723/wd/hub',desired_caps)
         driver.implicitly_wait(10)
         return driver
 

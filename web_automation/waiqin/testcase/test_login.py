@@ -41,11 +41,15 @@ class TestLogin(unittest.TestCase):
 
 if __name__ == '__main__':  # 并没有执行
     # print(sys.path)
+    #获取测试集对象
     # suite = unittest.TestSuite()
+    #使用搜索加载制定路径模块下的用例集
     # suite=unittest.defaultTestLoader.discover('../testcase','test_login.py')
+    #添加用例集
     # discover.addTest(TestLogin('test_02_login'))
     # # suite.addTest(TestLogin("test_01_login_1"))
     # # runner = unittest.TextTestRunner()
+    #添加时间生成唯一测试报告
     # file_url='../report/'+time.strftime("%Y-%m-%d %H_%M_%S")+' result.html'
     # print(file_url)
     # f=open(file_url,'wb')

@@ -91,7 +91,7 @@ class Dd():
             print('未开启打卡通知！')
         finally:
             # 关闭，回到主界面
-            driver.find_element(By.XPATH, '//android.widget.RelativeLayout[@content-desc="关闭"]').click()
+            driver.find_element(By.XPATH,'//android.widget.RelativeLayout[@content-desc="关闭"]').click()
             sleep(2)
 
     def dddk(self, dk_type, username, password):
@@ -152,7 +152,7 @@ if __name__=='__main__':
         date = datetime.datetime.now()
         h,m = date.time().strftime('%H:%M:%S').split(':')[:2]
         if is_workday(date):
-            if h == '08' and m == '10':
+            if h == '08' and m == '40':
                 dd = Dd()
                 for p in peoples:
                     dd.dddk(dk_types[0], p['username'], p['password'])

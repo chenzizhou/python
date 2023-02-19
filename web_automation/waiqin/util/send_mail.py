@@ -19,6 +19,7 @@ def send_mail(file_new):
     smtpserver='smtp.qq.com'
     #发送邮箱用户/密码
     user = '1096059759@qq.com'
+    # 在QQ邮箱设置中获取
     password = 'jjrrbaoauhpejcgf'
     #发送邮箱
     sender = '1096059759@qq.com'
