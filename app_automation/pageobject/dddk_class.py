@@ -28,6 +28,31 @@ from chinese_calendar import is_workday
 # }
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+import os,sys
+# 将当前工作目录下的文件夹都加入系统模块搜索路径
+path=os.getcwd().split('\\')[0]
+for i in range(0,len(os.getcwd().split('\\'))-1):
+    if i==0:
+        path = path
+        sys.path.append(path)
+    else:
+        path=path+'/'+os.getcwd().split('\\')[i]
+        sys.path.append(path)
+from until.send_mail_until import send_mail
+
+#send_mail参数格式
+# report_file=''#报告名称
+# with open(report_file,'r',encoding='utf-8') as f:
+#     message=f.read()
+message='打卡成功'
+mail_all={
+    'from_username':'417753633@qq.com',#发送人
+    'authorization_code':'jdpdvalctttxbhdh',#授权码
+    'send_to_username':['1096059759@qq.com'],#收件人
+    'subject': '钉钉打卡报告',#主题
+    'content_text':message,  # 纯文本或者HTML内容,发送邮件的内容 context_html
+    'attachments':[]# 附件,多个附件，以列表的形式存储
+ }
 class Dd():
     def __init__(self):
         global driver
@@ -59,12 +84,12 @@ class Dd():
         driver.find_element(By.XPATH, '//android.widget.TextView[@text="我的"]').click()
         sleep(2)
         # 滑动
-        driver.swipe(0, 1000, 0, 500)
+        driver.swipe(0, 1000, 0, 200)
         # 点击设置
         driver.find_element(By.XPATH, '//android.widget.TextView[@text = "设置"]').click()
         sleep(2)
-        driver.swipe(0, 1000, 0, 500)
-        # 退出登录
+        driver.swipe(0, 1000, 0, 200)
+        # 退出登录5
         driver.find_element(By.XPATH, '//android.widget.TextView[@text="退出登录"]').click()
         sleep(1)
         # 点击确定
@@ -81,6 +106,7 @@ class Dd():
             # 打卡
             driver.find_element(By.XPATH, "//android.view.View[@text='" + dk_type + "']").click()
             print(f'{username}-打卡成功')
+            send_mail(**mail_all)
             sleep(3)
             if driver.find_element(By.XPATH, "//android.widget.TextView[@text='工作通知']"):
                 print('进入打卡通知界面')
@@ -96,13 +122,18 @@ class Dd():
 
     def dddk(self, dk_type, username, password):
         try:
-            self.dd_login(username, password)
-        except Exception:
-            print('未在登录界面')
+            try:
+                self.dd_login(username, password)
+            except Exception:
+                print('未在登录界面')
+                self.dd_logout()
+                self.dd_login(username, password)
+            self.dd_dk(dk_type,username)
             self.dd_logout()
-            self.dd_login(username, password)
-        self.dd_dk(dk_type,username)
-        self.dd_logout()
+        except Exception as e:
+            print(e)
+            mail_all['content_text']=e
+            send_mail(**mail_all)
 
     def get_dd_user(self):
         x=xlrd2.open_workbook(r'..\data\dd_user_info.xlxs')
@@ -169,7 +200,7 @@ if __name__=='__main__':
             # 调试代码段
             # elif h:
             #     dd = Dd()
-            #     for p in peoples:
+            #     for p in peoples:+
             #         dd.dddk(dk_types[1], p['username'], p['password'])
             #     sleep(60*3)
 
