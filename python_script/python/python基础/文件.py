@@ -13,11 +13,16 @@ t = f.readline()
 # f.seek(2,1)
 # 只适合字节读取
 t=f.read(2)#根据文本格式读取位数，t代表读取两个字符，b代表两个字节
+print(t)
 f.write('123')
-f.write('456')
-f.seek(0,0)
+f.write('456')#追加写入，读写位置到最后
+print(f.tell())#读取当前读写位置
+#向文件头偏移1
+f.seek(1,0)
 print(f.read())
+f.flush()#刷新内存，强制写入文件
 f.close()
+
 
 f = open('test.txt', 'rb')
 print(f.read())
