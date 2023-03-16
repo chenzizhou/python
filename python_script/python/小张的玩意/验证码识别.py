@@ -38,3 +38,4 @@ def image_threashoding_method(image):
 def captcha_crack(image):
     result = pytesseract.image_to_string(image)
     return result
+

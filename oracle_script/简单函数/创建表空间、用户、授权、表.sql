@@ -1,41 +1,129 @@
----åˆ›å»ºè¡¨ç©ºé—´ï¼Œéœ€è¦åˆ›å»ºè¡¨ç©ºé—´æƒé™
+---´´½¨±í¿Õ¼ä£¬ĞèÒª´´½¨±í¿Õ¼äÈ¨ÏŞ
 CREATE TABLESPACE "DD" 
-LOGGING DATAFILE 'E:\app\Administrator\oradata\orcl\DD.DBF' --æ•°æ®åº“æ–‡ä»¶
-SIZE 32M --æ•°æ®æ–‡ä»¶å¤§å°
-AUTOEXTEND ON --è‡ªåŠ¨æ‰©å¢
-NEXT 32M --æ¯æ¬¡æ‰©å¢å¤§å°
-MAXSIZE UNLIMITED --æœ€å¤§æ–‡ä»¶å¤§å°
-EXTENT MANAGEMENT LOCAL --åŒºé—´ï¼ˆè¡¨ç©ºé—´ï¼‰ç®¡ç† æœ¬åœ°ã€å­—å…¸dictionary
-SEGMENT SPACE MANAGEMENT AUTO; --æ®µç©ºé—´ç®¡ç†  
+LOGGING DATAFILE 'D:\app\nature\oradata\orcl\DD.DBF' --Êı¾İ¿âÎÄ¼ş
+SIZE 32M --Êı¾İÎÄ¼ş´óĞ¡
+AUTOEXTEND ON --×Ô¶¯À©Ôö
+NEXT 32M --Ã¿´ÎÀ©Ôö´óĞ¡
+MAXSIZE UNLIMITED --×î´óÎÄ¼ş´óĞ¡
+EXTENT MANAGEMENT LOCAL --Çø¼ä£¨±í¿Õ¼ä£©¹ÜÀí ±¾µØ¡¢×Öµädictionary
+SEGMENT SPACE MANAGEMENT AUTO; --¶Î¿Õ¼ä¹ÜÀí  
 
---	"V$" ï¼šé’ˆå¯¹æŸä¸ªå®ä¾‹çš„è§†å›¾
--- "GV$" ï¼šå…¨å±€è§†å›¾ï¼Œé’ˆå¯¹å¤šä¸ªå®ä¾‹ç¯å¢ƒã€‚
--- "X$"  ï¼šæ˜¯ 'GV$' è§†å›¾çš„æ•°æ®æ¥æºï¼ŒOracle å†…éƒ¨è¡¨ã€‚
--- "V_$" ï¼šå›ºå®šè¡¨æˆ–è§†å›¾ï¼Œå…¶åŒä¹‰è¯æ˜¯ 'V$'
--- "GV_$"ï¼šå›ºå®šè¡¨æˆ–è§†å›¾ï¼Œå…¶åŒä¹‰è¯æ˜¯ 'GV$'
-select * from V_$TABLESPACE;
+--	"V$" £ºÕë¶ÔÄ³¸öÊµÀıµÄÊÓÍ¼
+-- "GV$" £ºÈ«¾ÖÊÓÍ¼£¬Õë¶Ô¶à¸öÊµÀı»·¾³¡£
+-- "X$"  £ºÊÇ 'GV$' ÊÓÍ¼µÄÊı¾İÀ´Ô´£¬Oracle ÄÚ²¿±í¡£
+-- "V_$" £º¹Ì¶¨±í»òÊÓÍ¼£¬ÆäÍ¬Òå´ÊÊÇ 'V$'
+-- "GV_$"£º¹Ì¶¨±í»òÊÓÍ¼£¬ÆäÍ¬Òå´ÊÊÇ 'GV$'
+--select * from V_$TABLESPACE;
 
-CREATE USER "DD" IDENTIFIED BY "nature" DEFAULT TABLESPACE DD;--åˆ›å»ºç”¨æˆ·
+/*
+CREATE USER 'ÓÃ»§Ãû£¬Ò»°ãÎª×ÖÄ¸Êı×ÖĞÍºÍ¡°#¡±¼°¡°_¡±·ûºÅ' 
+IDENTIFIED BY 'ÓÃ»§¿ÚÁî£¬Ò»°ãÎª×ÖÄ¸Êı×ÖĞÍºÍ¡°#¡±¼°¡°_¡±·ûºÅ'
+DEFAULT TABLESPACE 'Ä¬ÈÏµÄ±í¿Õ¼ä'
+TEMPORARY TABLESPACE 'ÁÙÊ±±í¿Õ¼äÃû'
+PROFILE '×ÊÔ´ÎÄ¼ş'
+QUOTA 'ÓÃ»§¿ÉÒÔÊ¹ÓÃµÄ±í¿Õ¼äµÄ×Ö½ÚÊı'
+PASSWORD EXPIRE--Á¢¼´½«¿ÚÁîÉè³É¹ıÆÚ×´Ì¬£¬ÓÃ»§ÔÙµÇÂ¼Ç°±ØĞëĞŞ¸Ä¿ÚÁî
+ACCOUNT LOCK OR ACCOUNT UNLOCK;--ÓÃ»§ÊÇ·ñ±»¼ÓËø£¬Ä¬ÈÏÇé¿öÏÂÊÇ²»¼ÓËøµÄ¡£
+;--´´½¨ÓÃ»§
+*/
+CREATE USER 'dd' 
+IDENTIFIED BY 'nature'
+DEFAULT TABLESPACE 'dd'
+;--´´½¨ÓÃ»§
+
+
 GRANT CONNECT,RESOURCE TO DD;
 GRANT DBA TO DD;
 
+---´´½¨±í
+DROP TABLE USER_INFO;
+CREATE TABLE user_info(
+  u_id int,
+  tel_num varchar(11) NOT NULL,
+  password varchar(30) NOT NULL,
+  sex varchar(2) DEFAULT 'ÄĞ',
+  age int DEFAULT 18£¬
+  height varchar(10) DEFAULT 100,
+  PRIMARY KEY (tel_num)
+)TABLESPACE DD
 
----åˆ›å»ºè¡¨
+---´´½¨ĞòÁĞ
+DROP SEQUENCE SE_U_ID;
+
+CREATE SEQUENCE SE_U_ID
+MINVALUE 0        ---ĞòÁĞ×îĞ¡Öµ
+MAXVALUE 1000     ---ĞòÁĞ×î´óÖµ
+START WITH 0    ---²»ÄÜĞ¡ÓÚ×îĞ¡Öµ
+INCREMENT BY 1  ----Ğ¡ÓÚMAX-MIN
+CYCLE
+CACHE 2--»º´æÖµ±ØĞë´óÓÚ1ÇÒĞ¡ÓÚÒ»´ÎÑ­»·µÄÖµ
+;
+
+SELECT SE_U_ID.NEXTVAL FROM DUAL;
+SELECT * FROM USER_INFO;
+---´´½¨±í1
 CREATE TABLE user_info1(
   tel_num varchar(11) NOT NULL,
   password varchar(30) NOT NULL,
   PRIMARY KEY (tel_num)
 )TABLESPACE DD
+--¸øÁĞÌí¼Ó±ğÃû
+COMMENT ON COLUMN user_info.tel_num is 'µç»°ºÅÂë';
+alter table user_info add age int;--Ôö¼ÓÁĞ
+alter table user_info add sex varchar(2);--Ôö¼ÓÁĞ
+alter table user_info add height varchar(5);--Ôö¼ÓÁĞ
+alter table user_info modify age int default 20;--ĞŞ¸Ä±í½á¹¹
 
---ç»™åˆ—æ·»åŠ åˆ«å
-COMMENT ON COLUMN user_info.tel_num is 'ç”µè¯å·ç ';
+COMMENT ON COLUMN user_info1.tel_num is 'µç»°ºÅÂë';
+alter table user_info1 add age int;--Ôö¼ÓÁĞ
+alter table user_info1 add sex varchar(2);--Ôö¼ÓÁĞ
+alter table user_info1 add height varchar(5);--Ôö¼ÓÁĞ
+alter table user_info1 modify age int default 20;--ĞŞ¸Ä±í½á¹¹
+
+/*
+drop table user_info;--É¾³ı±í
+drop table user_info1;
+*/
+insert into user_info t (t.u_id,t.tel_num,t.password)values(SE_U_ID.NEXTVAL,'2','2');
+insert into user_info values('2','2',null);
 
 
---åˆå¹¶
+insert into user_info1 t(t.tel_num,t.password) values('4','4');
+insert into user_info1(tel_num,password) values('3','3');
+
+
+alter table user_info add age int;
+
+--ºÏ²¢ ½«user_info1ÖĞµÄÊı¾İºÏ²¢µ½user_infoÖĞ
 MERGE INTO user_info t 
 USING user_info1 t1 
 ON (t.tel_num=t1.tel_num)
 WHEN MATCHED THEN 
 UPDATE set t.password=t1.password WHERE tel_num=t1.tel_num
 WHEN NOT MATCHED THEN
-INSERT VALUES(t1.tel_num,t1.password)
+INSERT VALUES(t1.tel_num,t1.password,t1.age)
+
+
+select * from dba_profiles;---²é¿´×ÊÔ´ÅäÖÃ²ÎÊı
+
+select * from user_info;
+
+--½ÇÉ«
+create role dd_role;--´´½¨½ÇÉ«
+grant connect,resource,dba to dd_role;--ÊÚÈ¨
+alter role dd_role identified by nature;
+alter role dd_role not identified;
+grant dd_role to dd;
+revoke dd_role from dd;
+
+select * from dba_roles ;   
+select * from user_role_privs;
+select * from role_role_privs;
+select * from role_sys_privs where role='DD_ROLE';
+select * from session_roles;
+select * from role_tab_privs;
+drop role dd_role cascade;
+
+
+
+

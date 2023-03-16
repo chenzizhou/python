@@ -1,36 +1,58 @@
---å­˜å‚¨è¿‡ç¨‹ æ— å‚
+--´æ´¢¹ı³Ì ÎŞ²Î(µ¥ĞĞ×¢ÊÍ£©
 CREATE OR REPLACE PROCEDURE p_test_put is
 BEGIN
 	DBMS_OUTPUT.PUT_LINE('123456');
 END p_test_put;
 
 call p_test_put();
-execute p_test_put;--åœ¨é»‘çª—å£è¿è¡Œï¼ˆsqlplusï¼‰
+/*execute p_test_put;--ÔÚºÚ´°¿ÚÔËĞĞ£¨sqlplus£©*/  --¶àĞĞ×¢ÊÍ
 
---å­˜å‚¨è¿‡ç¨‹ å¸¦æœ‰å…¥å‚
-CREATE OR REPLACE PROCEDURE p_test_put_i(i in int) is
+--´æ´¢¹ı³Ì ´øÓĞÈë²Î
+CREATE OR REPLACE PROCEDURE p_test_put_i(i in int default 123) is
 BEGIN
 	DBMS_OUTPUT.PUT_LINE(i);
 END p_test_put_i;
 
-call p_test_put_i(123456)
+call p_test_put_i();--Ö´ĞĞÊ¹ÓÃÄ¬ÈÏ²ÎÊıÖµ
+call p_test_put_i(123456);--ÏµÍ³×Ô¶¯Æ¥Åä²ÎÊıÖµ
+call p_test_put_i(i=>123456);--¶ÔÓ¦²ÎÊı¸³Öµ
 
---å­˜å‚¨è¿‡ç¨‹ å¸¦æœ‰å…¥å‚å’Œå‡ºå‚
+
+--´æ´¢¹ı³Ì ´øÓĞ³ö²Î ´øÓĞ³ö²ÎµÄ´æ´¢¹ı³Ì£¬±ØĞëÉùÃ÷¶¨Òå³ö²Î
+CREATE OR REPLACE PROCEDURE p_test_put_o(i out int) is
+BEGIN
+  i:=123;
+	DBMS_OUTPUT.PUT_LINE(i);
+END p_test_put_o;
+
+variable i int;
+call p_test_put_o(:i);
+
+declare
+  i int;
+begin
+  p_test_put_o(i);---µ÷ÓÃÊ±³ö²Î±ØĞëÊÇÒ»¸ö±äÁ¿Ãû²»ÊÇÒ»¸ö³£Á¿
+end;
+
+--´æ´¢¹ı³Ì ´øÓĞÈë²ÎºÍ³ö²Î
 CREATE OR REPLACE PROCEDURE p_test_put_i_o(i in int default 12345 ,a out int) is
 BEGIN
 	a:=123;
 	DBMS_OUTPUT.PUT_LINE(i);
 END p_test_put_i_o;
-var a int;--å®šä¹‰æ¥æ”¶å­˜å‚¨è¿‡ç¨‹è¿”å›çš„å€¼
+var a int;--¶¨Òå½ÓÊÕ´æ´¢¹ı³Ì·µ»ØµÄÖµ
 call p_test_put_i_o(123456,:a);
 
---å­˜å‚¨è¿‡ç¨‹ å‚æ•°å³æ˜¯å…¥å‚åˆæ˜¯å‡ºå‚
+--´æ´¢¹ı³Ì ²ÎÊı¼´ÊÇÈë²ÎÓÖÊÇ³ö²Î
 CREATE OR REPLACE PROCEDURE p_test_put_io(i in out int) is
 BEGIN
 	i:=i+0;
 	DBMS_OUTPUT.PUT_LINE(i);
+  p_test_put_i(2);--´æ´¢¹ı³ÌÖ±½Óµ÷ÓÃ´æ´¢¹ı³Ì
 END p_test_put_io;
 
-var a int;--ç»‘å®šå‡ºå‚
-exec :a:=123456;--å£°æ˜å…¥å‚å€¼
-call p_test_put_io(:a);--è°ƒç”¨æ—¶ä¸æ¥å—å¸¸é‡å€¼ï¼Œåªèƒ½ç”¨å˜é‡ä¸ºå…¶ä¼ å€¼
+declare
+  a int:=123456;--°ó¶¨³ö²Î
+begin
+  p_test_put_io(a);--µ÷ÓÃÊ±²»½ÓÊÜ³£Á¿Öµ£¬Ö»ÄÜÓÃ±äÁ¿ÎªÆä´«Öµ(³ÌĞò¿éµ÷ÓÃ´æ´¢¹ı³Ì£¬Ö±½ÓÓÃ¹ı³ÌÃû)
+end;
