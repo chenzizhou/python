@@ -41,9 +41,11 @@ CREATE TABLE user_info(
   u_id int,
   tel_num varchar(11) NOT NULL,
   password varchar(30) NOT NULL,
+  name varchar(10) NOT NULL,
   sex varchar(2) DEFAULT 'ÄÐ',
   age int DEFAULT 18£¬
   height varchar(10) DEFAULT 100,
+  hight varchar(10) DEFAULT 170,
   PRIMARY KEY (tel_num)
 )TABLESPACE DD
 
