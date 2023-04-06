@@ -36,22 +36,40 @@ GRANT CONNECT,RESOURCE TO DD;
 GRANT DBA TO DD;
 
 ---创建表
-DROP TABLE USER_INFO;
-CREATE TABLE user_info(
+CALL P_DROP_TABLE('DD_USER_INFO');
+CREATE TABLE dd_user_info(
   u_id int,
-  tel_num varchar(11) NOT NULL,
-  password varchar(30) NOT NULL,
+  tel varchar(11) NOT NULL,
+  password varchar(30) NOT NULL,--不能为空
   name varchar(10) NOT NULL,
-  sex varchar(2) DEFAULT '男',
-  age int DEFAULT 18，
+  sex varchar(2) DEFAULT '男'CHECK(SEX IN('男','女')）,---约束方法1，默认值为男，只能为'男','女'
+  age int DEFAULT 18,--设置默认值
   height varchar(10) DEFAULT 100,
-  hight varchar(10) DEFAULT 170,
-  PRIMARY KEY (tel_num)
-)TABLESPACE DD
+  high varchar(10) DEFAULT 170,
+  PRIMARY KEY (u_id,tel),
+  CONSTRAINT CHK_AGE CHECK(AGE<150)--添加约束方法2
+)TABLESPACE DD---声明表空间
+
+COMMENT ON TABLE USER_INFO IS 'dd用户信息表';
+COMMENT ON COLUMN USER_INFO.TEL IS '手机号码';--给表字段备注
+
+ALTER TABLE USER_INFO DROP PRIMARY KEY;---删除主键
+ALTER TABLE USER_INFO ADD PRIMARY KEY(U_ID,TEL);---添加主键1
+--ALTER TABLE USER_INFO ADD CONSTRAINT PK_U_ID_TEL PRIMARY KEY(U_ID,TEL);---添加主键1
+
+DELETE FROM DD_USER_INFO;
+
+--批量插入数据
+BEGIN
+  FOR i IN 1..100
+    LOOP
+      INSERT INTO DD_USER_INFO t(t.u_id,t.tel,t.password,t.name,t.sex)values(i,i,i,i,'女');
+    END LOOP;
+    COMMIT;
+END;
 
 ---创建序列
 DROP SEQUENCE SE_U_ID;
-
 CREATE SEQUENCE SE_U_ID
 MINVALUE 0        ---序列最小值
 MAXVALUE 1000     ---序列最大值
@@ -62,7 +80,9 @@ CACHE 2--缓存值必须大于1且小于一次循环的值
 ;
 
 SELECT SE_U_ID.NEXTVAL FROM DUAL;
-SELECT * FROM USER_INFO;
+SELECT * FROM DD_USER_INFO;
+
+
 ---创建表1
 CREATE TABLE user_info1(
   tel_num varchar(11) NOT NULL,
