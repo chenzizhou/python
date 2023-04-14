@@ -57,4 +57,4 @@ class TestPytest:
 
 if __name__ == '__main__':
     pytest.main(['-vs', '../testcase/test_pytest001.py', '--reruns=2','--alluredir','../temp'])
-    os.system(r'E:\allure-2.21.0\bin\allure.bat generate ../temp -o ../report --clean')
+    os.system(r'F:\allure-2.20.1\bin\allure.bat generate ../temp -o ../report --clean')

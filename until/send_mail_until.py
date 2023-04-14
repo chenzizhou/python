@@ -4,8 +4,11 @@
 # 2023/2/19 12:43
 # 功能
 #
-
+import smtplib
 import uuid as uuid
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 import zmail
 
 
@@ -21,7 +24,7 @@ import zmail
 #     'content_html':message,  # 纯文本或者HTML内容,发送邮件的内容 context_html
 #     'attachments':['2022-12-21 14_06_52 result.html']# 附件,多个附件，以列表的形式存储
 #  }
-def send_mail(**kwargs):
+def send_mail_by_zmail(**kwargs):
     username = kwargs['from_username']
     # 邮箱授权码，此处一定要注意，授权码不是邮箱密码，是要申请开通SMTP服务，官方给你的授权码
     authorization_code = kwargs['authorization_code']
@@ -52,3 +55,28 @@ def send_mail(**kwargs):
     except Exception as e:
         print(e)
         print("发送失败")
+
+
+def send_mail_by_email():
+    smtpserver = 'smtp.163.com'
+    # 发送邮件的用户名和客户端密码
+    username = 'mashang_xueyuan@163.com'
+    password = 'KNLQCNOKUHWHIXJg'  # 授权密码
+    # 接收邮件的邮箱
+    receiver = '2971330037@qq。com' #逗号隔开表示个收件人
+    # 创建邮件对象
+    message = MIMEMultipart('related')
+    subject = '湖南公安一网通项目自动化测试报告'
+    # 邮件的主题
+    fujian = MIMEText(open('report.html', 'rb').read(), 'html', 'utf-8')
+    # 把邮件的信息组装到邮件对象里面
+    message['form'] = username
+    message['to'] = receiver
+    message[' subject'] = subject
+    message.attach(fujian)
+    # 登录smtp服务器并发送邮件
+    smtp = smtplib.SMTP()
+    smtp.connect(smtpserver)
+    smtp.login(username, password)
+    smtp.sendmai(username, receiver, message.as_string())
+    smtp.quit()

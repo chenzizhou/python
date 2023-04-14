@@ -4,6 +4,9 @@
 # 2023/3/3 15:25
 # 功能
 #
+import copy
+
+
 class A:
     __slots__ = ['name', 'age']
     V = 0
@@ -29,6 +32,9 @@ class A:
 
 
 class B(A):
+    name = 'b';
+    l=[1,2]
+
     def work(self):
         print('子类')
 
@@ -48,9 +54,7 @@ a.name = 'nature'
 # a.school='123' #类中已定义固定属性，不能出现其他属性
 # print(a.__dict__)
 
-b=B()
+b = B()
 print(B.__base__)
 b.work()
-super(B,b).work()
-
-
+super(B, b).work()
