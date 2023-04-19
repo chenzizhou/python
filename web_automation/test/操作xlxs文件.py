@@ -23,4 +23,4 @@ sheets_name = wb.sheetnames
 print(sheets_name)
 
 # 保存为工作簿data1.xlsx
-wb.save(os.path.dirname(__file__).split('test')[0]+'common\data.xlsx')
+wb.save(os.path.dirname(__file__).split('test')[0]+'commons\data.xlsx')

@@ -4,7 +4,6 @@
 # 功能：
 import os
 from time import sleep
-
 import allure
 import pytest
 

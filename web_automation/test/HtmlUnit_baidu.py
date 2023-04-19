@@ -13,5 +13,5 @@ driver = Remote(command_executor='http://127.0.0.1:4444/wd/hub',
 driver.get("http://www.baidu.com")
 driver.find_element_by_id("kw").send_keys("htmlunit")
 driver.find_element_by_id("su").click()
-driver.get_screenshot_as_file("../common/run_ok.jpg")
+driver.get_screenshot_as_file("../commons/run_ok.jpg")
 driver.quit()

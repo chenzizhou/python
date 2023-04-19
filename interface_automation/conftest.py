@@ -3,9 +3,12 @@
 # 开发时间：2022/12/2 21:58
 # 功能：是本地的插件库，其中的hook函数和fixture将作用于该文件所在的目录以及所有子目录。
 import pytest
+import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+
+from interface_automation.commons.yaml_util import YamlUtil
 
 
 # pytest前置条件+后置条件的两种写法
@@ -37,6 +40,16 @@ def my_fixture2(request):
 
 @pytest.fixture()  # 夹具，没有设定范围，就代表function范围  url='https://npm.taobao.org/mirrors/chromedriver/113.0.5672.24/chromedriver_win32.zip'
 def driver():  # 函数
-    _path = ChromeDriverManager(url='https://chromedriver.storage.googleapis.com',version='113.0.5672.24')\
+    _path = ChromeDriverManager(url='https://chromedriver.storage.googleapis.com', version='113.0.5672.24') \
         .install()  # 自动安装 webdriver
     return webdriver.Chrome(service=Service(_path))  # 启动浏览器
+
+
+@pytest.fixture(scope='session', autouse=True)
+def session():
+    return requests.session()
+
+
+@pytest.fixture(scope='session', autouse=True)
+def clear_yaml():
+    YamlUtil().clear_extract_yaml()

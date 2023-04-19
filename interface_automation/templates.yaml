@@ -1,0 +1,23 @@
+-
+  name: 登录
+  request:
+    url: http://10.41.16.20:32091/hbp/userService/login?&type=1&sys=PATROL&sysVersion=&operSys=Windows&client=Chrome%3A%20114.0.0.0&platformType=pc&userAndPwd=LAXnCU%2BPweQ8Z8ryECP0CVw5PwCbnUHwN%2FYhtHctZyMP9Wd%2B2VPO7L4c3v%2Bn62IlKehNPd6kWG2mQmIIwqcUNOtWi71TxyrzQZhWvDlAA1bNXJmF9NiQVqDm9MUqs0zB4tdp8RF%2BduPH3EKSnXcDPtFETySr5Hksmdhkjo5Pius%3D&access_token=
+    method: get
+    headers:
+      Accept: application/json, text/plain, */*
+      Accept-Encoding: gzip, deflate
+      Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+      Connection: keep-alive
+      Content-Language: zh_CN
+      Content-Type: application/json
+      Host: 10.41.16.20:32091
+      Origin: http://10.41.16.20:32091
+      Referer: http://10.41.16.20:32091/?ecode=FCG&init=FCG
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/114.0.0.0 Safari/537.36
+      X-Hope-Ecode: FCG
+      X-Hope-Sys: PATROL
+      system_menu: ''
+    data: ''
+  validate:
+    msg: 登陆成功
