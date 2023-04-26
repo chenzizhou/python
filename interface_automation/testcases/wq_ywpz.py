@@ -9,11 +9,10 @@ import json
 import requests
 import yaml
 
-from interface_automation.commons.yaml_util import read_yaml
-
+from interface_automation.commons.yaml_util import YamlUtil
 req = requests.session()
 url = 'http://10.41.16.20:32091/hbp/userService/login?&type=1&sys=PATROL&sysVersion=&operSys=Windows&client=Chrome%3A%20114.0.0.0&platformType=pc&userAndPwd=LAXnCU%2BPweQ8Z8ryECP0CVw5PwCbnUHwN%2FYhtHctZyMP9Wd%2B2VPO7L4c3v%2Bn62IlKehNPd6kWG2mQmIIwqcUNOtWi71TxyrzQZhWvDlAA1bNXJmF9NiQVqDm9MUqs0zB4tdp8RF%2BduPH3EKSnXcDPtFETySr5Hksmdhkjo5Pius%3D&access_token='
-heads = read_yaml('../heads.yaml')
+heads = YamlUtil().read_yaml('../heads.yaml')
 rep = req.request('get', url=url,headers=heads)
 print(rep.json())
 token = rep.json()['token']

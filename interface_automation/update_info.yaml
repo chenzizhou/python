@@ -1,8 +1,10 @@
 -
   name: 批量添加对象
   request:
-    url: http://10.41.16.20:32091/patrolServer/configure/api/scheme/equip/batchUpdate
     method: post
+    url: http://10.41.16.20:32091/patrolServer/configure/api/scheme/equip/batchUpdate
+    params:
+      access_token: ${read_extract_data(access_token)}
     headers:
       Accept: application/json, text/plain, */*
       Accept-Encoding: gzip, deflate
@@ -25,8 +27,8 @@
       "needArrive": 1,
       "needFeedback": 1,
       "objectName": "防城港标签点",
-      "schemeTypeId": data,
-      "schemeType": "321"
+      "schemeTypeId": "${read_extract_data(data)}",
+      "schemeType": "${read_extract_data(code)}"
       }]
   validate:
     code: 200

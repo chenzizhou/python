@@ -1,8 +1,10 @@
 -
   name: 添加类型
   request:
-    url: http://10.41.16.20:32091/patrolServer/bp/configure/api/manager/schemeType/add
     method: post
+    url: http://10.41.16.20:32091/patrolServer/bp/configure/api/manager/schemeType/add
+    params:
+      access_token: ${read_extract_data(access_token)}
     headers:
       Accept: application/json, text/plain, */*
       Accept-Encoding: gzip, deflate
@@ -209,3 +211,6 @@
   }
   validate:
     code: 200
+  extract:
+    data: '"data":"(.*?)"'
+    code: 321

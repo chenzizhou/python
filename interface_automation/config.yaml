@@ -1,0 +1,8 @@
+logger:
+  name: MyTEST
+  level: DEBUG
+  when: D
+  interval: 1
+  backupCount: 10
+  encoding: utf-8
+  format: '%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s'

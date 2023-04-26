@@ -10,12 +10,13 @@ import yaml
 class YamlUtil:
 
     # 读取extract.yaml
-    def read_extract_yaml(self):
+    def read_extract_yaml(self,key):
         # 打开yaml文件，读取方式为a追加，编码格式utf-8， 然后重命名为 f
-        with open('../extract.yaml', mode='a', encoding='utf-8') as f:
+        with open('../extract.yaml', mode='r', encoding='utf-8') as f:
             # 读取f文件流， 读取方式FullLoader，然后赋值给value
             value = yaml.load(stream=f, Loader=yaml.FullLoader)
-            return value
+            print(value)
+            return value[key]
 
     # 写入extract.yaml
     def write_extract_yaml(self, data):
@@ -41,5 +42,6 @@ class YamlUtil:
             return data
 
 
+yaml_data = YamlUtil().read_yaml('../config.yaml')
 if __name__ == "__main__":
     print(YamlUtil().read_yaml('../login.yaml'))
