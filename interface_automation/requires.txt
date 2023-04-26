@@ -5,4 +5,5 @@ pytest-rerunfailures
 PyYAML
 requests
 urllib3
-xlrd
+xlrd2
+jsonpath
