@@ -11,8 +11,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class BasePage:
-    jm_loc=(By.XPATH,"//button[text()='登录']")
+    jm_loc = (By.XPATH, "//button[text()='登录']")
+
     def __init__(self):
         global driver
         driver = webdriver.Chrome()
@@ -21,13 +23,15 @@ class BasePage:
         driver.set_window_size(1550, 848)
         sleep(1)
         driver.maximize_window()
-    def get(self,url):
+
+    def get(self, url):
         driver.get(url)
         # 显示等待
         WebDriverWait(driver, 3, 20).until(EC.visibility_of_element_located(self.jm_loc))
         # 刷新当前界面，清除历史数据
         driver.refresh()
         WebDriverWait(driver, 3, 20).until(EC.visibility_of_element_located(self.jm_loc))
+
     def loc_element(self, loc):
         return driver.find_element(*loc)
 
