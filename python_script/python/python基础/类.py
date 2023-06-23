@@ -58,29 +58,29 @@ class B1(A1):
 
 
 
+if __name__=="__main__":
+    # 类方法调用
+    print('类直接访问类方法', A1.get_v())  # 类直接访问类方法
+    a = A1()
+    print(a.__dict__)
+    print('类实例访问类方法', a.get_v())  # 类实例访问类方法
+    print('获取该实例的类访问类方法', a.__class__.get_v())  # 获取该实例的类访问类方法
+    # 静态方法调用
+    print('类实例访问静态方法',A1.myadd(100, 200))
+    print('类对象获取类访问静态方法',a.__class__.myadd(100, 200))
+    print('类对象访问静态方法',a.myadd(300, 400))
 
-# 类方法调用
-print('类直接访问类方法', A1.get_v())  # 类直接访问类方法
-a = A1()
-print(a.__dict__)
-print('类实例访问类方法', a.get_v())  # 类实例访问类方法
-print('获取该实例的类访问类方法', a.__class__.get_v())  # 获取该实例的类访问类方法
-# 静态方法调用
-print('类实例访问静态方法',A1.myadd(100, 200))
-print('类对象获取类访问静态方法',a.__class__.myadd(100, 200))
-print('类对象访问静态方法',a.myadd(300, 400))
-
-# print(a.__slots__)
-# #类中定义__slots__变量后，类实例无该__dict__属性）
-# a.school='123' #类中已定义固定属性，不能出现其他属性
+    # print(a.__slots__)
+    # #类中定义__slots__变量后，类实例无该__dict__属性）
+    # a.school='123' #类中已定义固定属性，不能出现其他属性
 
 
-b = B1()
-print(B1.__base__)
-b.work()
-super(B1, b).work()
-print(b.__dict__)
-print(B1.__mro__)
-print(B1.myadd(b.a,b.b))
-print(repr(b))
-b.invoke_private()
+    b = B1()
+    print(B1.__base__)
+    b.work()
+    super(B1, b).work()
+    print(b.__dict__)
+    print(B1.__mro__)
+    print(B1.myadd(b.a,b.b))
+    print(repr(b))
+    b.invoke_private()

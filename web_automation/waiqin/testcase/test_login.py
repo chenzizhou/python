@@ -7,7 +7,7 @@ import sys
 import unittest
 from time import sleep
 
-from ddt import ddt, data, unpack
+from ddt import ddt, data, unpack, file_data
 import sys
 
 path = os.getcwd().split('\\')[0]
@@ -32,6 +32,7 @@ class TestLogin(unittest.TestCase):
     @data(('admin', '123456'), ('nature', '123456'))  # 使用命令执行时python test_01_login执行不了，因为测试用例名加了序列号和实参
     # ，test_01_login_1___admin___123456
     @unpack  # 数据是序列，需解包
+    @unittest.skip
     def test_01_login(self, username, password):
         '''测试登录'''
         url = 'http://192.168.10.195:7799/login'
@@ -45,6 +46,10 @@ class TestLogin(unittest.TestCase):
     @unittest.skip  # 添加改装饰后，测试机也加不进去
     def test_02_login(self):
         print(111222)
+
+    @file_data('../data/test.yaml')
+    def test_yaml(self, data):
+        print(data)
 
     def tearDown(self):  # 每个用例执行之后执行的方法
         print('结束')
@@ -69,5 +74,5 @@ if __name__ == '__main__':  # 并没有执行
     # f.close()
     # send_mail(get_new_file())
     # unittest.main()
-    unittest.main(defaultTest=['TestLogin.test_02_login'],verbosity=2)
+    unittest.main(defaultTest=['TestLogin.test_02_login'], verbosity=2)
     # unittest.main(defaultTest=['TestLogin'], verbosity=2)

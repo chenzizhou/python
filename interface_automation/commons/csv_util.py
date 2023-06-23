@@ -17,7 +17,6 @@ def FromCsvToJson(csv_path):
             profileList.append(dict(row))
         return profileList
 
-
 # yaml_file为YAML模板文件
 # new_yaml_file为新生成的带有测试数据的YAML文件
 def EnvReplaceYaml(yaml_file, new_yaml_file):
