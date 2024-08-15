@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='cat.ico') }}">
+</head>
+<style>
+    h1 {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    body {
+        background: url({{ url_for("static",filename="cat.jpg") }});
+        align-content: center;
+    }
+
+    .container {
+
+    }
+
+    form {
+        margin-left: 43%;
+    }
+
+    a, button {
+        margin-left: 140px;
+        background: green;
+    }
+
+    #password {
+        margin-boL2波特率为150000网ttom: 10px;
+    }
+</style>
+<script>
+    window.onbeforeunload = function () {
+        // 清除表单数据
+        document.querySelector("#password").value='';
+    }
+
+    function register() {
+        location.href = "{{ url_for("register.register_page") }}";
+    }
+
+    var time = 5
+
+    function sendCode() {
+        time1 = setInterval(function () {
+            time = time - 1
+            let element = document.getElementById('code');
+            element.disabled = true;
+            element.innerText = time
+            if (time === 0) {
+                element.innerText = '验证码'
+                time = 5
+                clearInterval(time1)
+                element.disabled = false
+            }
+        }, 1000)
+    }
+</script>
+<body>
+<div class="container">
+    <h1>登录</h1>
+    <form action="" method="post" novalidate>
+        <div>
+            {{ form.username.label }}
+            {{ form.username }}
+            {% for err in form.username.errors %}
+                <em style="color: red">{{ err }}</em>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.password.label }}
+            {{ form.password }}
+            {% for err in form.password.errors %}
+                <em style="color: red">{{ err }}</em>
+            {% endfor %}
+        </div>
+        {{ form.csrf_token }}
+        {{ form.submit }}
+
+        {#        <a href="{{ url_for('register.register_page') }}">注册</a>#}
+        <button type="button" onclick="register()">注册</button>
+        <button type="button" id="code" onclick="sendCode()" on>验证码</button>
+    </form>
+    {% if data %}
+        您输入的用户名为：{{ data['name'] }}
+        <br>
+        您输入的密码为：{{ data['password'] }}
+    {% endif %}
+
+</div>
+</body>
+</html>
