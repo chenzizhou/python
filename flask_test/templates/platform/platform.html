@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>账号列表</title>
+    <style>
+        th, td {
+            border: solid thin;
+            width: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    {% if result %}
+    <script>alert('添加成功')</script>
+    {% endif %}
+<a href="{{ url_for('platform.add_platform') }}">添加</a>
+<table style="border: solid green 1px">
+    <tr>
+        <th>平台</th>
+        <th>账号</th>
+        <th>密码</th>
+        <th>操作</th>
+    </tr>
+    {% for platform in platforms %}
+    <tr>
+        <td>{{platform.platform}}</td>
+        <td>{{platform.account}}</td>
+        <td>{{platform.password}}</td>
+        <td><a href="/update?id={{platform.id}}">更新</a><a href="{{ url_for('platform.delete_platform',id=platform.id)}}">删除</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
