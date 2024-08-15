@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<h1>{% block model %}{% endblock %}</h1>
+<form action="{% block action %}{% endblock %}" method="post" novalidate>
+    <div>
+        {{ form.platform.label }}
+        {{ form.platform }}
+        {% for err in form.platform.errors %}
+            <em style="color: red">{{ err }}</em>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.account.label }}
+        {{ form.account }}
+        {% for err in form.account.errors %}
+            <em style="color: red">{{ err }}</em>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.password.label }}
+        {{ form.password }}
+        {% for err in form.password.errors %}
+            <em style="color: red">{{ err }}</em>
+        {% endfor %}
+    </div>
+    {{ form.csrf_token }}
+    {{ form.submit }}
+</form>
+</body>
+</html>
