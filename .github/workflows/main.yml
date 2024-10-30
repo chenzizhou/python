@@ -5,7 +5,7 @@ on:
     - main
 jobs:
   build:
-    runs-on: test-runner
+    runs-on: [test-runner,Windows]
     steps:
       - name: test
         run:
