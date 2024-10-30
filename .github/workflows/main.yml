@@ -5,7 +5,7 @@ on:
     - main
 jobs:
   build:
-    runs-on: [self-hosted]
+    runs-on: [DESKTOP-QDOSAJB]
     steps:
       - name: test
         run:
