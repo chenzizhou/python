@@ -11,3 +11,7 @@ extract.yaml :全局接口关联中间变量提取文件
 pytest.ini :全局pytest配置文件
 run.py:全局运行文件
 readme:接口自动化测试框架说明文件
+
+
+window获取手机当前界面activity：
+adb shell dumpsys window | find "mCurrentFocus"
