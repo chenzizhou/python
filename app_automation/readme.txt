@@ -15,3 +15,12 @@ readme:接口自动化测试框架说明文件
 
 window获取手机当前界面activity：
 adb shell dumpsys window | find "mCurrentFocus"
+
+打开设置界面
+adb shell am start -n com.android.settings/.Settings（包名）
+
+滑动
+adb shell input swipe <起始X坐标> <起始Y坐标> <结束X坐标> <结束Y坐标> [持续时间]
+
+点击
+adb shell input tap x y
