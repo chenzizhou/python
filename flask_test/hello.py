@@ -14,14 +14,17 @@ import config
 from exts import db, mail
 from blueprints.login import bp_login
 
-app = Flask(__name__)
-CORS(app)
+app = Flask(__name__)  # 实例化一个Flask对象
+CORS(app)  # 解决跨域问题
 app.config.from_object(config)
-db.init_app(app)
-mail.init_app(app)
-migrate = Migrate(app, db)
-print(app.instance_path)
-app.register_blueprint(bp_login, url_prefix='/login')
+db.init_app(app)  # 初始化数据库
+mail.init_app(app)  # 初始化邮件
+# 主要逻辑：
+# Migrate(app, db)：这是一个构造函数，用于创建一个Migrate对象。其中，app是Flask应用的实例，db是SQLAlchemy数据库的实例。这个构造函数会将Flask应用和数据库实例绑定到一起，以便于后续的数据库迁移操作。
+# migrate = Migrate(app, db)：这行代码将创建的Migrate对象赋值给变量migrate，后续的数据库迁移操作可以通过这个变量进行。
+migrate = Migrate(app, db)  # 初始化迁移命令
+print('实例路径', app.instance_path)  # D:\python-main\flask_test\instance
+app.register_blueprint(bp_login, url_prefix='/login')  # 注册蓝图
 app.register_blueprint(bp_register, url_prefix='/register')
 app.register_blueprint(bp_platform, url_prefix='/platform')
 app.register_blueprint(bp_update_platform, url_prefix='/update')
@@ -168,10 +171,10 @@ def send_mail():
 #     return f'{escape(value)}'
 
 
-# with app.test_request_context():
-#     print(url_for('index'))
-#     print(url_for('test'))
-
+with app.test_request_context():
+    # print(url_for('index'))
+    # print(url_for('test'))
+    db.create_all()  # 创建所有在当前上下文中定义的模型对应的表
 
 # @app.route('/login')
 # def login():
