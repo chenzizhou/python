@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, redirect, request, jsonify, render_template, abort, url_for
+from flask import Flask, redirect, request, jsonify, render_template, abort, url_for, make_response, session
 from flask_cors import CORS
 from flask_mail import Message
 from flask_migrate import Migrate
@@ -28,6 +28,7 @@ app.register_blueprint(bp_login, url_prefix='/login')  # 注册蓝图
 app.register_blueprint(bp_register, url_prefix='/register')
 app.register_blueprint(bp_platform, url_prefix='/platform')
 app.register_blueprint(bp_update_platform, url_prefix='/update')
+
 
 # @app.route('/update/<platform>', methods=['GET', 'POST'])
 # def update_account(platform):
@@ -170,6 +171,24 @@ def get_url():
 def redirect_url():
     return redirect(url_for('show_post', post_id=10))
 
+
+# 响应对象包含了发送给客户端的响应信息，包括状态码、响应头和响应体。Flask 默认会将字符串、HTML 直接作为响应体。
+# make_response：创建一个自定义响应对象，并设置响应头 X-Custom-Header。
+@app.route('/custom_response')
+def custom_response():
+    response = make_response('This is a custom response!')
+    response.headers['X-Custom-Header'] = 'Value'
+    return response
+# Flask 使用客户端会话来存储用户信息，以便在用户浏览应用时记住他们的状态。会话数据存储在客户端的 cookie 中，并在服务器端进行签名和加密。
+@app.route('/set_session/<username>')
+def set_session(username):
+    session['username'] = username
+    return f'Session set for {username}'
+
+@app.route('/get_session')
+def get_session():
+    username = session.get('username')
+    return f'Hello, {username}!' if username else 'No session data'
 
 @app.route('/test')
 def test():
