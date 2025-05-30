@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, redirect, request, jsonify, render_template
+from flask import Flask, redirect, request, jsonify, render_template, abort
 from flask_cors import CORS
 from flask_mail import Message
 from flask_migrate import Migrate
@@ -160,11 +160,8 @@ def send_mail():
 # @app.route('/url')
 # def get_url():
 #     return url_for('show_post', post_id=10)
-#
-#
 
-#
-#
+
 # @app.route('/test')
 # def test():
 #     value = '<script>alert("bad!")</script>'
@@ -176,12 +173,19 @@ with app.test_request_context():
     # print(url_for('test'))
     db.create_all()  # 创建所有在当前上下文中定义的模型对应的表
 
-# @app.route('/login')
+# @app.route('/401')
 # def login():
 #     abort(401)
 #     this_is_never_executed()
 
 
 if __name__ == "__main__":
-    db.create_all()
+    # 参数说明
+    # host：设置监听地址，默认为127.0.0.1（只能本机访问），设置为0.0.0.0后，可以被其它机器访问
+    # port：设置监听端口，默认为5000
+    # debug：是否开启调试模式，True表示开启，开启后，修改代码后，不需要重启服务器，服务器会自动重启
+    # load_dotenv：是否加载环境变量，True表示加载，加载后，可以在代码中使用os.environ获取环境变量
+    # use_reloader：是否使用重载器，True表示使用，使用后，修改代码后，不需要重启服务器，服务器会自动重启（和debug类似，但use_reloader更通用）
+    # threaded：是否开启线程，True
+    # processes：设置进程数，默认为1，设置为0时，会根据CPU核心数自动设置
     app.run(debug=True)
