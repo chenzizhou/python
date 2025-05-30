@@ -78,9 +78,7 @@ app.register_blueprint(bp_update_platform, url_prefix='/update')
 #         conn.close()
 #     return render_template('platform.html', data=data)
 #
-'''路由是 URL 到 Python 函数的映射。Flask 允许你定义路由，使得当用户访问特定 URL 时，Flask 会调用对应的视图函数来处理请求'''
-
-
+# '''路由是 URL 到 Python 函数的映射。Flask 允许你定义路由，使得当用户访问特定 URL 时，Flask 会调用对应的视图函数来处理请求'''
 @app.route('/')
 def index():
     return redirect('/login')
@@ -145,17 +143,13 @@ def send_mail():
 # def index():
 #     return 'hello world'
 
-'''视图函数是处理请求并返回响应的 Python 函数。它们通常接收请求对象作为参数，并返回响应对象，或者直接返回字符串、HTML 等内容。'''
-
-
+# 视图函数是处理请求并返回响应的 Python 函数。它们通常接收请求对象作为参数，并返回响应对象，或者直接返回字符串、HTML 等内容。
 @app.route('/user/<username>')
 def show_user_profile(username):
     return render_template('user.html', name=username)
 
 
-'''限制请求传参类型'''
-
-
+# '''限制请求传参类型'''
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
     if post_id == 10:
@@ -165,17 +159,13 @@ def show_post(post_id):
     return 'id {} 内容为：{}'.format(post_id, content)
 
 
-'''通过函数名及函数参数来确定访问url'''
-
-
+# '''通过函数名及函数参数来确定访问url'''
 @app.route('/url')
 def get_url():
     return url_for('show_post', post_id=10)
 
 
-'''重定向访问地址'''
-
-
+# '''重定向访问地址'''
 @app.route('/redirect_url')
 def redirect_url():
     return redirect(url_for('show_post', post_id=10))
