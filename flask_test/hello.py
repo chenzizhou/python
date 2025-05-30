@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, redirect, request, jsonify, render_template, abort
+from flask import Flask, redirect, request, jsonify, render_template, abort, url_for
 from flask_cors import CORS
 from flask_mail import Message
 from flask_migrate import Migrate
@@ -28,7 +28,6 @@ app.register_blueprint(bp_login, url_prefix='/login')  # 注册蓝图
 app.register_blueprint(bp_register, url_prefix='/register')
 app.register_blueprint(bp_platform, url_prefix='/platform')
 app.register_blueprint(bp_update_platform, url_prefix='/update')
-
 
 # @app.route('/update/<platform>', methods=['GET', 'POST'])
 # def update_account(platform):
@@ -79,6 +78,9 @@ app.register_blueprint(bp_update_platform, url_prefix='/update')
 #         conn.close()
 #     return render_template('platform.html', data=data)
 #
+'''路由是 URL 到 Python 函数的映射。Flask 允许你定义路由，使得当用户访问特定 URL 时，Flask 会调用对应的视图函数来处理请求'''
+
+
 @app.route('/')
 def index():
     return redirect('/login')
@@ -98,13 +100,13 @@ def uploader():
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
         return 'file uploaded successfully'
     else:
-        return render_template('upload.html')
+        return render_template('upload.html')  # 将文件保存到指定路径
 
 
 @app.route('/api/axios')
 def get_data():
     data = {'message': 'nihao'}
-    return jsonify(data)
+    return jsonify(data)  # 将字典转换为json格式
 
 
 @app.route('/mail', methods=['GET'])
@@ -142,30 +144,47 @@ def send_mail():
 # @app.route('/', methods=['GET', 'POST'])
 # def index():
 #     return 'hello world'
-#
-# @app.route('/user/<username>')
-# def show_user_profile(username):
-#     return render_template('user.html', name=username)
-#
-#
-# @app.route('/post/<int:post_id>')
-# def show_post(post_id):
-#     if post_id == 10:
-#         content = '1234'
-#     else:
-#         content = '5678'
-#     return 'id {} 内容为：{}'.format(post_id, content)
-#
-#
-# @app.route('/url')
-# def get_url():
-#     return url_for('show_post', post_id=10)
+
+'''视图函数是处理请求并返回响应的 Python 函数。它们通常接收请求对象作为参数，并返回响应对象，或者直接返回字符串、HTML 等内容。'''
 
 
-# @app.route('/test')
-# def test():
-#     value = '<script>alert("bad!")</script>'
-#     return f'{escape(value)}'
+@app.route('/user/<username>')
+def show_user_profile(username):
+    return render_template('user.html', name=username)
+
+
+'''限制请求传参类型'''
+
+
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    if post_id == 10:
+        content = '1234'
+    else:
+        content = '5678'
+    return 'id {} 内容为：{}'.format(post_id, content)
+
+
+'''通过函数名及函数参数来确定访问url'''
+
+
+@app.route('/url')
+def get_url():
+    return url_for('show_post', post_id=10)
+
+
+'''重定向访问地址'''
+
+
+@app.route('/redirect_url')
+def redirect_url():
+    return redirect(url_for('show_post', post_id=10))
+
+
+@app.route('/test')
+def test():
+    value = '<script>alert("bad!")</script>'
+    return f'{escape(value)}'
 
 
 with app.test_request_context():
@@ -188,4 +207,4 @@ if __name__ == "__main__":
     # use_reloader：是否使用重载器，True表示使用，使用后，修改代码后，不需要重启服务器，服务器会自动重启（和debug类似，但use_reloader更通用）
     # threaded：是否开启线程，True
     # processes：设置进程数，默认为1，设置为0时，会根据CPU核心数自动设置
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=True)
