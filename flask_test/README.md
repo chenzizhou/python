@@ -15,11 +15,13 @@ pip install -r requirements.txt
 /<uuid:value>  16个字符组成
 def func(value)
 4、请求对象 request
-request.full_path 获取完整路径，包括后面参数
-request.path 获取路径，没有参数
-request.heades
+request.full_path 获取完整路径，包括后面参数 /xx/xx/xx?xx=xx&xx=xx
+request.path 获取路径，没有参数 /xx/xx/xx
+request.url 获取请求地址
+request.heades 获取请求头
 request.args 获取路径中的参数值(返回字典）
-request.url 
+request.form 获取post请求（返回字典）
+
 5、响应对象 response
 response.setcookies
 6、jinja2 模板引擎
