@@ -5,23 +5,27 @@ venv/Script/activate #激活
 venv/Script/deactivate #退出
 2、安装依赖环境
 pip install -r requirements.txt 
-3、路由自上而下匹配
+3、创建flask应用
+app=Flask(__name__)
+app.config.from_object(config)
+4、路由自上而下匹配
 不带/表示唯一，带有/斜杆表示重定向
 路由规则
+@app.route(url='',method=[])
+url格式如下：
 /<float:value>
 /<int:value>
 /<str:value>
 /<path:value>
 /<uuid:value>  16个字符组成
 def func(value)
-4、请求对象 request
+5、请求对象 request
 request.full_path 获取完整路径，包括后面参数 /xx/xx/xx?xx=xx&xx=xx
 request.path 获取路径，没有参数 /xx/xx/xx
 request.url 获取请求地址
 request.heades 获取请求头
 request.args 获取路径中的参数值(返回字典）
 request.form 获取post请求（返回字典）
-
 5、响应对象 response
 response.setcookies
 6、jinja2 模板引擎
