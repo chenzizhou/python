@@ -34,4 +34,14 @@ render_temple
 模板传参
 根据html形参确定传参
 render_temple('xxx.html',参数)
+7、flask—script
+8、flask-sqlalchemy
+orm映射
+类 表
+属性 字段
+对象 一条数据
+9、flask-migrate 数据迁移
+flask --app hello db init 初始化
+flask --app hello db migrate 对比初始化生成变更脚本
+flask --app hello db upgrade 执行变更脚本，同步当前模型和数据库
 
