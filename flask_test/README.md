@@ -40,8 +40,10 @@ orm映射
 类 表
 属性 字段
 对象 一条数据
+db.init(app) 数据库关联应用
+db.create_all() 创建表
 9、flask-migrate 数据迁移
-flask --app hello db init 初始化
+flask --app hello db init 初始化，产生一个文件夹migrations
 flask --app hello db migrate 对比初始化生成变更脚本
 flask --app hello db upgrade 执行变更脚本，同步当前模型和数据库
 
