@@ -4,3 +4,9 @@ flask_sqlalchemy
 flask_cors
 flask_mail
 flask_migrate
+flask-script
+
+model.query.filter_by(col=value) 里面是一个等值
+model.query.filter_by(col=value).first()
+model.query.filter(model.col==value) 里面是布尔条件
+
