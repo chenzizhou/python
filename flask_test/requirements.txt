@@ -6,7 +6,26 @@ flask_mail
 flask_migrate
 flask-script
 
-model.query.filter_by(col=value) 里面是一个等值
-model.query.filter_by(col=value).first()
-model.query.filter(model.col==value) 里面是布尔条件
+查询
+model.query.filter_by(col=value) 里面是一个等值         类似where col==value
+model.query.filter_by(col=value).first() --对象        类似where col==value limit 1
+model.query.filter(model.col==value) 里面是布尔条件     类似where col==value
+模糊查询
+model.query.filter(model.col.startwith(value)).all()   类似like
+model.query.filter(model.col.endwith(value)).all()     类似like
+model.query.filter(model.col.contains(value)).all()    类似like
+model.query.filter(model.col.like('%value')).all()     类似like
+model.query.filter(or_(model.col==value,model.col==value).all()     类似 where col==value or col==value
+model.query.filter(and_(model.col==value,model.col==value).all()    类似 where col==value and col==value
+model.query.filter(not_(model.col==value,model.col==value).all() 
+model.query.filter(and_(model.col==value,model.col.__lt__(value)).all()    类似 where col==value and col<value
+
+model.query.filter(and_(model.col==value,model.col.<value).all()  类似 where col between value1 and value2
+model.query.between()/model.query.filter(model.col.be())
+__lt__()/__gt__()/__le__()/__gt()__/in_([,,,])/be() 用法类似
+or_()/and_()/not_() 用法类似
+model.query.all() --列表
+
+排序
+model.query.filter_by(col=value).order_by(col1).order_by(col2).all()
 
