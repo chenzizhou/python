@@ -27,5 +27,13 @@ or_()/and_()/not_() 用法类似
 model.query.all() --列表
 
 排序
-model.query.filter_by(col=value).order_by(col1).order_by(col2).all()
+model.query.filter_by(col=value).order_by(col1).all() 对所有升序排列
+model.query.filter_by(col=value).order_by(col1).order_by(-model.col).all()
+order_by(参数)  参数：1、字符串‘字段名’ ，但是不能倒序 order_by('col') 2、填字段名：模型.字段  order_by(-moder.col)
+
+限制：limit
+model.query.order_by(col1).limit(2).all()  拿到12
+model.query.offset(2).order_by(col1).limit(2).all() 拿到34
+
+
 
