@@ -8,7 +8,7 @@ from models import PlatformModel, UserModel
 
 
 def check_platform(form, field):
-    platforms = PlatformModel.query.filter_by(platform=field.data,user_id=session.get('user_id')).all()
+    platforms = PlatformModel.query.filter_by(platform=field.data, user_id=session.get('user_id')).all()
     print(platforms, '----------------------')
 
     if platforms:
@@ -19,7 +19,7 @@ class PlatformForm(FlaskForm):
     platform = StringField(label='平台', validators=[InputRequired("平台不能为空"), check_platform])
     account = StringField(label='账号', validators=[InputRequired("账号不能为空")])
     password = PasswordField(label='密码', validators=[InputRequired("密码不能为空")])
-    submit = SubmitField(label="提交",render_kw={'style':'background:green;'})
+    submit = SubmitField(label="提交", render_kw={'style': 'background:green;'})
 
 
 bp_platform = Blueprint('platform', __name__)
@@ -36,7 +36,7 @@ def check_auth():
 @bp_platform.route('/', methods=['GET', 'POST'])
 def platform_page():
     try:
-        platforms = sorted(UserModel.query.get(session.get('user_id')).platforms,key=lambda x:x.platform)
+        platforms = sorted(UserModel.query.get(session.get('user_id')).platforms, key=lambda x: x.platform)
         print(platforms, '---------------------------')
     except Exception as e:
         print(e)
