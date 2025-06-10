@@ -46,4 +46,11 @@ db.create_all() 创建表
 flask --app hello db init 初始化，产生一个文件夹migrations
 flask --app hello db migrate 对比初始化生成变更脚本
 flask --app hello db upgrade 执行变更脚本，同步当前模型和数据库
+flask --app hello db downgrade 数据库降级
+9、加密 hashlib
+hashlib.md5(vlaue.encode('utf-8')).hexdigest()
+md5  32位 16进制
+sha1 40位
+sha256 64位 
+sha512 128位
 
