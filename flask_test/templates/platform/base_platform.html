@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>{% block model %}{% endblock %}</h1>
-<form action="{% block action %}{% endblock %}" method="post" novalidate>
+<form action="{% block action %}{% endblock %}" method="{% block method %}{% endblock %}" novalidate>
     <div>
         {{ form.platform.label }}
         {{ form.platform }}
