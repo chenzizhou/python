@@ -2,8 +2,8 @@
 # 作者：NATURE
 # 开发时间：2022/11/27 16:19
 # 功能：
-import os
-from time import sleep
+# from time import sleep
+
 import allure
 import pytest
 
@@ -14,22 +14,27 @@ class TestPytest:
     @allure.title("001")  # 标题，每个用例带个标题（报告体现在每个测试用例）(一个接口有几个用例，title用例的标签)
     @pytest.mark.skipif(1 == 0, reason='True')  # 满足条件跳过
     def test_pytest(self, mf2):  # 调用夹具的第一种方式
-        sleep(3)
         print(f'{mf2}测试pytest')
 
+    # 执行顺序
     @pytest.mark.run(order=1)
     # 标记 冒烟测试用例
     @pytest.mark.smoke
     # 调用夹具的第二种方式
     @pytest.mark.usefixtures('mf2')
-    # 跳过测试用例
+    # 无条件跳过测试用例
     @pytest.mark.skip(reason='cool')
     def test_pytest_ini(self):
-        sleep(3)
+        # 确保测试用例是函数，并以test_开头。
+        # 避免使用time.sleep()或其他非函数作为测试用例。
+        # 使用pytest.mark.skip跳过不必要的测试用例。
+        # 调整pytest的收集规则，避免误收集。
+        # sleep(3)
         print('测试pytest_ini')
 
     @pytest.mark.smoke
     def test_baidu(self, driver):
+        driver.maximize_window()
         driver.get('http://www.baidu.com')
         print('夹具生成浏览器驱动')
 
@@ -38,7 +43,7 @@ class TestPytest:
     def test_parametrize_single(self, one):
         print(one)
 
-    @pytest.mark.parametrize('one,two', [[1, 2], [3, 4], [5, 6]])#从列表迭代取出，然后解包赋值给前面的参数
+    @pytest.mark.parametrize('one,two', [[1, 2], [3, 4], [5, 6]])  # 从列表迭代取出，然后解包赋值给前面的参数
     def test_parametrize_double(self, one, two):
         print(one, two)
 
