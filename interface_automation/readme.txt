@@ -52,3 +52,9 @@ from jsonpath_ng import jsonpath, parse
 jsonpath_expr = parse('$.store.book[*].title')
 matches = [match.value for match in jsonpath_expr.find(data)]
 print(matches)  # 输出: ['Sayings of the Century', 'The Lord of the Rings']
+
+断言所有响应内容
+pip install resopnses_validator
+from resopnses_validator import validator
+
+
