@@ -24,6 +24,10 @@ def f2(f):  # 夹具中可以调用另一个夹具
 
 
 class TestPytest:
+    def test_use_fixture(self, f):
+        print(f)
+        print('使用夹具')
+
     def test_use_fixture001(self, f2):
         print(f2)
         print('使用夹具的第001种方式')
@@ -33,9 +37,18 @@ class TestPytest:
         print(f2)
         print('使用夹具的第002种方式')
 
-    def test_use_fixture003(self, f3):
-        print(f3)
-        print('使用夹具的第003种方式')
+    # def test_use_fixture003(self, f3):
+    #     print(f3)
+    #     print('使用夹具的第003种方式')
+
+    def test_transfer001(self, f, doctest_namespace):
+        name = 'nature'
+        doctest_namespace['name'] = name
+        assert True
+
+    def test_transfer002(self, f, doctest_namespace):
+        print(doctest_namespace['name'])
+        assert True
 
 
 # https://github.com/allure-framework/allure2/releases
