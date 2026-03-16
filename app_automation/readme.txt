@@ -18,6 +18,7 @@ adb connect 127.0.0.1:62001
 其他模拟器：雷神5555 夜神62001 mumu7555 逍遥 
 查看
 adb devices -l
+
 window获取手机当前界面activity：
 pip uiautomation2 ()
 impoort uiautomation2 as u2
@@ -28,7 +29,8 @@ d.app_current()
 adb shell dumpsys window | find "mCurrentFocus"
 adb shell dumpsys window | find "mFocusedActivity"
 adb shell dumpsys window top | findstr ACTIVITY
-aapt dump badging file.apk    # 是 Android SDK 中 Android Asset Packaging Tool (aapt) 的一个命令，用于提取 Android 应用（APK 文件）的 元数据信息
+aapt dump badging file.apk | findstr lanchable
+aapt dump badging file.apk | findstr package  # 是 Android SDK 中 Android Asset Packaging Tool (aapt) 的一个命令，用于提取 Android 应用（APK 文件）的 元数据信息
 
 打开设置界面
 adb shell am start -n com.android.settings/.Settings（包名）
@@ -39,7 +41,11 @@ adb shell input tap x y
 恢复出厂设置
 adb shell reboot refactory 如果root，恢复后还是root状态
 
+清除数据
+adb shell pm clear com.wgwnauv.yrcqj.tczufqum
 
+清除缓存
+adb shell pm trim-caches -n packagename
 
 
 
