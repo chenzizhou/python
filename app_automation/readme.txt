@@ -28,7 +28,7 @@ d.app_current()
 adb shell dumpsys window | find "mCurrentFocus"
 adb shell dumpsys window | find "mFocusedActivity"
 adb shell dumpsys window top | findstr ACTIVITY
-aapt dump badging file.apk
+aapt dump badging file.apk    # 是 Android SDK 中 Android Asset Packaging Tool (aapt) 的一个命令，用于提取 Android 应用（APK 文件）的 元数据信息
 
 打开设置界面
 adb shell am start -n com.android.settings/.Settings（包名）
