@@ -79,7 +79,7 @@ weditor推atx、app-uiautomator.apk、app-uiautomator-test.apk、minicap、minit
 12、pom
 base层      每个页面相同的属性和行为
 pageobject  每个页面特有的属性和行为
-testcase    用例层
+testcase    用例层，描述项目业务
 testdata    数据层
 
 13、项目结构
