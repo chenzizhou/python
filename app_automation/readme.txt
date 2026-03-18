@@ -47,24 +47,6 @@ adb shell pm clear com.wgwnauv.yrcqj.tczufqum
 清除缓存
 adb shell pm trim-caches -n packagename
 
-
-
-
-commons:公共封装文件夹
-datas: YAML 数据驱动文件夹
-hotloads:热加载文件夹
-logs:日志文件夹
-reports::定制的allure报告文件夹
-temps :临时报告文件夹
-testcases :YAML测试用例文件夹
-config . yaml:全局配置文件
-conftest . py:全局fixture固件
-extract.yaml :全局接口关联中间变量提取文件
-pytest.ini :全局pytest配置文件
-run.py:全局运行文件
-readme:接口自动化测试框架说明文件
-
-
 定位
 无障碍id accessbility_id /description
 id  resouce-id
@@ -91,7 +73,29 @@ sdk  software development kit
 uiautomator（android sdk自带，如果其他软件占用定位设备界面时，改工具使用不了）
 appiium inspector/weditor 这两个工具都要向定位设备中推包
 
+appium推appium
+weditor推atx、app-uiautomator.apk、app-uiautomator-test.apk、minicap、minitouch
 
+12、pom
+base层      每个页面相同的属性和行为
+pageobject  每个页面特有的属性和行为
+testcase    用例层
+testdata    数据层
+
+13、项目结构
+commons:公共封装文件夹
+datas: YAML 数据驱动文件夹
+hotloads:热加载文件夹
+logs:日志文件夹
+reports::定制的allure报告文件夹
+temps :临时报告文件夹
+testcases :YAML测试用例文件夹
+config . yaml:全局配置文件
+conftest . py:全局fixture固件
+extract.yaml :全局接口关联中间变量提取文件
+pytest.ini :全局pytest配置文件
+run.py:全局运行文件
+readme:接口自动化测试框架说明文件
 
 
 
