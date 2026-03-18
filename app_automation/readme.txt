@@ -1,5 +1,5 @@
 1、原理
-通过appium-python-client和appium server进行通信，告诉他我要干什么，通过他来进行翻译成对应设备工具包sdk的识别的指令，然后通过sdk来操控设备终端。
+通过appium-python-client和appium server进行通信，利用desired_caps传参，来确认手机是否连接，用什么框架、sdk，推包来控制设备
 2、jdk环境 android的sdk的环境依赖java环境
 3、android sdk  不同系统要下载不同sdk，以便操作不同设备
 通过desired_capabilities来设置将要操作的版本
@@ -69,16 +69,16 @@ readme:接口自动化测试框架说明文件
 
 
 定位
-无障碍id accessbility_id 
+无障碍id accessbility_id /description
 id  resouce-id
 在selenium中id具有唯一性（推荐）
 appium中的id继承了selenium，不具有唯一性，xpath脆弱、性能低
 image
 class
 custom：使用自己创建的定位策略
-ANDROID_UIAUTOMATOR: 'new UiSelector().text('XXX')
+ANDROID_UIAUTOMATOR: 'new UiSelector().text('XXX')  #利用android sdk自带uiautomator框架调用里面的UiSelector类
 
-定位元素写法
+定位元素写法 
 driver.find_element(AppiumBy.ID,'xxxxxxxxxxxxxxxxx')  #appium
 driver.find_element(By.ID,'xxxxxxxxxxxxxxxxx')  #selenium
 
