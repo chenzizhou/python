@@ -65,9 +65,6 @@ run.py:全局运行文件
 readme:接口自动化测试框架说明文件
 
 
-
-
-
 定位
 无障碍id accessbility_id /description
 id  resouce-id
@@ -89,6 +86,11 @@ wait=webDriverWait(driver,5) #显示等待5s
 sdk  software development kit 
 
 安装jdk，配置jdk环境配置，adroid环境配置
+
+11、常用定位工具
+uiautomator（android sdk自带，如果其他软件占用定位设备界面时，改工具使用不了）
+appiium inspector/weditor 这两个工具都要向定位设备中推包
+
 
 
 
